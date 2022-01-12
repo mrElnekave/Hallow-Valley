@@ -1,7 +1,7 @@
 import pygame, sys
 pygame.init()
 import objects
-
+from constants import *
 
 current_width = WINDOWWIDTH
 current_height = WINDOWHEIGHT
@@ -28,14 +28,14 @@ while 1:
 
     if ratio > 1: # height is too tall
         display_width = current_width
-        display_height = display_width * RATIO
+        display_height = display_width * objects.RATIO
         y_offset = (current_height - display_height) / 2
 
     else:
         display_height = current_height 
-        display_width = display_height / RATIO
+        display_width = display_height / objects.RATIO
         x_offset = (current_width - display_width) / 2
 
-    screen.blit(pygame.transform.scale(display, (int(display_width), int(display_height))), (int(x_offset), int(y_offset)))
+    screen.blit(pygame.transform.scale(objects.display, (int(display_width), int(display_height))), (int(x_offset), int(y_offset)))
     pygame.display.update()
 
