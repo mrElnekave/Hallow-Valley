@@ -1,0 +1,3 @@
+- Subchunks can be exited from sides when entering from shop *removed shop entrance, chunk still exists*
+- All images must have a "base" concrete dirt whatever, to show where you can and can't step
+- ability cooldowns
