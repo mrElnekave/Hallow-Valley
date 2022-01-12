@@ -1,10 +1,8 @@
-<<<<<<< HEAD
 import pygame
+pygame.init()
+from constants import *
 
-WINDOWWIDTH = 500
-WINDOWHEIGHT = 500
-RATIO = WINDOWHEIGHT/WINDOWWIDTH
-=======
+display = pygame.Surface((WINDOWWIDTH, WINDOWHEIGHT))
 
 
 '''
@@ -66,4 +64,3 @@ achievements = [
     ]
 
 '''
->>>>>>> 4e2f2cccd904295a7b461141e2887112ac6881ac

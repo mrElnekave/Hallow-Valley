@@ -1,6 +1,7 @@
 import pygame, sys
 pygame.init()
 import objects
+from constants import *
 
 
 current_width = WINDOWWIDTH
@@ -36,6 +37,6 @@ while 1:
         display_width = display_height / RATIO
         x_offset = (current_width - display_width) / 2
 
-    screen.blit(pygame.transform.scale(display, (int(display_width), int(display_height))), (int(x_offset), int(y_offset)))
+    screen.blit(pygame.transform.scale(objects.display, (int(display_width), int(display_height))), (int(x_offset), int(y_offset)))
     pygame.display.update()
 
