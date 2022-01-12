@@ -1,17 +1,15 @@
 import pygame, sys
 pygame.init()
+import objects
 
-WINDOWWIDTH = 500
-WINDOWHEIGHT = 500
-RATIO = WINDOWHEIGHT/WINDOWWIDTH
+
 current_width = WINDOWWIDTH
 current_height = WINDOWHEIGHT
 
 
 screen = pygame.display.set_mode((current_width, current_height), pygame.RESIZABLE)
 screen.fill((255,255,255))
-display = pygame.Surface((WINDOWWIDTH, WINDOWHEIGHT))
-display.fill((0, 0, 0))
+
 
 while 1: 
     screen.fill((255,255,255))
@@ -25,13 +23,19 @@ while 1:
     
     ratio = current_height/current_width
 
+    x_offset = 0
+    y_offset = 0
+
     if ratio > 1: # height is too tall
         display_width = current_width
         display_height = display_width * RATIO
+        y_offset = (current_height - display_height) / 2
+
     else:
         display_height = current_height 
         display_width = display_height / RATIO
+        x_offset = (current_width - display_width) / 2
 
-    screen.blit(pygame.transform.scale(display, (int(display_width), int(display_height))), (0, 0))
+    screen.blit(pygame.transform.scale(display, (int(display_width), int(display_height))), (int(x_offset), int(y_offset)))
     pygame.display.update()
 
