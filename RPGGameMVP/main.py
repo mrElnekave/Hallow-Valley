@@ -16,11 +16,7 @@ MapLoader.load()
 # Game Name: H@LLOW VALLEY
 print("REPORT: Welcome to the game. Your goal is to find 9 portals on the map and defeat the 9 bosses within them. Controls: arrow keys to move, click to shoot an arrow towards the mouse. Later in the game, when you have other abilities, you can press 1 to switch back to arrows. ")
 
-<<<<<<< Updated upstream
-# Game Poop
-=======
 # Game Doop
->>>>>>> Stashed changes
 clock = pygame.time.Clock()
 while 1: 
     for event in pygame.event.get(pygame.QUIT):
