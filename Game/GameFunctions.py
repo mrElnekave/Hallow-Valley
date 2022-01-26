@@ -144,19 +144,19 @@ def GameplayRender():
         objects.display.blit(freezeOverlay, (0,0))
     objects.player.render()
     
-    '''# UI Rendering
-    objects.screen.blit(objects.myFont.render("Coins: "+ str(objects.resourceAmounts["coins"]), True, (0,0,0)), (0,0))
-    questName = objects.quests[objects.currentQuest].name
-    objects.screen.blit(objects.myFont.render(questName, True, (0,0,0)), (200,100))
+    # UI Rendering
+    objects.display.blit(objects.myFont.render("Coins: "+ str(objects.resourceAmounts["coins"]), True, (0,0,0)), (0,50))
+    '''questName = objects.quests[objects.currentQuest].name
+    objects.display.blit(objects.myFont.render(questName, True, (0,0,0)), (200,100))
     '''
     # Draw healthbar
     pygame.draw.rect(objects.display, (15,15,15), pygame.Rect(300,0,200,20))
     pygame.draw.rect(objects.display, (0,255,0), pygame.Rect(300,0,objects.player.currentHealth/objects.player.maxHealth*200,20))
-    #objects.screen.blit(objects.myFont.render(f"Health: {objects.player.currentHealth} / {objects.player.maxHealth}", True, (0,0,0)),(100,0))
+    objects.display.blit(objects.myFont.render(f"Health: {objects.player.currentHealth} / {objects.player.maxHealth}", True, (0,0,0)),(0,0))
     # Draw energybar
     pygame.draw.rect(objects.display, (15,15,15), pygame.Rect(300,20,200,20))
     pygame.draw.rect(objects.display, (0,0,255), pygame.Rect(300,20,objects.resourceAmounts["ghostEnergy"]/objects.player.maxEnergy*200,20))
-    #objects.screen.blit(objects.myFont.render(f"Ghost Energy: {objects.resourceAmounts['ghostEnergy']} / {objects.player.maxEnergy}", True, (0,0,0)),(100,25))
+    objects.display.blit(objects.myFont.render(f"Ghost Energy: {objects.resourceAmounts['ghostEnergy']} / {objects.player.maxEnergy}", True, (0,0,0)),(0,25))
     # Draw equipped
     for i in range(len(objects.abilityPanel)):
         if i == objects.player.currentAbility:

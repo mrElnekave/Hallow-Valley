@@ -16,6 +16,6 @@ difficulty = 0
 
 
 pygame.font.init()
-myFont = pygame.font.SysFont("Comic Sans", 24)
-announcementFont = pygame.font.SysFont("Comic Sans", 72)
-mathFont = pygame.font.SysFont("Comic Sans", 50)
+myFont = pygame.font.SysFont("Arial", 20)
+announcementFont = pygame.font.SysFont("Arial", 72)
+mathFont = pygame.font.SysFont("Arial", 50)
