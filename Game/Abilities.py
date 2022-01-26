@@ -19,7 +19,7 @@ class FireArrow(): # Ability 1: Fires an arrow projectile
             return
 
         if pygame.mouse.get_pressed(3)[0]:
-            mousePos = pygame.mouse.get_pos()
+            mousePos = objects.mapMousePos(pygame.mouse.get_pos())
             mouseX = mousePos[0]
             mouseY = mousePos[1]
             xGap = mouseX - objects.player.rect.centerx 
@@ -76,7 +76,7 @@ class LaunchFireball:
             return
 
         if pygame.mouse.get_pressed(3)[0] and objects.resourceAmounts["ghostEnergy"] >= self.cost:
-            mousePos = pygame.mouse.get_pos()
+            mousePos = objects.mapMousePos(pygame.mouse.get_pos())
             mouseX = mousePos[0]
             mouseY = mousePos[1]
             xGap = mouseX - objects.player.rect.centerx 
@@ -230,7 +230,7 @@ class ElectroDash:
 
         if len(self.dashPositions) == 0 and pygame.mouse.get_pressed(3)[0] and objects.resourceAmounts["ghostEnergy"] >= self.cost:
             objects.resourceAmounts["ghostEnergy"] -= self.cost
-            mousePos = pygame.mouse.get_pos()
+            mousePos = objects.mapMousePos(pygame.mouse.get_pos())
             # Find the incremental amount to get there
             totalXdist = mousePos[0]-objects.player.rect.centerx
             totalYdist = mousePos[1]-objects.player.rect.centery
@@ -307,7 +307,7 @@ class SummonAbility(Obj):
             self.active = True
             self.rect.center = objects.player.rect.center
         if self.active:
-            mousePos = pygame.mouse.get_pos()
+            mousePos = objects.mapMousePos(pygame.mouse.get_pos())
             xGap = mousePos[0] - self.rect.center[0] 
             yGap = mousePos[1] - self.rect.center[1] 
             distance = (xGap**2+yGap**2)**(1/2)
@@ -362,7 +362,7 @@ class FireLaserArrow(): # Ability 8: Fires a laser arrow projectile
 
         if pygame.mouse.get_pressed(3)[0] and objects.resourceAmounts["ghostEnergy"] >= self.cost:
             objects.resourceAmounts["ghostEnergy"] -= self.cost
-            mousePos = pygame.mouse.get_pos()
+            mousePos = objects.mapMousePos(pygame.mouse.get_pos())
             mouseX = mousePos[0]
             mouseY = mousePos[1]
             xGap = mouseX - objects.player.rect.centerx 
@@ -417,7 +417,7 @@ class LaunchWave(): # Ability 9: Fires a wave projectile with knockback
 
         if pygame.mouse.get_pressed(3)[0] and objects.resourceAmounts["ghostEnergy"] >= self.cost:
             objects.resourceAmounts["ghostEnergy"] -= self.cost
-            mousePos = pygame.mouse.get_pos()
+            mousePos = objects.mapMousePos(pygame.mouse.get_pos())
             mouseX = mousePos[0]
             mouseY = mousePos[1]
             xGap = mouseX - objects.player.rect.centerx 

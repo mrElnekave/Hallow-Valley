@@ -219,7 +219,7 @@ def MathUpdate():
     global answerString
     for event in pygame.event.get(): 
         if event.type == pygame.MOUSEBUTTONDOWN: 
-            mousePos = pygame.mouse.get_pos()
+            mousePos = objects.mapMousePos(pygame.mouse.get_pos())
             if answerString != "" and answerString[-1] in values: 
                 pass
             else: 

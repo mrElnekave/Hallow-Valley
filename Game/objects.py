@@ -79,7 +79,20 @@ def Reset():
                 if thing.type == "enemy": 
                     thing.health = thing.maxHealth
 
+# map mouse
+def mapMousePos(mx, my):
+    pass
 
+# Helper debug stuffs
+class Point: 
+    def __init__(self, position): 
+        self.color = (255,0,0) 
+        self.position = position
+        self.type = "marker"
+    def render(self): 
+        pygame.draw.circle(display, self.color, self.position, 5)
+    def update(self): 
+        pass
 '''
 pygame.font.init()
 myFont = pygame.font.SysFont("Comic Sans", 24)

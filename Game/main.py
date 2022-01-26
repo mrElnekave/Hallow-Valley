@@ -3,11 +3,12 @@
 # 5-3) Make quest information
 # 6-3) Housekeeping
 
-import pygame, sys, objects, MapLoader, mathsets
+import pygame, sys, objects, MapLoader, mathsets, rubato
 mathsets.LoadMath()
 from GameFunctions import *
 from constants import *
 pygame.init()
+
 
 
 # load everything
@@ -25,6 +26,35 @@ screen = pygame.display.set_mode((current_width, current_height), pygame.RESIZAB
 screen.fill((255,255,255))
 
 # basic screen like resizing and such
+
+def mapPosHelper(mx, my):
+    x_offset = 0
+    y_offset = 0
+    mx = float(mx)
+    my = float(my)
+    ratio = current_height/current_width
+    if ratio > 1: # height is too tall
+        display_width = current_width
+        display_height = display_width * RATIO
+        y_offset = (current_height - display_height) / 2
+
+    else:
+        display_height = current_height 
+        display_width = display_height / RATIO
+        x_offset = (current_width - display_width) / 2
+    mx = rubato.utils.PMath.clamp(mx, x_offset, display_width + x_offset) - x_offset
+    my = rubato.utils.PMath.clamp(my, y_offset, display_height + y_offset) - y_offset
+    return (mx/display_width) * WINDOWWIDTH, (my/display_height) * WINDOWHEIGHT
+
+def mapMousePos(mousePos):
+    mx, my = mousePos
+    nx, ny = mapPosHelper(mx, my)
+    # debug
+    # if objects.gamestate == 1 and objects.currentChunk:
+    #     objects.currentChunk.contents.append(objects.Point((nx, ny)))
+    return int(nx), int(ny)
+objects.mapMousePos = mapMousePos
+
 
 def input_basics():
     global screen, current_height, current_width

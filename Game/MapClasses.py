@@ -98,7 +98,7 @@ class Button(Obj):
         self.effects = effects
     def update(self): 
         if pygame.mouse.get_pressed(3)[0]:
-            mousePos = pygame.mouse.get_pos()
+            mousePos = objects.mapMousePos(pygame.mouse.get_pos())
             if self.rect.collidepoint(mousePos): 
                 for action in self.effects:
                     exec(action)
@@ -110,7 +110,7 @@ class NPC(Obj):
         self.type = "NPC" #TODO: wait till up before being pressed down
     def update(self): 
         if pygame.mouse.get_pressed(3)[0]:
-            mousePos = pygame.mouse.get_pos()
+            mousePos = objects.mapMousePos(pygame.mouse.get_pos())
             if self.rect.collidepoint(mousePos): 
                 for action in self.effects:
                     exec(action)
