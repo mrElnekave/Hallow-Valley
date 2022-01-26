@@ -137,5 +137,9 @@ achievements = [
     "Pick up 100 Question Cubes!", 
     "PLEASE ENTER MORE HERE"
     ]
-
 '''
+def FindQuest(name):
+    for quest in quests:
+        if quest.name == name:
+            return quest
+            break
