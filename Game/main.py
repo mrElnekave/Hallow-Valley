@@ -19,10 +19,9 @@ MapLoader.load()
 print("REPORT: Welcome to the game. Your goal is to find 9 portals on the map and defeat the 9 bosses within them. Controls: arrow keys to move, click to shoot an arrow towards the mouse. Later in the game, when you have other abilities, you can press 1 to switch back to arrows. ")
 
 # screen
-current_width = WINDOWWIDTH
-current_height = WINDOWHEIGHT
+current_width, current_height = constants.default_size
 
-screen = pygame.display.set_mode((current_width, current_height), pygame.RESIZABLE)
+screen = pygame.display.set_mode(constants.default_size, pygame.RESIZABLE)
 screen.fill((255,255,255))
 
 # basic screen like resizing and such
@@ -37,7 +36,6 @@ def mapPosHelper(mx, my):
         display_width = current_width
         display_height = display_width * RATIO
         y_offset = (current_height - display_height) / 2
-
     else:
         display_height = current_height 
         display_width = display_height / RATIO
