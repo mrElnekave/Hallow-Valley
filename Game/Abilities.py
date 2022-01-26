@@ -493,4 +493,4 @@ class PotionAbility:
             
     def render(self):
         potionText = objects.myFont.render("Amount of Equipped Potion ["+PotionAbility.types[PotionAbility.number]+"]: "+str(objects.potions[PotionAbility.types[PotionAbility.number]]),False,(0,0,0))
-        objects.display.blit(potionText, (0,50))
+        objects.display.blit(potionText, (0,75))

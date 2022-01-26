@@ -50,7 +50,7 @@ objects.chunks[0][0].contents.append(
     MapClasses.NPC(pygame.image.load("RPGGameMVP\Pixel Images\Player.png"), (100,100), [
         "if objects.resourceAmounts['coins'] >= 50: objects.player.currentHealth = objects.player.maxHealth;objects.resourceAmounts['coins'] -= 50"]))
 
-objects.chunks[0][0].contents.append(MapClasses.Building(pygame.image.load("RPGGameMVP\Pixel Images\House.png"), (100,0), 0, (24,50)))
+# objects.chunks[0][0].contents.append(MapClasses.Building(pygame.image.load("RPGGameMVP\Pixel Images\House.png"), (100,0), 0, (24,50)))
 
 objects.chunks[0][0].contents.append(MapClasses.NPC(pygame.image.load("RPGGameMVP\Pixel Images\Shop.png"), (400,400), ["objects.shopShowing = not objects.shopShowing", "time.sleep(0.1)"])) #TODO: Fix glitching and freeze game
 
@@ -93,7 +93,7 @@ objects.chunks[7][8].contents.append(MapClasses.MovementBarrier(image,(250,250))
 # Final Boss 
 createDungeon(9, Enemies.FinalBossGhost(), (250,250),(3,3),pygame.image.load("RPGGameMVP\Pixel Images\Grass.png"), pygame.image.load("RPGGameMVP\Pixel Images\Summoning Portal.png"), "final dungeon")
 
-objects.chunks[0][0].contents.append(MapClasses.Obstacle(pygame.image.load("RPGGameMVP\Pixel Images\House.png"), (250,250)))
+# objects.chunks[0][0].contents.append(MapClasses.Obstacle(pygame.image.load("RPGGameMVP\Pixel Images\House.png"), (250,250)))
 
 def load():
     position = file["chunks"]["chunk33"]["obstacles"][0]
