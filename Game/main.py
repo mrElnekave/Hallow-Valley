@@ -7,6 +7,7 @@ import pygame, sys, objects, MapLoader, mathsets, rubato
 mathsets.LoadMath()
 from GameFunctions import *
 from constants import *
+import constants
 pygame.init()
 
 

@@ -1,4 +1,5 @@
 from pydoc import importfile
+from tkinter import image_names
 import pygame
 import MapClasses
 import Abilities 
@@ -7,14 +8,14 @@ import objects
 import random
 import MapLoader
 import quests
-import time
-from images import *
+import rubato as rb
+import images
 
 pygame.init()
 
 buttons = {
     "game": [], 
-    "menu": [MapClasses.Button(pygame.transform.scale(pygame.image.load("Game\Pixel Images\StartButton.png"), (500,100)),(250,450), ['objects.gamestate = 1','objects.Reset()']), MapClasses.Button(pygame.image.load("Game\Pixel Images\AboutUsButton.png"),(250,350), ['webbrowser.open("https://docs.google.com/presentation/d/1fCRW8VGcp_BtFYz1E_SCKFJo4uPcnhw9mEK5d6gdftc/edit?usp=sharing")'])],
+    "menu": [MapClasses.Button(pygame.transform.scale(pygame.image.load("Game\Pixel Images\StartButton.png"), (300,80)),(250,450), ['objects.gamestate = 1','objects.Reset()']), MapClasses.Button(pygame.transform.scale(pygame.image.load("Game\Pixel Images\AboutUsButton.png"), (300,80)),(250,350), ['webbrowser.open("https://docs.google.com/presentation/d/1fCRW8VGcp_BtFYz1E_SCKFJo4uPcnhw9mEK5d6gdftc/edit?usp=sharing")'])],
     "shop": [
     MapClasses.Button(pygame.transform.scale(pygame.image.load("Game\Pixel Images\Purple Potion.png"),(50,50)),(175,175), ['if objects.resourceAmounts["coins"] >= 25: objects.potions["purple"] += 1;objects.resourceAmounts["coins"] -= 25;print("Bought Purple Potion")', "time.sleep(0.5)"]),
     MapClasses.Button(pygame.transform.scale(pygame.image.load("Game\Pixel Images\Red Potion.png"), (50,50)),(225,175), ['if objects.resourceAmounts["coins"] >= 50: objects.potions["red"] += 1;objects.resourceAmounts["coins"] -= 50;print("Bought Red Potion")', "time.sleep(0.5)"]),
@@ -171,14 +172,23 @@ def GameplayRender():
 
 def MenuRender(): 
     objects.display.fill((255,255,255))
-    titleScreen = menu_base# pygame.image.load("Game\Pixel Images\StartScreen.png")
+    titleScreen = images.menu_base
     
     objects.display.blit(titleScreen, (0, 0))
     for button in buttons["menu"]: 
         button.render()
 
-def MenuUpdate():
+def lightning():
+    timescale = random.random() * 2 + 0.5
+    rb.Time.delayed_call(0 * timescale, images.switch_base)
+    rb.Time.delayed_call(500 * timescale, images.switch_base)
+    rb.Time.delayed_call(550 * timescale, images.switch_base)
+    rb.Time.delayed_call(1000 * timescale, images.switch_base)
+    rb.Time.delayed_call(random.randrange(4, 10) * 1000, lightning)
 
+rb.Time.delayed_call(1000, lightning)
+def MenuUpdate():
+    rb.Time.process_calls()
     for button in buttons["menu"]: 
         button.update()
 
