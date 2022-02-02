@@ -5,8 +5,6 @@ pygame.display.set_mode(constants.default_size)
 current_path = "Game\Pixel Images\\"
 
 def load_img(path, colorkey=(255,255,255)):
-    # path = os.path.join(current_path, path)
-    print(current_path + path)
     img = pygame.image.load(current_path + path).convert()
     img.set_colorkey(colorkey)
     return img
@@ -42,7 +40,7 @@ menu_base = pygame.transform.scale(load_img("main_menu.png"), constants.size)
 mountain_1 = load_img("Title Screen Mountain.png", (0, 0, 0))
 mountain_2 = load_img("Title Screen Mountain 2.png", (0, 0, 0))
 mountain_3 = load_img("Title Screen Mountain 3.png", (0, 0, 0))
-# menu_base.blit(pygame.Surface(menu_base.get_size()).fill((139, 195, 74)), (0,mountain_range_height + mountain_1.get_height()))
+pygame.draw.rect(menu_base, (139, 195, 74), pygame.Rect((0,mountain_range_height + mountain_1.get_height() - 20), menu_base.get_size()))
 
 menu_base.blit(mountain_1, (-20, mountain_range_height))
 menu_base.blit(mountain_2, (200, mountain_range_height))
