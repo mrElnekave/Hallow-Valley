@@ -14,8 +14,10 @@ import images
 pygame.init()
 
 buttons = {
-    "game": [], 
-    "menu": [MapClasses.Button(pygame.transform.scale(pygame.image.load("Game\Pixel Images\StartButton.png"), (300,80)),(250,450), ['objects.gamestate = 1','objects.Reset()']), MapClasses.Button(pygame.transform.scale(pygame.image.load("Game\Pixel Images\AboutUsButton.png"), (300,80)),(250,350), ['webbrowser.open("https://docs.google.com/presentation/d/1fCRW8VGcp_BtFYz1E_SCKFJo4uPcnhw9mEK5d6gdftc/edit?usp=sharing")'])],
+    "game": [
+        MapClasses.Button(pygame.image.load("Game\Pixel Images\Help Button.png"), (480, 70), ["webbrowser.open(\"https://docs.google.com/document/d/1MywKXdex3Ny2-qE1z_nNMzU6OQ4gaUB3d9Zq9louTh8/edit?usp=sharing\")"])], 
+    "menu": [
+        MapClasses.Button(pygame.transform.scale(pygame.image.load("Game\Pixel Images\StartButton.png"), (300,80)),(250,450), ['objects.gamestate = 1','objects.Reset()']), MapClasses.Button(pygame.transform.scale(pygame.image.load("Game\Pixel Images\AboutUsButton.png"), (300,80)),(250,350), ['webbrowser.open("https://docs.google.com/presentation/d/1fCRW8VGcp_BtFYz1E_SCKFJo4uPcnhw9mEK5d6gdftc/edit?usp=sharing")'])],
     "shop": [
     MapClasses.Button(pygame.transform.scale(pygame.image.load("Game\Pixel Images\Purple Potion.png"),(50,50)),(175,175), ['if objects.resourceAmounts["coins"] >= 25: objects.potions["purple"] += 1;objects.resourceAmounts["coins"] -= 25;print("Bought Purple Potion")', "time.sleep(0.5)"]),
     MapClasses.Button(pygame.transform.scale(pygame.image.load("Game\Pixel Images\Red Potion.png"), (50,50)),(225,175), ['if objects.resourceAmounts["coins"] >= 50: objects.potions["red"] += 1;objects.resourceAmounts["coins"] -= 50;print("Bought Red Potion")', "time.sleep(0.5)"]),
@@ -54,6 +56,8 @@ def NightEvent():
 
 dayNightCounter = 0
 def GameplayUpdate():
+    for button in buttons["game"]: 
+        button.update()
     for quest in objects.quests:
         quest.update()
 
@@ -140,6 +144,7 @@ objects.abilityPanel = [pygame.image.load("Game\Pixel Images\Arrow Icon.png"),
                 pygame.image.load("Game\Pixel Images\Potion Icon.png")]
 
 def GameplayRender(): 
+
     # RENDER (Putting stuff on the screen)
     objects.currentChunk.render()
     if objects.freeze == True: 
@@ -169,6 +174,8 @@ def GameplayRender():
         else:
             objects.abilityPanel[i].set_alpha(25)
         objects.display.blit(objects.abilityPanel[i], (50 * i, 450))
+    for button in buttons["game"]: 
+        button.render()
 
 def MenuRender(): 
     objects.display.fill((255,255,255))
