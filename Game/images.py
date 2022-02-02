@@ -1,4 +1,4 @@
-import pygame, constants
+import pygame, constants, copy
 pygame.init()
 
 pygame.display.set_mode(constants.default_size)
@@ -11,22 +11,6 @@ def load_img(path, colorkey=(255,255,255)):
     img.set_colorkey(colorkey)
     return img
 
-
-# intro
-small_bolt = load_img("small_bolt.png")
-medium_bolt = load_img("medium_bolt.png")
-large_bolt = load_img("large_bolt.png")
-
-menu_base = pygame.transform.scale(load_img("main_menu.png"), constants.size)
-mountain_1 = load_img("Title Screen Mountain.png", (0, 0, 0))
-mountain_2 = load_img("Title Screen Mountain 2.png", (0, 0, 0))
-mountain_3 = load_img("Title Screen Mountain 3.png", (0, 0, 0))
-menu_base.blit(mountain_1, (-20, 200))
-menu_base.blit(mountain_2, (200, 200))
-menu_base.blit(mountain_3, (120, 200))
-
-
-
 def darken_except(pic, pos):
     dark_picture = obscure(pic, (0,0,0), 200)
     pygame.draw.circle(dark_picture, (255, 255, 255), pos, 20)
@@ -34,10 +18,50 @@ def darken_except(pic, pos):
     pic.blit(dark_picture, (0, 0))
     pass
 
+def switch_base():
+    global menu_base
+    if menu_base == menu_base_dark:
+        menu_base = menu_base_clear
+    else:
+        menu_base = menu_base_dark
 
 def obscure(pic, color, alpha):
     overlay = pygame.Surface(pic.get_size())
     overlay.fill(color)
     overlay.set_alpha(alpha)
     return overlay
+
+# intro
+small_bolt = load_img("small_bolt.png", (0, 0, 0))
+medium_bolt = load_img("medium_bolt.png", (0, 0, 0))
+large_bolt = load_img("large_bolt.png", (0, 0, 0))
+
+mountain_range_height = 200
+
+menu_base = pygame.transform.scale(load_img("main_menu.png"), constants.size)
+mountain_1 = load_img("Title Screen Mountain.png", (0, 0, 0))
+mountain_2 = load_img("Title Screen Mountain 2.png", (0, 0, 0))
+mountain_3 = load_img("Title Screen Mountain 3.png", (0, 0, 0))
+# menu_base.blit(pygame.Surface(menu_base.get_size()).fill((139, 195, 74)), (0,mountain_range_height + mountain_1.get_height()))
+
+menu_base.blit(mountain_1, (-20, mountain_range_height))
+menu_base.blit(mountain_2, (200, mountain_range_height))
+menu_base.blit(mountain_3, (120, mountain_range_height))
+
+menu_base_clear = copy.copy(menu_base)
+
+
+menu_base_dark = copy.copy(menu_base)
+dark_picture = obscure(menu_base_dark, (0,0,0), 200)
+menu_base_dark.blit(dark_picture, (0, 0))
+menu_base_dark.blit(small_bolt, (40, 40))
+menu_base_dark.blit(small_bolt, (200, 50))
+
+menu_base_dark.blit(medium_bolt, (100, 70))
+menu_base_dark.blit(medium_bolt, (350, 10))
+
+menu_base_dark.blit(medium_bolt, (150, 20))
+menu_base_dark.blit(medium_bolt, (300, 60))
+
+
 
