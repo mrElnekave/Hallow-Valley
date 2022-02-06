@@ -1,4 +1,0 @@
-- Coin spread/respawn 
-- ability strength: 
-    - Laser Arrows deal too much damage 
-- boss dificulty

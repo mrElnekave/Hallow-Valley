@@ -29,7 +29,7 @@ class Chunk:
         self.image = pygame.transform.scale(self.image, size)
         if self.location[0] != 7: 
             for i in range(10): 
-                self.image.blit(pygame.image.load("RPGGameMVP\Pixel Images\TallGrass.png"), (random.randint(0,500),random.randint(0,500)))
+                self.image.blit(pygame.image.load("Data\Pixel Images\TallGrass.png"), (random.randint(0,500),random.randint(0,500)))
                 
         self.rect = self.image.get_rect()
         self.nightOverlay = pygame.Surface(objects.size)
@@ -66,7 +66,7 @@ class Quest:
 # Resource Class
 class Resource(Obj): 
     def __init__(self, item, quantity, location):
-        super().__init__(pygame.image.load("RPGGameMVP\Pixel Images\Gold Coin.png"), location)
+        super().__init__(pygame.image.load("Data\Pixel Images\Gold Coin.png"), location)
         self.item = item
         self.quantity = quantity
         self.type = "resource"
@@ -150,7 +150,7 @@ class QuestionCube(Obj):
     boosts = [["objects.player.currentHealth += 25", 25], ["objects.resourceAmounts['ghostEnergy'] += 25", 50], ["objects.moveSpeed = 10", 60],["objects.resourceAmountsr['purple']", 65],["objects.resourceAmounts['red']", 67],["objects.resourceAmounts['blue']", 69],["objects.resourceAmounts['gold']", 70],["print('10s infinite health')", 80], ["print('10s infinite energy')", 90], ["print('key')"]]
 
     def __init__(self, location): 
-        image = pygame.image.load("RPGGameMVP\Pixel Images\QuestionCube.png")
+        image = pygame.image.load("Data\Pixel Images\QuestionCube.png")
         super().__init__(image, location)
         self.type = "qcube"
     def update(self): 

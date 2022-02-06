@@ -15,14 +15,14 @@ pygame.init()
 
 buttons = {
     "game": [
-        MapClasses.Button(pygame.image.load("Game\Pixel Images\Help Button.png"), (480, 80), ["webbrowser.open(\"https://docs.google.com/document/d/1MywKXdex3Ny2-qE1z_nNMzU6OQ4gaUB3d9Zq9louTh8/edit?usp=sharing\")"])], 
+        MapClasses.Button(pygame.image.load("Data\Pixel Images\Help Button.png"), (480, 80), ["webbrowser.open(\"https://docs.google.com/document/d/1MywKXdex3Ny2-qE1z_nNMzU6OQ4gaUB3d9Zq9louTh8/edit?usp=sharing\")"])],
     "menu": [
-        MapClasses.Button(pygame.transform.scale(pygame.image.load("Game\Pixel Images\StartButton.png"), (300,80)),(250,450), ['objects.gamestate = 1','objects.Reset()']), MapClasses.Button(pygame.transform.scale(pygame.image.load("Game\Pixel Images\AboutUsButton.png"), (300,80)),(250,350), ['webbrowser.open("https://docs.google.com/presentation/d/1fCRW8VGcp_BtFYz1E_SCKFJo4uPcnhw9mEK5d6gdftc/edit?usp=sharing")'])],
+        MapClasses.Button(pygame.transform.scale(pygame.image.load("Data\Pixel Images\StartButton.png"), (300,80)),(250,450), ['objects.gamestate = 1','objects.Reset()']), MapClasses.Button(pygame.transform.scale(pygame.image.load("Data\Pixel Images\AboutUsButton.png"), (300,80)),(250,350), ['webbrowser.open("https://docs.google.com/presentation/d/1fCRW8VGcp_BtFYz1E_SCKFJo4uPcnhw9mEK5d6gdftc/edit?usp=sharing")'])],
     "shop": [
-    MapClasses.Button(pygame.transform.scale(pygame.image.load("Game\Pixel Images\Purple Potion.png"),(50,50)),(175,175), ['if objects.resourceAmounts["coins"] >= 25: objects.potions["purple"] += 1;objects.resourceAmounts["coins"] -= 25;print("Bought Purple Potion")', "time.sleep(0.5)"]),
-    MapClasses.Button(pygame.transform.scale(pygame.image.load("Game\Pixel Images\Red Potion.png"), (50,50)),(225,175), ['if objects.resourceAmounts["coins"] >= 50: objects.potions["red"] += 1;objects.resourceAmounts["coins"] -= 50;print("Bought Red Potion")', "time.sleep(0.5)"]),
-    MapClasses.Button(pygame.transform.scale(pygame.image.load("Game\Pixel Images\Blue Potion.png"),(50,50)),(275,175), ['if objects.resourceAmounts["coins"] >= 50: objects.potions["blue"] += 1;objects.resourceAmounts["coins"] -= 50;print("Bought Blue Potion")', "time.sleep(0.5)"]),
-    MapClasses.Button(pygame.transform.scale(pygame.image.load("Game\Pixel Images\Gold Potion.png"),(50,50)),(325,175), ['if objects.resourceAmounts["coins"] >= 100: objects.potions["gold"] += 1;objects.resourceAmounts["coins"] -= 100;print("Bought Gold Potion")', "time.sleep(0.5)","objects.FindQuest('Potion Critic').data += 1"]),
+    MapClasses.Button(pygame.transform.scale(pygame.image.load("Data\Pixel Images\Purple Potion.png"),(50,50)),(175,175), ['if objects.resourceAmounts["coins"] >= 25: objects.potions["purple"] += 1;objects.resourceAmounts["coins"] -= 25;print("Bought Purple Potion")', "time.sleep(0.5)"]),
+    MapClasses.Button(pygame.transform.scale(pygame.image.load("Data\Pixel Images\Red Potion.png"), (50,50)),(225,175), ['if objects.resourceAmounts["coins"] >= 50: objects.potions["red"] += 1;objects.resourceAmounts["coins"] -= 50;print("Bought Red Potion")', "time.sleep(0.5)"]),
+    MapClasses.Button(pygame.transform.scale(pygame.image.load("Data\Pixel Images\Blue Potion.png"),(50,50)),(275,175), ['if objects.resourceAmounts["coins"] >= 50: objects.potions["blue"] += 1;objects.resourceAmounts["coins"] -= 50;print("Bought Blue Potion")', "time.sleep(0.5)"]),
+    MapClasses.Button(pygame.transform.scale(pygame.image.load("Data\Pixel Images\Gold Potion.png"),(50,50)),(325,175), ['if objects.resourceAmounts["coins"] >= 100: objects.potions["gold"] += 1;objects.resourceAmounts["coins"] -= 100;print("Bought Gold Potion")', "time.sleep(0.5)","objects.FindQuest('Potion Critic').data += 1"]),
     MapClasses.Button(pygame.Surface((200,50)),(250,325), ['objects.shopShowing = False'])]
 }
 objects.player = Enemies.Player()
@@ -128,20 +128,20 @@ def ShopUpdate():
     for button in buttons["shop"]: 
         button.update()
 
-shopImage = pygame.image.load("Game\Pixel Images\ShopInv.png")
+shopImage = pygame.image.load("Data\Pixel Images\ShopInv.png")
 def ShopRender():
     objects.display.blit(shopImage, (150, 150))
 
-objects.abilityPanel = [pygame.image.load("Game\Pixel Images\Arrow Icon.png"),
-                pygame.image.load("Game\Pixel Images\Fireball Icon.png"),
-                pygame.image.load("Game\Pixel Images\Freeze Icon.png"),
-                pygame.image.load("Game\Pixel Images\Speed Icon.png"),
-                pygame.image.load("Game\Pixel Images\Poison Icon.png"),
-                pygame.image.load("Game\Pixel Images\Summoning Icon.png"),
-                pygame.image.load("Game\Pixel Images\Shield Icon.png"),
-                pygame.image.load("Game\Pixel Images\Laser Icon.png"),
-                pygame.image.load("Game\Pixel Images\Wave Icon.png"),
-                pygame.image.load("Game\Pixel Images\Potion Icon.png")]
+objects.abilityPanel = [pygame.image.load("Data\Pixel Images\Arrow Icon.png"),
+                pygame.image.load("Data\Pixel Images\Fireball Icon.png"),
+                pygame.image.load("Data\Pixel Images\Freeze Icon.png"),
+                pygame.image.load("Data\Pixel Images\Speed Icon.png"),
+                pygame.image.load("Data\Pixel Images\Poison Icon.png"),
+                pygame.image.load("Data\Pixel Images\Summoning Icon.png"),
+                pygame.image.load("Data\Pixel Images\Shield Icon.png"),
+                pygame.image.load("Data\Pixel Images\Laser Icon.png"),
+                pygame.image.load("Data\Pixel Images\Wave Icon.png"),
+                pygame.image.load("Data\Pixel Images\Potion Icon.png")]
 
 def GameplayRender(): 
 
@@ -270,7 +270,7 @@ def MathUpdate():
             #    else: 
             #        gamestate = 4
 
-panelImage = pygame.image.load("Game\Pixel Images\MathPanel.png")
+panelImage = pygame.image.load("Data\Pixel Images\MathPanel.png")
 panelRect = panelImage.get_rect()
 def MathRender():
     # Display our background
