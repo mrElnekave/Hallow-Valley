@@ -36,9 +36,9 @@ for x in range(objects.mapWidth):
         coinNum = 2
         if x == 3 and y == 3:
             coinNum = 4
-        if x != 0 or y != 0: 
-            for e in range(enemyNum): 
-                objects.chunks[x][y].contents.append(Enemies.Ghost((random.randint(100,400),random.randint(100,400))))
+        # if x != 0 or y != 0: 
+        #     for e in range(enemyNum): 
+        #         objects.chunks[x][y].contents.append(Enemies.Ghost((random.randint(100,400),random.randint(100,400))))
         for coin in range(coinNum): 
             objects.chunks[x][y].contents.append(MapClasses.Resource("coins", 10, (random.randint(0,500),random.randint(0,500))))
 
@@ -46,6 +46,8 @@ for x in range(objects.mapWidth):
 #objects.chunks[0][1].contents.append(
 #            MapClasses.Obstacle(pygame.transform.scale(pygame.image.load("TestImage.png"), (50,50)), (250, 250))
 #            )
+
+# --------------------------------------------- HOUSE AND NPC
 objects.chunks[0][0].contents.append(
     MapClasses.NPC(pygame.image.load("RPGGameMVP\Pixel Images\Player.png"), (100,100), [
         "if objects.resourceAmounts['coins'] >= 50: objects.player.currentHealth = objects.player.maxHealth;objects.resourceAmounts['coins'] -= 50"]))
@@ -94,6 +96,13 @@ objects.chunks[7][8].contents.append(MapClasses.MovementBarrier(image,(250,250))
 createDungeon(9, Enemies.FinalBossGhost(), (250,250),(3,3),pygame.image.load("RPGGameMVP\Pixel Images\Grass.png"), pygame.image.load("RPGGameMVP\Pixel Images\Summoning Portal.png"), "final dungeon")
 
 # objects.chunks[0][0].contents.append(MapClasses.Obstacle(pygame.image.load("RPGGameMVP\Pixel Images\House.png"), (250,250)))
+
+for x in range(objects.mapWidth): 
+    for y in range(objects.mapHeight):
+        enemyNum = random.randint(1,5)
+        if x != 0 or y != 0: 
+            for e in range(enemyNum): 
+                objects.chunks[x][y].contents.append(Enemies.Ghost((random.randint(100,400),random.randint(100,400))))
 
 def load():
     position = file["chunks"]["chunk33"]["obstacles"][0]

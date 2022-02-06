@@ -15,7 +15,7 @@ pygame.init()
 
 buttons = {
     "game": [
-        MapClasses.Button(pygame.image.load("Game\Pixel Images\Help Button.png"), (480, 70), ["webbrowser.open(\"https://docs.google.com/document/d/1MywKXdex3Ny2-qE1z_nNMzU6OQ4gaUB3d9Zq9louTh8/edit?usp=sharing\")"])], 
+        MapClasses.Button(pygame.image.load("Game\Pixel Images\Help Button.png"), (480, 80), ["webbrowser.open(\"https://docs.google.com/document/d/1MywKXdex3Ny2-qE1z_nNMzU6OQ4gaUB3d9Zq9louTh8/edit?usp=sharing\")"])], 
     "menu": [
         MapClasses.Button(pygame.transform.scale(pygame.image.load("Game\Pixel Images\StartButton.png"), (300,80)),(250,450), ['objects.gamestate = 1','objects.Reset()']), MapClasses.Button(pygame.transform.scale(pygame.image.load("Game\Pixel Images\AboutUsButton.png"), (300,80)),(250,350), ['webbrowser.open("https://docs.google.com/presentation/d/1fCRW8VGcp_BtFYz1E_SCKFJo4uPcnhw9mEK5d6gdftc/edit?usp=sharing")'])],
     "shop": [
@@ -154,6 +154,7 @@ def GameplayRender():
     
     # UI Rendering
     objects.display.blit(objects.myFont.render("Coins: "+ str(objects.resourceAmounts["coins"]), True, (0,0,0)), (0,50))
+    objects.display.blit(objects.myFont.render("Chunk: "+ str(objects.currentChunk), True, (0,0,0)), (280,70))
     '''questName = objects.quests[objects.currentQuest].name
     objects.display.blit(objects.myFont.render(questName, True, (0,0,0)), (200,100))
     '''
@@ -165,7 +166,8 @@ def GameplayRender():
     pygame.draw.rect(objects.display, (15,15,15), pygame.Rect(300,20,200,20))
     pygame.draw.rect(objects.display, (0,0,255), pygame.Rect(300,20,objects.resourceAmounts["ghostEnergy"]/objects.player.maxEnergy*200,20))
     objects.display.blit(objects.myFont.render(f"Ghost Energy: {objects.resourceAmounts['ghostEnergy']} / {objects.player.maxEnergy}", True, (0,0,0)),(0,25))
-    # Draw equipped
+    
+    # Draw ability panel and equipped abiltiy
     for i in range(len(objects.abilityPanel)):
         if i == objects.player.currentAbility:
             objects.abilityPanel[i].set_alpha(255)
@@ -174,6 +176,7 @@ def GameplayRender():
         else:
             objects.abilityPanel[i].set_alpha(25)
         objects.display.blit(objects.abilityPanel[i], (50 * i, 450))
+    
     for button in buttons["game"]: 
         button.render()
 
@@ -191,7 +194,7 @@ def lightning():
     rb.Time.delayed_call(500 * timescale, images.switch_base)
     rb.Time.delayed_call(550 * timescale, images.switch_base)
     rb.Time.delayed_call(1000 * timescale, images.switch_base)
-    rb.Time.delayed_call(random.randrange(4, 10) * 1000, lightning)
+    rb.Time.delayed_call(random.randrange(5, 12) * 1000, lightning)
 
 rb.Time.delayed_call(1000, lightning)
 def MenuUpdate():
