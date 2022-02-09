@@ -3,7 +3,7 @@
 # 5-3) Make quest information
 # 6-3) Housekeeping
 
-import pygame, sys, objects, MapLoader, mathsets, rubato
+import pygame, sys, objects, MapLoader, mathsets, rubato, music
 mathsets.LoadMath()
 from GameFunctions import *
 from constants import *
