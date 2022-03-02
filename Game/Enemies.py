@@ -12,7 +12,7 @@ from BasicClasses import Obj
 class Player(Obj):
     # Player Setup
     def __init__(self):
-        super().__init__(pygame.image.load("Data\Pixel Images\Player.png"))
+        super().__init__(pygame.image.load("Data\Pixel Images\Player2.png"))
         self.chunk = (0,0)
         self.currentHealth = 100
         self.maxEnergy = 100
