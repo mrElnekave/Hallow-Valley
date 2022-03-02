@@ -6,10 +6,7 @@ main_scene = rb.Scene()
 rb.game.scenes.add(main_scene)
 
 # objects in that scene
-sprite = rb.Image({
-    "image_location": ""
-})
-
+sprite = rb.Sprite().add_component(rb.Image())
 
 # our general update for main
 def main_update():

@@ -41,8 +41,8 @@ def mapPosHelper(mx, my):
         display_height = current_height 
         display_width = display_height / RATIO
         x_offset = (current_width - display_width) / 2
-    mx = min(max(mx, x_offset), display_width + x_offset) - x_offset
-    my = min(max(my, y_offset), display_height + y_offset) - y_offset
+    mx = rubato.Math.clamp(mx, x_offset, display_width + x_offset) - x_offset
+    my = rubato.Math.clamp(my, y_offset, display_height + y_offset) - y_offset
     return (mx/display_width) * WINDOWWIDTH, (my/display_height) * WINDOWHEIGHT
 
 def mapMousePos(mousePos):
@@ -93,6 +93,7 @@ def screen_update():
 # Game Loop
 clock = pygame.time.Clock()
 while 1: 
+    rb.Time.process_calls()
     input_basics()
     if objects.debugging: # Debugging code
         DebugCode()

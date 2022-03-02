@@ -148,14 +148,13 @@ class UpdateLog(Obj):
     def addToLog(self, message: str):
         self.log.append(message)
         self.regenerate_image()
+        print("generated")
+        print(rb.Time.tasks)
         def todo():
             self.log.remove(message)
             self.regenerate_image()
             print("TODONE")
         rb.Time.delayed_call(5 * 1000, todo)
-
-
-
 
 
 class Building(Obj):

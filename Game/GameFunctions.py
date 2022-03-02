@@ -210,7 +210,6 @@ def lightning():
 
 rb.Time.delayed_call(1000, lightning)
 def MenuUpdate():
-    rb.Time.process_calls()
     for button in buttons["menu"]: 
         button.update()
 
