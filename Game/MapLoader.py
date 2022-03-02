@@ -4,6 +4,7 @@ import objects
 import pygame
 import random
 import time
+from images import create_path
 
 file = {
     "chunks":
@@ -31,7 +32,7 @@ def createDungeon(index, boss, location, chunk, background, portal_image, name):
 for x in range(objects.mapWidth): 
     objects.chunks.append(list())
     for y in range(objects.mapHeight):
-        objects.chunks[-1].append(MapClasses.Chunk((x,y), pygame.image.load("Data\Pixel Images\Grass.png"), (500,500), "Overworld"))
+        objects.chunks[-1].append(MapClasses.Chunk((x,y), pygame.image.load(create_path("Grass.png")), (500,500), "Overworld"))
         enemyNum = random.randint(1,5)
         coinNum = 2
         if x == 3 and y == 3:
@@ -44,58 +45,58 @@ for x in range(objects.mapWidth):
 
 # Manual addition of objects to chunks
 #objects.chunks[0][1].contents.append(
-#            MapClasses.Obstacle(pygame.transform.scale(pygame.image.load("TestImage.png"), (50,50)), (250, 250))
+#            MapClasses.Obstacle(pygame.transform.scale(pygame.image.load("TestImage.png")), (50,50)), (250, 250))
 #            )
 
 # --------------------------------------------- HOUSE AND NPC
 objects.chunks[0][0].contents.append(
-    MapClasses.NPC(pygame.image.load("Data\Pixel Images\Player.png"), (100,100), [
+    MapClasses.NPC(pygame.image.load(create_path("Player1.png")), (100,100), [
         "if objects.resourceAmounts['coins'] >= 50: objects.player.currentHealth = objects.player.maxHealth;objects.resourceAmounts['coins'] -= 50"]))
 
-# objects.chunks[0][0].contents.append(MapClasses.Building(pygame.image.load("Data\Pixel Images\House.png"), (100,0), 0, (24,50)))
+# objects.chunks[0][0].contents.append(MapClasses.Building(pygame.image.load(create_path("House.png")), (100,0), 0, (24,50)))
 
-objects.chunks[0][0].contents.append(MapClasses.NPC(pygame.image.load("Data\Pixel Images\Shop.png"), (400,400), ["objects.shopShowing = not objects.shopShowing", "time.sleep(0.1)"])) #TODO: Fix glitching and freeze game
+objects.chunks[0][0].contents.append(MapClasses.NPC(pygame.image.load(create_path("Shop.png")), (400,400), ["objects.shopShowing = not objects.shopShowing", "time.sleep(0.1)"])) #TODO: Fix glitching and freeze game
 
 # Subchunk list
 objects.chunks.append(list())
 
 # House in spawn area
-objects.chunks[-1].append(MapClasses.Chunk((objects.mapWidth,0), pygame.image.load("Data\Pixel Images\HouseBackground.png"), (500,500), "Shop"))
-objects.chunks[-1][0].contents.append(MapClasses.CollisionButton(pygame.image.load("Data\Pixel Images\DoorFromInside.png"), (250, 475), ["objects.player.chunk = (0,0)","objects.player.rect.center = (400,200)"]))
+objects.chunks[-1].append(MapClasses.Chunk((objects.mapWidth,0), pygame.image.load(create_path("HouseBackground.png")), (500,500), "Shop"))
+objects.chunks[-1][0].contents.append(MapClasses.CollisionButton(pygame.image.load(create_path("DoorFromInside.png")), (250, 475), ["objects.player.chunk = (0,0)","objects.player.rect.center = (400,200)"]))
 
 # Fire Boss Dungeon
-createDungeon(1, Enemies.FireGhostBoss(), (250,250), (1,0), pygame.image.load("Data\Pixel Images\FireBossBackground.png"), pygame.image.load("Data\Pixel Images\FirePortal.png"), "fire dungeon")
+createDungeon(1, Enemies.FireGhostBoss(), (250,250), (1,0), pygame.image.load(create_path("FireBossBackground.png")), pygame.image.load(create_path("FirePortal.png")), "fire dungeon")
 
 # Ice Boss Dungeon
-createDungeon(2, Enemies.IceGhostBoss(), (250,250), (0,1), pygame.image.load("Data\Pixel Images\Ice Boss Background.png"), pygame.image.load("Data\Pixel Images\Ice Portal.png"), "ice dungeon")
+createDungeon(2, Enemies.IceGhostBoss(), (250,250), (0,1), pygame.image.load(create_path("Ice Boss Background.png")), pygame.image.load(create_path("Ice Portal.png")), "ice dungeon")
 
 
 # Lightning Boss Dungeon
-createDungeon(3, Enemies.LightningGhostBoss(), (250,250), (2,0), pygame.image.load("Data\Pixel Images\Lightning Boss Background.png"), pygame.image.load("Data\Pixel Images\Lightning Portal.png"), "lightning dungeon")
+createDungeon(3, Enemies.LightningGhostBoss(), (250,250), (2,0), pygame.image.load(create_path("Lightning Boss Background.png")), pygame.image.load(create_path("Lightning Portal.png")), "lightning dungeon")
 
 # Poison boss
-createDungeon(4, Enemies.PoisonGhostBoss(), (250,250), (1,5),pygame.image.load("Data\Pixel Images\Poison Boss Background.png"), pygame.image.load("Data\Pixel Images\Poison Portal.png"), "poison dungeon")
+createDungeon(4, Enemies.PoisonGhostBoss(), (250,250), (1,5),pygame.image.load(create_path("Poison Boss Background.png")), pygame.image.load(create_path("Poison Portal.png")), "poison dungeon")
 
 # Summoning Boss 
-createDungeon(5, Enemies.SummoningGhostBoss(), (250,250),(4,3),pygame.image.load("Data\Pixel Images\Grass.png"), pygame.image.load("Data\Pixel Images\Summoning Portal.png"), "summoning dungeon")
+createDungeon(5, Enemies.SummoningGhostBoss(), (250,250),(4,3),pygame.image.load(create_path("Grass.png")), pygame.image.load(create_path("Summoning Portal.png")), "summoning dungeon")
 
 # Shield Boss 
-createDungeon(6, Enemies.ShieldGhostBoss(), (250,250),(5,6),pygame.image.load("Data\Pixel Images\Grass.png"), pygame.image.load("Data\Pixel Images\Summoning Portal.png"), "shield dungeon")
-objects.chunks[7][6].contents.append(MapClasses.MovementBarrier(pygame.transform.scale(pygame.image.load("Data\Pixel Images\WaterBase.png"), (500,100)),(250,250)))
+createDungeon(6, Enemies.ShieldGhostBoss(), (250,250),(5,6),pygame.image.load(create_path("Grass.png")), pygame.image.load(create_path("Summoning Portal.png")), "shield dungeon")
+objects.chunks[7][6].contents.append(MapClasses.MovementBarrier(pygame.transform.scale(pygame.image.load(create_path("WaterBase.png")), (500,100)),(250,250)))
 
 # Laser Boss 
-createDungeon(7, Enemies.LaserGhostBoss(), (250,250),(3,5),pygame.image.load("Data\Pixel Images\Grass.png"), pygame.image.load("Data\Pixel Images\FirePortal.png"), "laser dungeon")
+createDungeon(7, Enemies.LaserGhostBoss(), (250,250),(3,5),pygame.image.load(create_path("Grass.png")), pygame.image.load(create_path("FirePortal.png")), "laser dungeon")
 
 # Water Boss 
-createDungeon(8, Enemies.WaterGhostBoss(), (250,250),(1,4),pygame.image.load("Data\Pixel Images\Grass.png"), pygame.image.load("Data\Pixel Images\Ice Portal.png"), "water dungeon")
-image = pygame.transform.scale(pygame.image.load("Data\Pixel Images\WaterBase.png"), (300,300))
+createDungeon(8, Enemies.WaterGhostBoss(), (250,250),(1,4),pygame.image.load(create_path("Grass.png")), pygame.image.load(create_path("Ice Portal.png")), "water dungeon")
+image = pygame.transform.scale(pygame.image.load(create_path("WaterBase.png")), (300,300))
 image.set_alpha(10)
 objects.chunks[7][8].contents.append(MapClasses.MovementBarrier(image,(250,250)))
 
 # Final Boss 
-createDungeon(9, Enemies.FinalBossGhost(), (250,250),(3,3),pygame.image.load("Data\Pixel Images\Grass.png"), pygame.image.load("Data\Pixel Images\Summoning Portal.png"), "final dungeon")
+createDungeon(9, Enemies.FinalBossGhost(), (250,250),(3,3),pygame.image.load(create_path("Grass.png")), pygame.image.load(create_path("Summoning Portal.png")), "final dungeon")
 
-# objects.chunks[0][0].contents.append(MapClasses.Obstacle(pygame.image.load("Data\Pixel Images\House.png"), (250,250)))
+# objects.chunks[0][0].contents.append(MapClasses.Obstacle(pygame.image.load(create_path("House.png")), (250,250)))
 
 for x in range(objects.mapWidth): 
     for y in range(objects.mapHeight):
@@ -107,5 +108,5 @@ for x in range(objects.mapWidth):
 def load():
     position = file["chunks"]["chunk33"]["obstacles"][0]
     #objects.chunks[3][3].contents.append(
-        #MapClasses.Obstacle(pygame.transform.scale(pygame.image.load("TestImage.png"), (50,50)), position)
+        #MapClasses.Obstacle(pygame.transform.scale(pygame.image.load("TestImage.png")), (50,50)), position)
         #)
