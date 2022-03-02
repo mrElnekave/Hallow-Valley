@@ -2,7 +2,7 @@ import pygame, constants, copy
 pygame.init()
 
 pygame.display.set_mode(constants.default_size)
-current_path = "Data\Pixel Images\\"
+current_path = "Game\Data\Pixel Images\\"
 
 def load_img(path, colorkey=(255,255,255)):
     img = pygame.image.load(current_path + path).convert()
@@ -11,8 +11,8 @@ def load_img(path, colorkey=(255,255,255)):
 
 def create_path(path:str):
     """
-    @param:path:path is the relative path from the pixel images folder
-    @return:return the relative path from roots of project
+    :param path:path is the relative path from the pixel images folder
+    :return: the relative path from roots of project
     """
     return current_path + path
 

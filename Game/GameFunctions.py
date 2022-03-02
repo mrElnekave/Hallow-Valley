@@ -10,12 +10,13 @@ import MapLoader
 import quests
 import rubato as rb
 import images
+from images import create_path
 
 pygame.init()
 
 buttons = {
     "game": [
-        MapClasses.Button(pygame.image.load("Data\Pixel Images\Help Button.png"), (480, 80), ["webbrowser.open(\"https://docs.google.com/document/d/1MywKXdex3Ny2-qE1z_nNMzU6OQ4gaUB3d9Zq9louTh8/edit?usp=sharing\")"])],
+        MapClasses.Button(pygame.image.load(create_path("Help Button.png")), (480, 80), ["webbrowser.open(\"https://docs.google.com/document/d/1MywKXdex3Ny2-qE1z_nNMzU6OQ4gaUB3d9Zq9louTh8/edit?usp=sharing\")"])],
     "menu": [
         MapClasses.Button(pygame.transform.scale(pygame.image.load("Data\Pixel Images\StartButton.png"), (300,80)),(250,450), ['objects.gamestate = 1','objects.Reset()']), MapClasses.Button(pygame.transform.scale(pygame.image.load("Data\Pixel Images\AboutUsButton.png"), (300,80)),(250,350), ['webbrowser.open("https://docs.google.com/presentation/d/1fCRW8VGcp_BtFYz1E_SCKFJo4uPcnhw9mEK5d6gdftc/edit?usp=sharing")'])],
     "shop": [
