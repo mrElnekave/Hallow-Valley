@@ -2,7 +2,7 @@ import pygame
 import objects
 import math
 from BasicClasses import Obj
-
+from images import create_path
 
 
 class FireArrow(): # Ability 1: Fires an arrow projectile
@@ -42,7 +42,7 @@ class FireArrow(): # Ability 1: Fires an arrow projectile
 
 class Arrow(Obj):
     def __init__(self,direction,rotationAngle):
-        image = pygame.image.load("Data\Pixel Images\Arrow.png")
+        image = pygame.image.load(create_path("Arrow.png"))
         image = pygame.transform.rotate(image, rotationAngle)
         super().__init__(image, objects.player.rect.center)
         self.direction = direction
@@ -110,7 +110,7 @@ class LaunchFireball:
 
 class Fireball(Obj):
     def __init__(self,size, dropsize, dropsize2, direction,rotationAngle, position):
-        super().__init__(pygame.image.load("Data\Pixel Images\Fireball.png"), position)
+        super().__init__(pygame.image.load(create_path("Fireball.png")), position)
         self.size = size
         self.dropsize = dropsize
         self.dropsize2 = dropsize2
@@ -258,7 +258,7 @@ class ElectroDash:
 
 class PoisonField(Obj): 
     def __init__(self): 
-        image = pygame.image.load("Data\Pixel Images\Poison Effect.png")
+        image = pygame.image.load(create_path("Poison Effect.png"))
         image.set_alpha(150)
         super().__init__(image)
         self.cooldown = 0
@@ -284,7 +284,7 @@ class PoisonField(Obj):
 
 class SummonAbility(Obj):
     def __init__(self): 
-        super().__init__(pygame.image.load("Data\Pixel Images\Ghost Enemy.png"), (250,250))
+        super().__init__(pygame.image.load(create_path("Ghost Enemy.png")), (250,250))
         self.speed = 10
         self.attackDamage = 20
         self.type = "projectile"
@@ -327,7 +327,7 @@ class SummonAbility(Obj):
 
 class MagicalShield(Obj): 
     def __init__(self): 
-        super().__init__(pygame.image.load("Data\Pixel Images\Magical Shield.png"))
+        super().__init__(pygame.image.load(create_path("Magical Shield.png")))
         self.cooldown = 0
         self.duration = 5 * objects.framerate
         self.cost = 25
@@ -385,7 +385,7 @@ class FireLaserArrow(): # Ability 8: Fires a laser arrow projectile
 
 class LaserArrow(Obj):
     def __init__(self,direction,rotationAngle):
-        image = pygame.image.load("Data\Pixel Images\Laser Arrow.png")
+        image = pygame.image.load(create_path("Laser Arrow.png"))
         image = pygame.transform.scale(image, (40,10))
         image = pygame.transform.rotate(image, rotationAngle)
         
@@ -443,7 +443,7 @@ class LaunchWave(): # Ability 9: Fires a wave projectile with knockback
 
 class Wave(Obj):
     def __init__(self,direction,rotationAngle):
-        image = pygame.image.load("Data\Pixel Images\Wave.png")
+        image = pygame.image.load(create_path("Wave.png"))
         if rotationAngle > 360: 
             rotationAngle -= 360
         image = pygame.transform.scale(image, (100,200))
@@ -465,10 +465,10 @@ class Wave(Obj):
 
 class PotionAbility: 
     types = ["purple","red","blue","gold"]
-    images = [pygame.transform.scale(pygame.image.load("Data\Pixel Images\Purple Potion.png"),(50,50)),pygame.transform.scale(pygame.image.load("Data\Pixel Images\Red Potion.png"),(50,50)),pygame.transform.scale(pygame.image.load("Data\Pixel Images\Blue Potion.png"),(50,50)),pygame.transform.scale(pygame.image.load("Data\Pixel Images\Gold Potion.png"),(50,50))]
+    images = [pygame.transform.scale(pygame.image.load(create_path("Purple Potion.png")),(50,50)),pygame.transform.scale(pygame.image.load("Data\Pixel Images\Red Potion.png"),(50,50)),pygame.transform.scale(pygame.image.load("Data\Pixel Images\Blue Potion.png"),(50,50)),pygame.transform.scale(pygame.image.load("Data\Pixel Images\Gold Potion.png"),(50,50))]
     number = 0
     def __init__(self): 
-        self.image = pygame.image.load("Data\Pixel Images\Poison Effect.png")
+        self.image = pygame.image.load(create_path("Poison Effect.png"))
         self.mousePressed = False
         self.cooldown = 0
         self.duration = objects.framerate
