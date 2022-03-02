@@ -9,6 +9,13 @@ def load_img(path, colorkey=(255,255,255)):
     img.set_colorkey(colorkey)
     return img
 
+def create_path(path:str):
+    """
+    @param:path:path is the relative path from the pixel images folder
+    @return:return the relative path from roots of project
+    """
+    return current_path + path
+
 def darken_except(pic, pos):
     dark_picture = obscure(pic, (0,0,0), 200)
     pygame.draw.circle(dark_picture, (255, 255, 255), pos, 20)
