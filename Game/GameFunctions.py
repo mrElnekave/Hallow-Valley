@@ -11,12 +11,17 @@ import quests
 import rubato as rb
 import images
 from images import create_path
+import webbrowser
 
 pygame.init()
 
+def open_guide():
+    webbrowser.open("https://docs.google.com/document/d/1MywKXdex3Ny2-qE1z_nNMzU6OQ4gaUB3d9Zq9louTh8/edit?usp=sharing")
+    print("Opened Tutorial in your web browser")
+
 buttons = {
     "game": [
-        MapClasses.Button(pygame.image.load(create_path("Help Button.png")), (480, 80), ["webbrowser.open(\"https://docs.google.com/document/d/1MywKXdex3Ny2-qE1z_nNMzU6OQ4gaUB3d9Zq9louTh8/edit?usp=sharing\")"])],
+        MapClasses.Button_func(pygame.image.load(create_path("Help Button.png")), (480, 80), open_guide)],
     "menu": [
         MapClasses.Button(pygame.transform.scale(pygame.image.load(create_path("StartButton.png")), (300,80)),(250,450), ['objects.gamestate = 1','objects.Reset()']), MapClasses.Button(pygame.transform.scale(pygame.image.load(create_path("AboutUsButton.png")), (300,80)),(250,350), ['webbrowser.open("https://docs.google.com/presentation/d/1fCRW8VGcp_BtFYz1E_SCKFJo4uPcnhw9mEK5d6gdftc/edit?usp=sharing")'])],
     "shop": [
@@ -27,6 +32,7 @@ buttons = {
     MapClasses.Button(pygame.Surface((200,50)),(250,325), ['objects.shopShowing = False'])]
 }
 objects.player = Enemies.Player()
+update_log = MapClasses.UpdateLog((200, 200))
 
 def DebugCode():
     if pygame.key.get_pressed()[pygame.K_SPACE]: 
@@ -67,8 +73,9 @@ def GameplayUpdate():
     keys = pygame.key.get_pressed()
     objects.player.getinput(keys)
     if keys[pygame.K_i]: # Game Information
+        update_log.addToLog("TESTING")
         print("INFORMATION: ")
-        print("Current Quest: "+objects.quests[objects.currentQuest].name) 
+        # print("Current Quest: "+objects.quests[objects.currentQuest].name) 
         print("Ghost Energy: "+str(objects.resourceAmounts["ghost energy"]))
         print("Coins: "+str(objects.resourceAmounts["coins"]))
         print("Potions: "+str(objects.potions)) 
@@ -159,6 +166,10 @@ def GameplayRender():
     '''questName = objects.quests[objects.currentQuest].name
     objects.display.blit(objects.myFont.render(questName, True, (0,0,0)), (200,100))
     '''
+
+    # Update Log
+    update_log.render()
+
     # Draw healthbar
     pygame.draw.rect(objects.display, (15,15,15), pygame.Rect(300,0,200,20))
     pygame.draw.rect(objects.display, (0,255,0), pygame.Rect(300,0,objects.player.currentHealth/objects.player.maxHealth*200,20))

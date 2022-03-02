@@ -7,6 +7,7 @@ import webbrowser
 import Abilities
 from BasicClasses import Obj
 from images import create_path
+import rubato as rb
 
 # Quest System Steps
 
@@ -103,6 +104,17 @@ class Button(Obj):
                 for action in self.effects:
                     exec(action)
 
+class Button_func(Obj):
+    def __init__(self, image, location, to_run):
+        super().__init__(image, location)
+        self.to_run = to_run
+    
+    def update(self):
+        if pygame.mouse.get_pressed(3)[0]:
+            mousePos = objects.mapMousePos(pygame.mouse.get_pos())
+            if self.rect.collidepoint(mousePos): 
+                self.to_run()
+
 class NPC(Obj): 
     def __init__(self, image, location, effects):
         super().__init__(image, location)
@@ -114,6 +126,37 @@ class NPC(Obj):
             if self.rect.collidepoint(mousePos): 
                 for action in self.effects:
                     exec(action)
+
+class UpdateLog(Obj):
+    def __init__(self, location):
+        self.basic_image = pygame.Surface((200, 200))
+        pygame.draw.rect(self.basic_image, (0, 0, 255), (0,0,200, 200))
+        super().__init__(self.basic_image, location)
+        self.log: list = []
+        self.archived = []
+        
+    
+    def regenerate_image(self):
+        self.image = self.basic_image
+        for i in range(len(self.log)):
+            log_event = self.log[i]
+            temp_img = objects.myFont.render(log_event, True, (0,0,0))
+            size = temp_img.get_height()
+            self.image.blit(temp_img, (0, i * (size + 2)))
+
+
+    def addToLog(self, message: str):
+        self.log.append(message)
+        self.regenerate_image()
+        def todo():
+            self.log.remove(message)
+            self.regenerate_image()
+            print("TODONE")
+        rb.Time.delayed_call(5 * 1000, todo)
+
+
+
+
 
 class Building(Obj):
     def __init__(self, image, location, subchunk, doorSize):

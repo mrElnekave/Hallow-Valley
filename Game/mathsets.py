@@ -3,7 +3,7 @@ import objects
 import os
 
 def LoadMath():
-    file_path = 'Data\\24sets.txt'
+    file_path = current_path + '24sets.txt'
     # current_path = os.path.dirname(__file__)
     # file_loc = os.path.join(current_path, file_path)
     filetxt = open(file_path, "r")

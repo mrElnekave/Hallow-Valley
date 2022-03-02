@@ -13,11 +13,7 @@ from BasicClasses import Obj
 class Player(Obj):
     # Player Setup
     def __init__(self):
-<<<<<<< Updated upstream
-        super().__init__(pygame.image.load("Data\Pixel Images\Player2.png"))
-=======
         super().__init__(pygame.image.load(create_path("Player.png")))
->>>>>>> Stashed changes
         self.chunk = (0,0)
         self.currentHealth = 100
         self.maxEnergy = 100

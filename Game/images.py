@@ -2,7 +2,7 @@ import pygame, constants, copy
 pygame.init()
 
 pygame.display.set_mode(constants.default_size)
-current_path = "Game\Data\Pixel Images\\"
+current_path = constants.current_path + "Pixel Images\\"
 
 def load_img(path, colorkey=(255,255,255)):
     img = pygame.image.load(current_path + path).convert()

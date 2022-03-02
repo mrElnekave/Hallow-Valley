@@ -1,7 +1,7 @@
-import pygame
+import pygame, constants
 
 
-current_path = "Data\Music\\"
+current_path = constants.current_path + "Music\\"
 
 pygame.mixer.init()
 pygame.mixer.music.load(current_path + "GameMusic.wav")
