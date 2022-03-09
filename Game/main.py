@@ -91,7 +91,6 @@ def screen_update():
         screen.fill((0,0,0))
     # screen_update_frame = not screen_update_frame
 
-# TODO: fix screen jitter
 
 # Game Loop
 clock = pygame.time.Clock()

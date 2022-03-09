@@ -19,9 +19,16 @@ def open_guide():
     webbrowser.open("https://docs.google.com/document/d/1MywKXdex3Ny2-qE1z_nNMzU6OQ4gaUB3d9Zq9louTh8/edit?usp=sharing")
     print("Opened Tutorial in your web browser")
 
+def switch_map_notifs():
+    pass
+
 buttons = {
     "game": [
         MapClasses.Button_func(pygame.image.load(create_path("Help Button.png")), (480, 80), open_guide)],
+    "tab":[
+        MapClasses.Button_func(pygame.image.load(create_path("Blue Potion.png")), (100, 250), switch_map_notifs),
+        MapClasses.Button_func(pygame.image.load(create_path("Red Potion.png")), (300, 250), switch_map_notifs),
+    ],
     "menu": [
         MapClasses.Button(pygame.transform.scale(pygame.image.load(create_path("StartButton.png")), (300,80)),(250,450), ['objects.gamestate = 1','objects.Reset()']), MapClasses.Button(pygame.transform.scale(pygame.image.load(create_path("AboutUsButton.png")), (300,80)),(250,350), ['webbrowser.open("https://docs.google.com/presentation/d/1fCRW8VGcp_BtFYz1E_SCKFJo4uPcnhw9mEK5d6gdftc/edit?usp=sharing")'])],
     "shop": [
@@ -32,7 +39,7 @@ buttons = {
     MapClasses.Button(pygame.Surface((200,50)),(250,325), ['objects.shopShowing = False'])]
 }
 objects.player = Enemies.Player()
-update_log = MapClasses.UpdateLog((50, 87), objects.archives)
+update_log = MapClasses.UpdateLog((100, 87), objects.archives)
 
 def DebugCode():
     if pygame.key.get_pressed()[pygame.K_SPACE]: 
@@ -62,7 +69,9 @@ def NightEvent():
     chunk.contents.append(Enemies.LargeGhost((250,250)))
 
 dayNightCounter = 0
+inTab = False
 def GameplayUpdate():
+    global inTab, dayNightCounter
     for button in buttons["game"]: 
         button.update()
     for quest in objects.quests:
@@ -85,6 +94,8 @@ def GameplayUpdate():
     for event in pygame.event.get(pygame.KEYDOWN):
         objects.player.changeAbility(event)
         # Changing ability level 
+        if event.key == pygame.K_TAB:
+            inTab = not inTab 
         if event.key == pygame.K_l: 
             for i in range(8): 
                 level = objects.levels[i]
@@ -94,62 +105,46 @@ def GameplayUpdate():
                 objects.levels[i] = level
             print(objects.levels)
 
-    # Using Scrollwheel
-    for event in pygame.event.get(pygame.MOUSEWHEEL): 
-        objects.player.changeAbilityWheel(event)
+    if not inTab:
+        for button in buttons["tab"]: 
+            button.update()
+        # Using Scrollwheel
+        for event in pygame.event.get(pygame.MOUSEWHEEL): 
+            objects.player.changeAbilityWheel(event)
 
-    # UPDATE (Doing checks in the background ex: checking if something is colliding)
+        # UPDATE (Doing checks in the background ex: checking if something is colliding)
 
-    # Day-Night cycle
-    global dayNightCounter
-    dayNightCounter += 1
-    if dayNightCounter / objects.framerate >= objects.dayLength: 
-        objects.daytime = not objects.daytime
-        if objects.daytime:
-            print("REPORT: It is now daytime.")
-        else:
-            print("REPORT: It is now nighttime")
-            NightEvent()
-        dayNightCounter = 0
-        
-    # Updating current chunk and stuff in it  
-    objects.currentChunk = objects.chunks[objects.player.chunk[0]][objects.player.chunk[1]]
-    if objects.freeze == True: 
-        for thing in objects.currentChunk.contents: 
-            if thing.type != 'enemy': 
-                thing.update()
-        Abilities.Freeze.freezeCD()
-    else: 
-        objects.currentChunk.update()
-    objects.player.update()
-    if objects.player.currentHealth <= 0: 
-        objects.gamestate = 2
-    if objects.resourceAmounts["ghostEnergy"] >= objects.player.maxEnergy: 
-        objects.resourceAmounts["ghostEnergy"] = objects.player.maxEnergy
+        # Day-Night cycle
+        dayNightCounter += 1
+        if dayNightCounter / objects.framerate >= objects.dayLength: 
+            objects.daytime = not objects.daytime
+            if objects.daytime:
+                print("REPORT: It is now daytime.")
+            else:
+                print("REPORT: It is now nighttime")
+                NightEvent()
+            dayNightCounter = 0
+            
+        # Updating current chunk and stuff in it  
+        objects.currentChunk = objects.chunks[objects.player.chunk[0]][objects.player.chunk[1]]
+        if objects.freeze == True: 
+            for thing in objects.currentChunk.contents: 
+                if thing.type != 'enemy': 
+                    thing.update()
+            Abilities.Freeze.freezeCD()
+        else: 
+            objects.currentChunk.update()
+        objects.player.update()
+        if objects.player.currentHealth <= 0: 
+            objects.gamestate = 2
+        if objects.resourceAmounts["ghostEnergy"] >= objects.player.maxEnergy: 
+            objects.resourceAmounts["ghostEnergy"] = objects.player.maxEnergy
+    else:
+        pass
         
 freezeOverlay = pygame.Surface(objects.size)
 freezeOverlay.fill((255,255,255))
 freezeOverlay.set_alpha(100)
-
-
-def ShopUpdate():
-    for button in buttons["shop"]: 
-        button.update()
-
-shopImage = pygame.image.load(create_path("ShopInv.png"))
-def ShopRender():
-    objects.display.blit(shopImage, (150, 150))
-
-objects.abilityPanel = [pygame.image.load(create_path("Arrow Icon.png")),
-                pygame.image.load(create_path("Fireball Icon.png")),
-                pygame.image.load(create_path("Freeze Icon.png")),
-                pygame.image.load(create_path("Speed Icon.png")),
-                pygame.image.load(create_path("Poison Icon.png")),
-                pygame.image.load(create_path("Summoning Icon.png")),
-                pygame.image.load(create_path("Shield Icon.png")),
-                pygame.image.load(create_path("Laser Icon.png")),
-                pygame.image.load(create_path("Wave Icon.png")),
-                pygame.image.load(create_path("Potion Icon.png"))]
 
 def GameplayRender(): 
 
@@ -191,6 +186,35 @@ def GameplayRender():
     
     for button in buttons["game"]: 
         button.render()
+    
+    if inTab: # render extra ontop
+        for button in buttons["tab"]: 
+            button.render()
+        
+        objects.display.blit(images.demo_map, (100, 100))
+        # render the map
+
+
+
+def ShopUpdate():
+    for button in buttons["shop"]: 
+        button.update()
+
+shopImage = pygame.image.load(create_path("ShopInv.png"))
+def ShopRender():
+    objects.display.blit(shopImage, (150, 150))
+
+objects.abilityPanel = [pygame.image.load(create_path("Arrow Icon.png")),
+                pygame.image.load(create_path("Fireball Icon.png")),
+                pygame.image.load(create_path("Freeze Icon.png")),
+                pygame.image.load(create_path("Speed Icon.png")),
+                pygame.image.load(create_path("Poison Icon.png")),
+                pygame.image.load(create_path("Summoning Icon.png")),
+                pygame.image.load(create_path("Shield Icon.png")),
+                pygame.image.load(create_path("Laser Icon.png")),
+                pygame.image.load(create_path("Wave Icon.png")),
+                pygame.image.load(create_path("Potion Icon.png"))]
+
 
 def MenuRender(): 
     objects.display.fill((255,255,255))

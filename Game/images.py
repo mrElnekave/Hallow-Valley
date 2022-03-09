@@ -69,4 +69,5 @@ menu_base_dark.blit(medium_bolt, (150, 20))
 menu_base_dark.blit(medium_bolt, (300, 60))
 
 
-
+# map and notifs
+demo_map = pygame.image.load(create_path("Demo Map.png")).convert()
