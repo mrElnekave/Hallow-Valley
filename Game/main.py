@@ -3,6 +3,9 @@
 # 5-3) Make quest information
 # 6-3) Housekeeping
 
+# at cycle:
+# 
+
 import pygame, sys, objects, MapLoader, mathsets, rubato, music
 mathsets.LoadMath()
 from GameFunctions import *
