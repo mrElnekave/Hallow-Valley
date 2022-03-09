@@ -1,3 +1,4 @@
+from tkinter.messagebox import NO
 import pygame
 import objects
 import random
@@ -128,31 +129,42 @@ class NPC(Obj):
                     exec(action)
 
 class UpdateLog(Obj):
-    def __init__(self, location):
-        self.basic_image = pygame.Surface((200, 200))
-        pygame.draw.rect(self.basic_image, (0, 0, 255), (0,0,200, 200))
-        super().__init__(self.basic_image, location)
-        self.log: list = []
-        self.archived = []
+    def __init__(self, location, archives):
+        self.capsule = pygame.Surface((100, 20))
+        self.capsule.fill((1, 0, 0))
+        self.capsule.set_alpha(10)
+        self.exclamation = pygame.image.load(create_path("Notification Button.png"))
+        self.exclamation_white = pygame.image.load(create_path("White Notification Button.png"))
+        self.image = pygame.Surface((100, 25))
+        self.image.fill((1, 1, 1))
+        self.image.set_colorkey((1, 1, 1))
+        self.image.blit(self.capsule, (25, 0))
+        self.image.blit(self.exclamation, (0, 0))
+        # self.image = self.exclamation
+        super().__init__(self.image, location)
+        self.message: str = ""
+        self.archived = archives
         
     
     def regenerate_image(self):
-        self.image = self.basic_image
-        for i in range(len(self.log)):
-            log_event = self.log[i]
-            temp_img = objects.myFont.render(log_event, True, (0,0,0))
-            size = temp_img.get_height()
-            self.image.blit(temp_img, (0, i * (size + 2)))
+        self.image.fill((1, 1, 1))
+        self.image.set_colorkey((1, 1, 1))
+        self.image.blit(self.capsule, (25, 0))
+        self.image.blit(self.exclamation, (0, 0))
+        
+        temp_img = objects.myFont.render(self.message, True, (200,0,0))
+        self.image.blit(temp_img, (20, 0))
 
 
-    def addToLog(self, message: str):
-        self.log.append(message)
+    def addMessage(self, message: str):
+        self.archived.append(message)
+        self.message = message
         self.regenerate_image()
-        def todo():
-            self.log.remove(message)
-            self.regenerate_image()
-            print("TODONE")
-        rb.Time.delayed_call(5 * 1000, todo)
+        # def todo():
+        #     self.log.remove(message)
+        #     self.regenerate_image()
+        #     print("TODONE")
+        # rb.Time.delayed_call(5 * 1000, todo)
 
 
 

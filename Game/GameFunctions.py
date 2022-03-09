@@ -32,7 +32,7 @@ buttons = {
     MapClasses.Button(pygame.Surface((200,50)),(250,325), ['objects.shopShowing = False'])]
 }
 objects.player = Enemies.Player()
-update_log = MapClasses.UpdateLog((200, 200))
+update_log = MapClasses.UpdateLog((200, 200), objects.archives)
 
 def DebugCode():
     if pygame.key.get_pressed()[pygame.K_SPACE]: 
@@ -73,7 +73,7 @@ def GameplayUpdate():
     keys = pygame.key.get_pressed()
     objects.player.getinput(keys)
     if keys[pygame.K_i]: # Game Information
-        update_log.addToLog("TESTING")
+        update_log.addMessage("TESTING")
         print("INFORMATION: ")
         # print("Current Quest: "+objects.quests[objects.currentQuest].name) 
         print("Ghost Energy: "+str(objects.resourceAmounts["ghost energy"]))

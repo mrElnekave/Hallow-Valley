@@ -43,6 +43,9 @@ potionEffects = {
     "gold":["objects.player.currentHealth = objects.player.maxHealth","objects.resourceAmounts['ghostEnergy'] = objects.player.maxEnergy"],
 }
 
+# logs
+archives = []
+
 # quests
 """#"Find the Fire Key! ","Defeat the Fire Ghost! ","Find the Ice Key! ","Defeat the Ice Ghost! ","Find the Lightning Key! ","Defeat the Lightning Ghost! ","Find the Poison Key! ","Defeat the Poison Ghost! ","Find the Summoning Key! ","Defeat the Summoner Ghost! ","Find the Shield Key! ","Defeat the Shield Ghost! ","Find the Laser Key! ","Defeat the Laser Ghost! ","Find the Water Key! ","Defeat the Water Ghost! ","Find the Boss Key! ","Defeat the Dark Ghost! "]
 currentQuest = 0
