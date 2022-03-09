@@ -493,6 +493,6 @@ class PotionAbility:
             
     def render(self):
         potionText = objects.myFont.render("Amount of Equipped Potion ["+PotionAbility.types[PotionAbility.number]+"]: "+str(objects.potions[PotionAbility.types[PotionAbility.number]]),False,(0,0,0))
-        objects.display.blit(potionText, (0,75))
-        potionText = objects.myFont.render("Left button to use, Right to switch",False,(0,0,0))
         objects.display.blit(potionText, (0,100))
+        potionText = objects.myFont.render("Left button to use, Right to switch",False,(0,0,0))
+        objects.display.blit(potionText, (0,125))
