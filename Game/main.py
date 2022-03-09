@@ -4,7 +4,7 @@
 # 6-3) Housekeeping
 
 # at cycle:
-# 
+# @PiThon Protectors @Python Vipers @Eco Hero
 
 import pygame, sys, objects, MapLoader, mathsets, rubato, music
 mathsets.LoadMath()
