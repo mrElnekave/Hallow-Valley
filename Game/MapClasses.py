@@ -49,6 +49,8 @@ class Chunk:
             thing.update()
     
     def __repr__(self):
+        if self.location[0]== objects.mapWidth: 
+            return f"{self.chunk_type}"
         return f"{self.location} {self.chunk_type}"
         
 class Quest:
