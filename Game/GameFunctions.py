@@ -73,7 +73,7 @@ def GameplayUpdate():
     keys = pygame.key.get_pressed()
     objects.player.getinput(keys)
     if keys[pygame.K_i]: # Game Information
-        update_log.addMessage("TESTING")
+        update_log.addMessage("TESTINGLONGER")
         print("INFORMATION: ")
         # print("Current Quest: "+objects.quests[objects.currentQuest].name) 
         print("Ghost Energy: "+str(objects.resourceAmounts["ghost energy"]))
