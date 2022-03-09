@@ -151,9 +151,17 @@ class UpdateLog(Obj):
         self.image.set_colorkey((1, 1, 1))
         self.image.blit(self.capsule, (25, 0))
         self.image.blit(self.exclamation, (0, 0))
-        
-        temp_img = objects.myFont.render(self.message, True, (200,0,0))
+        message = self.clamp_message(self.message)
+        temp_img = objects.myFont.render(message, True, (200,0,0))
         self.image.blit(temp_img, (25, 0))
+
+    def clamp_message(self, message):
+        text_width, text_height = objects.myFont.size(message)
+
+        while text_width > self.capsule.get_size()[0] - 5:
+            text_width, text_height = objects.myFont.size(message)
+            message = message[:-1]
+        return message
 
 
     def addMessage(self, message: str):
