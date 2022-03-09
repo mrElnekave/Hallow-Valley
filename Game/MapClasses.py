@@ -130,12 +130,12 @@ class NPC(Obj):
 
 class UpdateLog(Obj):
     def __init__(self, location, archives):
-        self.capsule = pygame.Surface((100, 20))
+        self.capsule = pygame.Surface((175, 25))
         self.capsule.fill((1, 0, 0))
         self.capsule.set_alpha(10)
         self.exclamation = pygame.image.load(create_path("Notification Button.png"))
         self.exclamation_white = pygame.image.load(create_path("White Notification Button.png"))
-        self.image = pygame.Surface((100, 25))
+        self.image = pygame.Surface((200, 25))
         self.image.fill((1, 1, 1))
         self.image.set_colorkey((1, 1, 1))
         self.image.blit(self.capsule, (25, 0))
@@ -153,7 +153,7 @@ class UpdateLog(Obj):
         self.image.blit(self.exclamation, (0, 0))
         
         temp_img = objects.myFont.render(self.message, True, (200,0,0))
-        self.image.blit(temp_img, (20, 0))
+        self.image.blit(temp_img, (25, 0))
 
 
     def addMessage(self, message: str):
