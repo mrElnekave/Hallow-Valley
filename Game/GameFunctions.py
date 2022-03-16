@@ -39,7 +39,7 @@ buttons = {
     MapClasses.Button(pygame.Surface((200,50)),(250,325), ['objects.shopShowing = False'])]
 }
 objects.player = Enemies.Player()
-update_log = MapClasses.UpdateLog((100, 87), objects.archives)
+update_log = MapClasses.UpdateLog((0, 87), objects.archives)
 
 def DebugCode():
     if pygame.key.get_pressed()[pygame.K_SPACE]: 
