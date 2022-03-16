@@ -157,11 +157,13 @@ class UpdateLog(Obj):
     def in_relation(self, x, y):
         return (self.rect.x + x, self.rect.y + y)
 
+    #if player in dungeon: return
     def render(self): 
-        blit_alpha(objects.display, self.capsule, self.in_relation(25, 0), 10)
-        if self.text != None:
-            objects.display.blit(self.text, self.in_relation(25, 0))
-        objects.display.blit(self.exclamation, self.in_relation(0, 0))
+        if objects.player.chunk[0] != -1: 
+            blit_alpha(objects.display, self.capsule, self.in_relation(25, 0), 10)
+            if self.text != None:
+                objects.display.blit(self.text, self.in_relation(25, 0))
+            objects.display.blit(self.exclamation, self.in_relation(0, 0))
     
     def regenerate_image(self):
         message = self.clamp_message(self.message)
