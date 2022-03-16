@@ -1,4 +1,7 @@
 import images
+import MapClasses
+import special_obstacles
+import GameFunctions
 map=[
     [0,0,1,1,1,1,6,6,6,6,6,6,6,6,6],
     [0,0,1,1,1,1,6,6,6,6,6,6,6,6,6],
@@ -43,7 +46,16 @@ location_log = {
 }
 
 color_meaning_by_chunk = [
-    [gray, Obstacle],
+    [ ((158,158,158), MapClasses.Obstacle)], #village
+    [ ((244,67,54), special_obstacles.Lava ),((66,66,66),MapClasses.Obstacle )], #Fire
+    [((96,125,139), MapClasses.Obstacle )], #Ice
+    [((121,85,72), MapClasses.Obstacle)], #Electric
+    [((103,58,183), special_obstacles.Poison), ((158,158,158), MapClasses.Obstacle)] #Poison
+    [((66,66,66), MapClasses.Obstacle)], #summoner
+    [((96,125,139), MapClasses.Obstacle)], #shield
+    [((121,85,72), MapClasses.Obstacle)], #laser
+    [((76,175,80), special_obstacles.Cactus)], #water
+    [((38,50,56),MapClasses.Obstacle)] #final
 ]
 
 map = images.demo_map
