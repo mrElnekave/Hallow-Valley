@@ -13,6 +13,8 @@ from constants import *
 import constants
 pygame.init()
 
+from helpful import map_description
+map_description.load_map()
 
 
 # load everything
