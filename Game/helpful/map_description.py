@@ -46,11 +46,11 @@ location_log = {
 }
 
 color_meaning_by_chunk = [
-    [ ((158,158,158), MapClasses.Obstacle)], #village
-    [ ((244,67,54), special_obstacles.Lava ),((66,66,66),MapClasses.Obstacle )], #Fire
+    [((158,158,158), MapClasses.Obstacle)], #village
+    [((244,67,54), special_obstacles.Lava ), ((66,66,66),MapClasses.Obstacle )], #Fire
     [((96,125,139), MapClasses.Obstacle )], #Ice
     [((121,85,72), MapClasses.Obstacle)], #Electric
-    [((103,58,183), special_obstacles.Poison), ((158,158,158), MapClasses.Obstacle)] #Poison
+    [((103,58,183), special_obstacles.Poison), ((158,158,158), MapClasses.Obstacle)], #Poison
     [((66,66,66), MapClasses.Obstacle)], #summoner
     [((96,125,139), MapClasses.Obstacle)], #shield
     [((121,85,72), MapClasses.Obstacle)], #laser

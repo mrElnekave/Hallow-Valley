@@ -106,9 +106,9 @@ for x in range(objects.mapWidth):
             for e in range(enemyNum): 
                 objects.chunks[x][y].contents.append(Enemies.Ghost((random.randint(100,400),random.randint(100,400))))
 
-objects.chunks[1][1].contents.append(special_obstacles.Lava((250,250),(300,300)))
-objects.chunks[0][0].contents.append(special_obstacles.Poison((250,250),(100,100)))
-objects.chunks[0][0].contents.append(special_obstacles.Cactus((150,250),(100,100)))
+objects.chunks[1][1].contents.append(special_obstacles.Lava((250,250)))
+objects.chunks[0][0].contents.append(special_obstacles.Poison((250,250)))
+objects.chunks[0][0].contents.append(special_obstacles.Cactus((150,250)))
 
 def load():
     position = file["chunks"]["chunk33"]["obstacles"][0]
