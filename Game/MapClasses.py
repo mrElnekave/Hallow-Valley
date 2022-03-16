@@ -1,3 +1,4 @@
+from tkinter import N
 from tkinter.messagebox import NO
 import pygame
 import objects
@@ -130,32 +131,41 @@ class NPC(Obj):
                 for action in self.effects:
                     exec(action)
 
+def blit_alpha(target, source, location, opacity):
+        x = location[0]
+        y = location[1]
+        temp = pygame.Surface((source.get_width(), source.get_height())).convert()
+        temp.blit(target, (-x, -y))
+        temp.blit(source, (0, 0))
+        temp.set_alpha(opacity)        
+        target.blit(temp, location)
+
 class UpdateLog(Obj):
     def __init__(self, location, archives):
         self.capsule = pygame.Surface((175, 25))
-        self.capsule.fill((1, 0, 0))
-        self.capsule.set_alpha(10)
-        self.exclamation = pygame.image.load(create_path("Notification Button.png"))
+        self.capsule.fill((0, 0, 0))
+        self.exclamation_black = pygame.image.load(create_path("Notification Button.png"))
         self.exclamation_white = pygame.image.load(create_path("White Notification Button.png"))
-        self.image = pygame.Surface((200, 25))
-        self.image.fill((1, 1, 1))
-        self.image.set_colorkey((1, 1, 1))
-        self.image.blit(self.capsule, (25, 0))
-        self.image.blit(self.exclamation, (0, 0))
-        # self.image = self.exclamation
+        self.exclamation = self.exclamation_black
+        self.image = pygame.Surface((1, 1))  # just for super
+        self.text = None
+
         super().__init__(self.image, location)
         self.message: str = ""
         self.archived = archives
-        
+    
+    def in_relation(self, x, y):
+        return (self.rect.x + x, self.rect.y + y)
+
+    def render(self): 
+        blit_alpha(objects.display, self.capsule, self.in_relation(25, 0), 10)
+        if self.text != None:
+            objects.display.blit(self.text, self.in_relation(25, 0))
+        objects.display.blit(self.exclamation, self.in_relation(0, 0))
     
     def regenerate_image(self):
-        self.image.fill((1, 1, 1))
-        self.image.set_colorkey((1, 1, 1))
-        self.image.blit(self.capsule, (25, 0))
-        self.image.blit(self.exclamation, (0, 0))
         message = self.clamp_message(self.message)
-        temp_img = objects.myFont.render(message, True, (200,0,0))
-        self.image.blit(temp_img, (25, 0))
+        self.text = objects.myFont.render(message, True, (200,0,0))
 
     def clamp_message(self, message):
         text_width, text_height = objects.myFont.size(message)
