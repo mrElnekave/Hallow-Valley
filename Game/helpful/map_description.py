@@ -1,8 +1,8 @@
 import images
 import MapClasses
 import special_obstacles
-import GameFunctions
 import objects, pygame
+
 
 map=[
     [0,0,1,1,1,1,6,6,6,6,6,6,6,6,6],
