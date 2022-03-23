@@ -69,11 +69,10 @@ def look_at(start_x, start_y, chunk_type):
     for i in range(start_x, end_x):
         for j in range(start_y, end_y):
             color_of_pixel = images.demo_map.get_at((i, j))[:-1]
-            # print(f"{color_of_pixel}, ", end="")
-            try:
-                index = look_for_colors.index(color_of_pixel)
-            except:
-                continue
+            # try:
+            index = look_for_colors.index(color_of_pixel)
+            # except:
+                # continue
             to_instantiate = definitions[index][1]
             # instantiate this in the chunk
         # print()
@@ -88,3 +87,6 @@ def load_map():
             start_x = 1 + 12 * j
 
             look_at(start_x, start_y, chunk_type)
+load_map()
+if __name__ == "__main__":
+    load_map()

@@ -1,5 +1,5 @@
 import pygame, constants, copy
-pygame.init()
+# pygame.init()
 
 pygame.display.set_mode(constants.default_size)
 current_path = constants.current_path + "Pixel Images\\"
@@ -71,3 +71,8 @@ menu_base_dark.blit(medium_bolt, (300, 60))
 
 # map and notifs
 demo_map = pygame.image.load(create_path("Demo Map.png")).convert()
+another = demo_map
+
+
+#
+pygame.image.load(create_path()).convert()
