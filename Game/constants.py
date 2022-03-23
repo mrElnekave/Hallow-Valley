@@ -22,3 +22,4 @@ announcementFont = pygame.font.SysFont("Arial", 72)
 mathFont = pygame.font.SysFont("Arial", 50)
 
 current_path = "Game\Data\\"
+# current_path = "Data\\"

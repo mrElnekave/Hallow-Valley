@@ -13,12 +13,12 @@ from constants import *
 import constants
 pygame.init()
 
-# from helpful import map_description
-# map_description.load_map()
-
+from helpful import map_description
 
 # load everything
 MapLoader.load()
+map_description.load_map()
+
 
 
 # Game Name: H@LLOW VALLEY

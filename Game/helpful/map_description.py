@@ -2,6 +2,8 @@ import images
 import MapClasses
 import special_obstacles
 import GameFunctions
+import objects, pygame
+
 map=[
     [0,0,1,1,1,1,6,6,6,6,6,6,6,6,6],
     [0,0,1,1,1,1,6,6,6,6,6,6,6,6,6],
@@ -60,22 +62,32 @@ color_meaning_by_chunk = [
 
 
 
-def look_at(start_x, start_y, chunk_type):
+def look_at(start_x, start_y, chunk_type, coords):
     end_x = start_x + 10
     end_y = start_y + 10
     definitions = color_meaning_by_chunk[chunk_type]
-    look_for_colors = [definitions[i][0] for i in range(definitions)]
+    look_for_colors = [color_obstacle_pair[0] for color_obstacle_pair in definitions]
 
     for i in range(start_x, end_x):
         for j in range(start_y, end_y):
             color_of_pixel = images.demo_map.get_at((i, j))[:-1]
-            # try:
-            index = look_for_colors.index(color_of_pixel)
-            # except:
-                # continue
+            try:
+                index = look_for_colors.index(color_of_pixel)
+            except ValueError:
+                continue
             to_instantiate = definitions[index][1]
+            try:
+                if coords[0] > 3: continue
+                if coords[1] > 3: continue
+
+                print("instantiate", coords)
+                objects.chunks[coords[0]][coords[1]].contents.append(
+                    to_instantiate(i*10, j*10)
+                )
+            except:
+                continue
             # instantiate this in the chunk
-        # print()
+
 
 def load_map():
     for i in range(len(map)):
@@ -86,7 +98,8 @@ def load_map():
             chunk_type = row[j]
             start_x = 1 + 12 * j
 
-            look_at(start_x, start_y, chunk_type)
-load_map()
+            look_at(start_x, start_y, chunk_type, (i, j))
+
+
 if __name__ == "__main__":
     load_map()
