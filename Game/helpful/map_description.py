@@ -48,16 +48,16 @@ location_log = {
 }
 
 color_meaning_by_chunk = [
-    [((158,158,158), MapClasses.Obstacle)], #village
-    [((244,67,54), special_obstacles.Lava ), ((66,66,66),MapClasses.Obstacle )], #Fire
-    [((96,125,139), MapClasses.Obstacle )], #Ice
-    [((121,85,72), MapClasses.Obstacle)], #Electric
-    [((103,58,183), special_obstacles.Poison), ((158,158,158), MapClasses.Obstacle)], #Poison
-    [((66,66,66), MapClasses.Obstacle)], #summoner
-    [((96,125,139), MapClasses.Obstacle)], #shield
-    [((121,85,72), MapClasses.Obstacle)], #laser
+    [((158,158,158), special_obstacles.InvisibleObj)], #village
+    [((244,67,54), special_obstacles.Lava ), ((66,66,66),special_obstacles.InvisibleObj )], #Fire
+    [((96,125,139), special_obstacles.InvisibleObj )], #Ice
+    [((121,85,72), special_obstacles.InvisibleObj)], #Electric
+    [((103,58,183), special_obstacles.Poison), ((158,158,158), special_obstacles.InvisibleObj)], #Poison
+    [((66,66,66), special_obstacles.InvisibleObj)], #summoner
+    [((96,125,139), special_obstacles.InvisibleObj)], #shield
+    [((121,85,72), special_obstacles.InvisibleObj)], #laser
     [((76,175,80), special_obstacles.Cactus)], #water
-    [((38,50,56),MapClasses.Obstacle)] #final
+    [((38,50,56),special_obstacles.InvisibleObj)] #final
 ]
 
 
@@ -76,13 +76,16 @@ def look_at(start_x, start_y, chunk_type, coords):
             except ValueError:
                 continue
             to_instantiate = definitions[index][1]
-            if coords[0] > 3: continue
-            if coords[1] > 3: continue
-
-            print("instantiate", coords)
-            objects.chunks[coords[0]][coords[1]].contents.append(
-                to_instantiate((i, j))
-            )
+            if coords[0] != 0: continue
+            if coords[1] != 2: continue
+            try:
+                print("instantiate", coords, to_instantiate, i-start_x, j-start_y)
+                print(start_x, start_y, end_x, end_y)
+                objects.chunks[coords[0]][coords[1]].contents.append(
+                    to_instantiate(((i-start_x)*50, (j-start_y)*50))
+                )
+            except IndexError:
+                continue
             # instantiate this in the chunk
 
 
