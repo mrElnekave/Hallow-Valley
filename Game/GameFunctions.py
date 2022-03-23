@@ -26,8 +26,8 @@ buttons = {
     "game": [
         MapClasses.Button_func(pygame.image.load(create_path("Help Button.png")), (480, 80), open_guide)],
     "tab":[
-        MapClasses.Button_func(pygame.image.load(create_path("Blue Potion.png")), (100, 250), switch_map_notifs),
-        MapClasses.Button_func(pygame.image.load(create_path("Red Potion.png")), (300, 250), switch_map_notifs),
+        MapClasses.Button_func(pygame.image.load(create_path("Blue Potion.png")), (100, 400), switch_map_notifs),
+        MapClasses.Button_func(pygame.image.load(create_path("Red Potion.png")), (300, 400), switch_map_notifs),
     ],
     "menu": [
         MapClasses.Button(pygame.transform.scale(pygame.image.load(create_path("StartButton.png")), (300,80)),(250,450), ['objects.gamestate = 1','objects.Reset()']), MapClasses.Button(pygame.transform.scale(pygame.image.load(create_path("AboutUsButton.png")), (300,80)),(250,350), ['webbrowser.open("https://docs.google.com/presentation/d/1fCRW8VGcp_BtFYz1E_SCKFJo4uPcnhw9mEK5d6gdftc/edit?usp=sharing")'])],
