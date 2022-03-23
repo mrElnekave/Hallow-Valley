@@ -74,5 +74,6 @@ demo_map = pygame.image.load(create_path("Demo Map.png")).convert()
 another = demo_map
 
 
-#
-pygame.image.load(create_path()).convert()
+lava = pygame.image.load(create_path("Lava.png"))
+poison = pygame.image.load(create_path("Poison Lake.png"))
+cactus = pygame.image.load(create_path("Cactus1.png"))

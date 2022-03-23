@@ -1,7 +1,8 @@
 import pygame 
 import objects 
 import constants 
-from BasicClasses import Obj
+from BasicClasses import Obj 
+import images
 
 
 class InvisibleObj: 
@@ -17,6 +18,9 @@ class Lava(InvisibleObj):
     def __init__(self, location): 
         super().__init__(location)
         self.type = "obstacle"
+        self.image = images.lava
+    def render(self): 
+        objects.display.blit(self.image, self.rect)
     def update(self): 
         if self.rect.colliderect(objects.player.rect): 
             if not objects.player.invulnerability: 
@@ -29,6 +33,9 @@ class Poison(InvisibleObj):
     def __init__(self, location): 
         super().__init__(location)
         self.type = "obstacle"
+        self.image = images.poison
+    def render(self): 
+        objects.display.blit(self.image, self.rect)
     def update(self):
         if self.rect.colliderect(objects.player.rect): 
             if not objects.player.invulnerability: 
@@ -38,6 +45,9 @@ class Cactus(InvisibleObj):
     def __init__(self, location): 
         super().__init__(location)
         self.type = "obstacle"
+        self.image = images.cactus
+    def render(self): 
+        objects.display.blit(self.image, self.rect)
     def update(self):
         if self.rect.colliderect(objects.player.rect): 
             objects.player.hit_this_frame = True 
