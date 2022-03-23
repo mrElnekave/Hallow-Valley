@@ -76,16 +76,13 @@ def look_at(start_x, start_y, chunk_type, coords):
             except ValueError:
                 continue
             to_instantiate = definitions[index][1]
-            try:
-                if coords[0] > 3: continue
-                if coords[1] > 3: continue
+            if coords[0] > 3: continue
+            if coords[1] > 3: continue
 
-                print("instantiate", coords)
-                objects.chunks[coords[0]][coords[1]].contents.append(
-                    to_instantiate(i*10, j*10)
-                )
-            except:
-                continue
+            print("instantiate", coords)
+            objects.chunks[coords[0]][coords[1]].contents.append(
+                to_instantiate((i, j))
+            )
             # instantiate this in the chunk
 
 

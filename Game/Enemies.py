@@ -1,6 +1,6 @@
 import pygame
 from images import create_path 
-import objects 
+import objects, constants
 import Abilities 
 import math 
 import random
@@ -14,7 +14,7 @@ class Player(Obj):
     # Player Setup
     def __init__(self):
         super().__init__(pygame.image.load(create_path("Player2.png")))
-        self.chunk = (0,0)
+        self.chunk = constants.start_chunk
         self.currentHealth = 100
         self.maxEnergy = 100
         self.maxHealth = 100
