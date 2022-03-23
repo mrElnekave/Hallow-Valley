@@ -583,7 +583,7 @@ class ShieldGhostBoss(Enemy):
         self.maxHealth = 1200
         self.health = self.maxHealth
         self.counter = 0
-        self.cooldown = objects.framerate*3
+        self.cooldown = objects.framerate*(random.randint(1,3))
         self.direction = (5,0)
         self.attackDamage = 25
     def render(self): 
