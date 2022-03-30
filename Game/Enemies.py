@@ -6,6 +6,7 @@ import math
 import random
 import MapClasses
 from BasicClasses import Obj
+from helpful import map_description
 
 #IMPORTANT: This includes the player 
 
@@ -298,7 +299,7 @@ class FireGhostBoss(Enemy):
                 for i in objects.chunks[1][0].contents: 
                     if type(i) == MapClasses.CollisionButton: 
                         objects.chunks[1][0].contents.remove(i)
-                return
+                        return
 
 class IceGhostBoss(Ghost): 
     def __init__(self):
@@ -375,7 +376,7 @@ class IceGhostBoss(Ghost):
             for i in objects.chunks[0][1].contents: 
                 if i.type == "collisionButton": 
                     objects.chunks[0][1].contents.remove(i)
-            return
+                    return
 
 class LightningGhostBoss(Enemy):
     def __init__(self):
@@ -447,10 +448,10 @@ class LightningGhostBoss(Enemy):
             print("NEW ABILITY: ELECTRODASH")
             print("Ability Information: The electrodash ability allows you to dash quickly to a spot on the screen, doing damage to everything in your path and not taking damage at all. This ability uses up 25 ghost energy per use. Press 4 to switch to the electrodash ability from another ability.")
             objects.FindQuest("The Lightning Boss").data = True
-            for i in objects.chunks[1][1].contents: 
+            for i in objects.chunks[2][0].contents: 
                 if i.type == "collisionButton": 
-                    objects.chunks[1][1].contents.remove(i)
-                return
+                    objects.chunks[2][0].contents.remove(i)
+                    return
 
 class PoisonGhostBoss(Enemy):
     def __init__(self):
@@ -509,10 +510,10 @@ class PoisonGhostBoss(Enemy):
             print("NEW ABILITY: POISON FIELD")
             print("Ability Information: The poison field ability deals damage over time to enemies near you. This ability uses up 25 ghost energy per use. Press 5 to switch to the poison field ability from another ability.")
             objects.FindQuest("The Poison Boss").data = True
-            for i in objects.chunks[2][0].contents: 
+            for i in objects.chunks[1][5].contents: 
                 if i.type == "collisionButton": 
-                    objects.chunks[2][0].contents.remove(i)
-                return
+                    objects.chunks[1][5].contents.remove(i)
+                    return
 
 class SummoningGhostBoss(Enemy):
     def __init__(self):
@@ -569,10 +570,10 @@ class SummoningGhostBoss(Enemy):
             print("NEW ABILITY: GHOST SUMMONING")
             print("Ability Information: The summoning ability summons a ghost that follows your mouse around the screen. This ability uses up 25 ghost energy per use. Press 6 to switch to the summoning ability from another ability.")
             objects.FindQuest("The Summoning Boss").data = True
-            for i in objects.chunks[3][0].contents: 
+            for i in objects.chunks[4][3].contents: 
                 if i.type == "collisionButton": 
-                    objects.chunks[3][0].contents.remove(i)
-                return
+                    objects.chunks[4][3].contents.remove(i)
+                    return
 
 class ShieldGhostBoss(Enemy):
     def __init__(self):
@@ -586,7 +587,7 @@ class ShieldGhostBoss(Enemy):
         self.cooldown = objects.framerate*(random.randint(1,3))
         self.direction = (5,0)
         self.attackDamage = 25
-    def render(self): 
+    def render(self):
         objects.display.blit(self.image, self.rect)
         pygame.draw.rect(objects.display, (15,15,15), pygame.Rect(150,25,200,20))
         pygame.draw.rect(objects.display, (255,0,0), pygame.Rect(150,25,self.health/self.maxHealth*200,20))
@@ -618,11 +619,11 @@ class ShieldGhostBoss(Enemy):
             print("NEW ABILITY: MAGICAL SHIELD")
             print("Ability Information: The magical shield ability makes you immune to taking damage. This ability uses up 25 ghost energy per use. Press 7 to switch to the poison field ability from another ability.")
             objects.FindQuest("The Shield Boss").data = True
-            for i in objects.chunks[0][0].contents: 
+            for i in objects.chunks[5][6].contents: 
                 if i.type == "collisionButton": 
-                    objects.chunks[0][0].contents.remove(i)
-                return
-
+                    objects.chunks[5][6].contents.remove(i)
+                    return
+            
 
 class LaserGhostBoss(Enemy): 
     def __init__(self):
@@ -737,10 +738,10 @@ class LaserGhostBoss(Enemy):
             print("NEW ABILITY: LASER ARROW")
             print("Ability Information: The laser arrow ability allows you to shoot a large arrow that passes through enemies, dealing high damage. This ability uses up 25 ghost energy per use. Press 8 to switch to the laser arrow ability from another ability.")
             objects.FindQuest("The Laser Boss").data = True
-            for i in objects.chunks[0][0].contents: 
-                if type(i) == MapClasses.CollisionButton: 
-                    objects.chunks[0][0].contents.remove(i)
-                return
+            for i in objects.chunks[3][5].contents: 
+                if i.type == "collisionButton": 
+                    objects.chunks[3][5].contents.remove(i)
+                    return
 
 class WaterGhostBoss: 
     def __init__(self):
@@ -808,10 +809,10 @@ class WaterGhostBoss:
             print("NEW ABILITY: WAVE")
             print("Ability Information: The wave ability launches 4 large waves in different directions. These waves deal damage over time to enemies that they collide with, and pull/push non-boss enemies along with them (dealing more damage). This ability uses up 25 ghost energy per use. Press 9 to switch to the wave ability from another ability.")
             objects.FindQuest("The Water Boss").data = True
-            for i in objects.chunks[0][0].contents: 
+            for i in objects.chunks[1][4].contents: 
                 if i.type == "collisionButton": 
-                    objects.chunks[0][0].contents.remove(i)
-                return
+                    objects.chunks[1][4].contents.remove(i)
+                    return
 
 class FinalBossGhost(Enemy):
     def __init__(self): 
@@ -1059,9 +1060,9 @@ class FinalBossGhost(Enemy):
             objects.player.rect.center = (400,400)
             print("REPORT: You have defeated the dark ghost.")
             print("GAME COMPLETE!")
-            for i in objects.chunks[0][0].contents: 
-                if type(i) == MapClasses.CollisionButton: 
-                    objects.chunks[0][0].contents.remove(i)
+            for i in objects.chunks[3][3].contents: 
+                if i.type == "collisionButton": 
+                    objects.chunks[3][3].contents.remove(i)
                     return
 
 class EnemyWave:

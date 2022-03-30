@@ -16,7 +16,6 @@ pygame.init()
 from helpful import map_description
 
 # load everything
-MapLoader.load()
 map_description.load_map()
 
 
