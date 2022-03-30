@@ -1,3 +1,5 @@
+from email.mime import image
+import imp
 import MapClasses 
 import Enemies 
 import objects
@@ -5,19 +7,10 @@ import pygame
 import random
 import time
 from images import create_path
+import images
 import special_obstacles
+from helpful import map_description
 
-file = {
-    "chunks":
-    {
-        "chunk00": {
-            "obstacles": [(250, 250)]
-        },
-        "chunk33": {
-            "obstacles": [(100, 200)]
-        }
-    }
-}
 
 def createDungeon(index, boss, location, chunk, background, portal_image, name):
     objects.chunks[chunk[0]][chunk[1]].contents.append(
@@ -29,20 +22,44 @@ def createDungeon(index, boss, location, chunk, background, portal_image, name):
       name))
     objects.chunks[-1][index].contents.append(boss)
 
-# Creating List
-for x in range(objects.mapWidth): 
+# Creating Chunks
+objects.mapHeight = len(map_description.map[0])
+objects.mapWidth = len(map_description.map)
+
+def from_chunk(surface, chunk):
+    definitions = map_description.color_meaning_by_chunk[type_of_area]
+    look_for_colors = [color_obstacle_pair[0] for color_obstacle_pair in definitions]
+    for x in range(10):
+        for y in range(10):
+            color_of_pixel = surface.get_at(x, y)
+            type_of_area = map_description.map[chunk[0]][chunk[1]]
+            if color_of_pixel in look_for_colors:
+                # instantiate right obstacle
+                pass
+    pass
+
+for x_index in range(objects.mapHeight): 
     objects.chunks.append(list())
-    for y in range(objects.mapHeight):
-        objects.chunks[-1].append(MapClasses.Chunk((x,y), pygame.image.load(create_path("Grass.png")), (500,500), "Overworld"))
-        enemyNum = random.randint(1,5)
+    x_map = x_index * 10
+
+    for y_index in range(objects.mapWidth):
+        y_map = y_index * 10
+        surf = pygame.Surface((10, 10))
+        surf.blit(images.simple_map, (0, 0), (x_map, y_map, 10, 10))
+
+        image = surf
+        objects.chunks[-1].append(MapClasses.Chunk((x_index,y_index), image, (500,500), "Overworld"))
         coinNum = 2
-        if x == 3 and y == 3:
+        if x_index == 3 and y_index == 3:
             coinNum = 4
+        
+        for coin in range(coinNum): 
+            objects.chunks[x_index][y_index].contents.append(MapClasses.Resource("coins", 10, (random.randint(0,500),random.randint(0,500))))
+
+        # enemyNum = random.randint(1,5)
         # if x != 0 or y != 0: 
         #     for e in range(enemyNum): 
         #         objects.chunks[x][y].contents.append(Enemies.Ghost((random.randint(100,400),random.randint(100,400))))
-        for coin in range(coinNum): 
-            objects.chunks[x][y].contents.append(MapClasses.Resource("coins", 10, (random.randint(0,500),random.randint(0,500))))
 
 # Manual addition of objects to chunks
 #objects.chunks[0][1].contents.append(
@@ -99,19 +116,17 @@ createDungeon(9, Enemies.FinalBossGhost(), (250,250),(3,3),pygame.image.load(cre
 
 # objects.chunks[0][0].contents.append(MapClasses.Obstacle(pygame.image.load(create_path("House.png")), (250,250)))
 
-for x in range(objects.mapWidth): 
-    for y in range(objects.mapHeight):
+for x_index in range(objects.mapWidth): 
+    for y_index in range(objects.mapHeight):
         enemyNum = random.randint(1,5)
-        if x != 0 or y != 0: 
+        if x_index != 0 or y_index != 0: 
             for e in range(enemyNum): 
-                objects.chunks[x][y].contents.append(Enemies.Ghost((random.randint(100,400),random.randint(100,400))))
+                objects.chunks[x_index][y_index].contents.append(Enemies.Ghost((random.randint(100,400),random.randint(100,400))))
+
+
+# TESTING
 
 objects.chunks[1][1].contents.append(special_obstacles.Lava((250,250)))
 objects.chunks[0][0].contents.append(special_obstacles.Poison((250,250)))
 objects.chunks[0][0].contents.append(special_obstacles.Cactus((150,250)))
 
-def load():
-    position = file["chunks"]["chunk33"]["obstacles"][0]
-    #objects.chunks[3][3].contents.append(
-        #MapClasses.Obstacle(pygame.transform.scale(pygame.image.load("TestImage.png")), (50,50)), position)
-        #)

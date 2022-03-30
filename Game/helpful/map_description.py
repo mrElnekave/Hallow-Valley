@@ -49,7 +49,7 @@ location_log = {
 
 color_meaning_by_chunk = [
     [((158,158,158), special_obstacles.InvisibleObj)], #village
-    [((244,67,54), special_obstacles.Lava ), ((66,66,66),special_obstacles.InvisibleObj )], #Fire
+    [((244,67,54), special_obstacles.Lava), ((66,66,66),special_obstacles.InvisibleObj )], #Fire
     [((96,125,139), special_obstacles.InvisibleObj )], #Ice
     [((121,85,72), special_obstacles.InvisibleObj)], #Electric
     [((103,58,183), special_obstacles.Poison), ((158,158,158), special_obstacles.InvisibleObj)], #Poison
@@ -78,6 +78,7 @@ def look_at(start_x, start_y, chunk_type, coords):
             to_instantiate = definitions[index][1]
             if coords[0] != 0: continue
             if coords[1] != 2: continue
+            print(start_x, start_y, chunk_type, coords)
             try:
                 print("instantiate", coords, to_instantiate, i-start_x, j-start_y)
                 print(start_x, start_y, end_x, end_y)
@@ -85,6 +86,7 @@ def look_at(start_x, start_y, chunk_type, coords):
                     to_instantiate(((i-start_x)*50, (j-start_y)*50))
                 )
             except IndexError:
+                print("bad")
                 continue
             # instantiate this in the chunk
 
@@ -99,7 +101,3 @@ def load_map():
             start_x = 1 + 12 * j
 
             look_at(start_x, start_y, chunk_type, (i, j))
-
-
-if __name__ == "__main__":
-    load_map()

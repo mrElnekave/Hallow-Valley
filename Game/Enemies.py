@@ -587,7 +587,7 @@ class ShieldGhostBoss(Enemy):
         self.cooldown = objects.framerate*(random.randint(1,3))
         self.direction = (5,0)
         self.attackDamage = 25
-    def render(self): 
+    def render(self):
         objects.display.blit(self.image, self.rect)
         pygame.draw.rect(objects.display, (15,15,15), pygame.Rect(150,25,200,20))
         pygame.draw.rect(objects.display, (255,0,0), pygame.Rect(150,25,self.health/self.maxHealth*200,20))
