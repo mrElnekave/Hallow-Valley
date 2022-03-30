@@ -72,7 +72,7 @@ menu_base_dark.blit(medium_bolt, (300, 60))
 # map and notifs
 demo_map = pygame.image.load(create_path("Demo Map.png")).convert()
 demo_map = pygame.transform.scale(demo_map,(240,240))
-
+simple_map = pygame.image.load(create_path("Simple Map.png")).convert()
 
 lava = pygame.image.load(create_path("Lava.png"))
 poison = pygame.image.load(create_path("Poison Lake.png"))
