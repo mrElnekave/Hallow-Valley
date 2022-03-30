@@ -1,5 +1,6 @@
 from email.mime import image
-import imp
+#import imp
+#from Game.special_obstacles import InvisibleObj
 import MapClasses 
 import Enemies 
 import objects
@@ -28,12 +29,16 @@ objects.mapWidth = len(map_description.map)
 
 def from_chunk(surface, chunk):
     definitions = map_description.color_meaning_by_chunk[type_of_area]
-    look_for_colors = [color_obstacle_pair[0] for color_obstacle_pair in definitions]
+    look_for_colors = definitions.keys
     for x in range(10):
         for y in range(10):
-            color_of_pixel = surface.get_at(x, y)
+            color_of_pixel = surface.get_at(x, y)[:-1]
             type_of_area = map_description.map[chunk[0]][chunk[1]]
             if color_of_pixel in look_for_colors:
+                toInstantiate = definitions[color_of_pixel]
+                objects.chunks[chunk[0]][chunk[1]].contents.append(
+                    toInstantiate(x*50,y*50)
+                )
                 # instantiate right obstacle
                 pass
     pass
