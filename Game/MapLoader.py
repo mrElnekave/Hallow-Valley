@@ -1,6 +1,3 @@
-from email.mime import image
-#import imp
-#from Game.special_obstacles import InvisibleObj
 import MapClasses 
 import Enemies 
 import objects
