@@ -1,6 +1,6 @@
 import pygame
 from images import create_path 
-import objects 
+import objects, constants
 import Abilities 
 import math 
 import random
@@ -15,7 +15,7 @@ class Player(Obj):
     # Player Setup
     def __init__(self):
         super().__init__(pygame.image.load(create_path("Player2.png")))
-        self.chunk = (0,0)
+        self.chunk = constants.start_chunk
         self.currentHealth = 100
         self.maxEnergy = 100
         self.maxHealth = 100
@@ -584,7 +584,7 @@ class ShieldGhostBoss(Enemy):
         self.maxHealth = 1200
         self.health = self.maxHealth
         self.counter = 0
-        self.cooldown = objects.framerate*3
+        self.cooldown = objects.framerate*(random.randint(1,3))
         self.direction = (5,0)
         self.attackDamage = 25
     def render(self): 

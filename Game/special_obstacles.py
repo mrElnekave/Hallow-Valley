@@ -7,6 +7,7 @@ import images
 
 class InvisibleObj: 
     def __init__(self, location, size=[50, 50]): 
+        self.type = "InvisibleObj"
         self.rect = pygame.Rect(0,0,size[0],size[1])
         self.rect.center = location 
     def render(self): 
