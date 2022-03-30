@@ -24,6 +24,7 @@ import rubato as rb
 # 2) Setup a 
 
 # Chunks of the map
+
 class Chunk: 
     def __init__(self, location, image, size, chunk_type: str):
         self.location = location

@@ -25,16 +25,16 @@ objects.mapHeight = len(map_description.map[0])
 objects.mapWidth = len(map_description.map)
 
 def from_chunk(surface, chunk):
+    type_of_area = map_description.map[chunk[0]][chunk[1]]
     definitions = map_description.color_meaning_by_chunk[type_of_area]
-    look_for_colors = definitions.keys
+    look_for_colors = definitions.keys()
     for x in range(10):
         for y in range(10):
-            color_of_pixel = surface.get_at(x, y)[:-1]
-            type_of_area = map_description.map[chunk[0]][chunk[1]]
+            color_of_pixel = surface.get_at((x, y))[:-1]
             if color_of_pixel in look_for_colors:
                 toInstantiate = definitions[color_of_pixel]
                 objects.chunks[chunk[0]][chunk[1]].contents.append(
-                    toInstantiate(x*50,y*50)
+                    toInstantiate((x*50 + 25,y*50 + 25))
                 )
                 # instantiate right obstacle
                 pass
@@ -51,6 +51,9 @@ for x_index in range(objects.mapHeight):
 
         image = surf
         objects.chunks[-1].append(MapClasses.Chunk((x_index,y_index), image, (500,500), "Overworld"))
+
+        from_chunk(image, [x_index, y_index])
+
         coinNum = 2
         if x_index == 3 and y_index == 3:
             coinNum = 4

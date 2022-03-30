@@ -52,10 +52,10 @@ color_meaning_by_chunk = [
     {(244,67,54): special_obstacles.Lava, (66,66,66): special_obstacles.InvisibleObj }, #Fire
     {(96,125,139): special_obstacles.InvisibleObj}, #Ice
     {(121,85,72): special_obstacles.InvisibleObj}, #Electric
-    {(103,58,183), special_obstacles.Poison, (158,158,158), special_obstacles.InvisibleObj}, #Poison
-    {(66,66,66), special_obstacles.InvisibleObj}, #summoner
-    {(96,125,139), special_obstacles.InvisibleObj}, #shield
-    {(121,85,72), special_obstacles.InvisibleObj}, #laser
-    {(76,175,80), special_obstacles.Cactus}, #water
-    {(38,50,56),special_obstacles.InvisibleObj} #final
+    {(103,58,183): special_obstacles.Poison, (158,158,158): special_obstacles.InvisibleObj}, #Poison
+    {(66,66,66): special_obstacles.InvisibleObj}, #summoner
+    {(96,125,139): special_obstacles.InvisibleObj}, #shield
+    {(121,85,72): special_obstacles.InvisibleObj}, #laser
+    {(76,175,80): special_obstacles.Cactus}, #water
+    {(38,50,56): special_obstacles.InvisibleObj} #final
 ]

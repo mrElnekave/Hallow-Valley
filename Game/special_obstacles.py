@@ -11,9 +11,12 @@ class InvisibleObj:
         self.rect = pygame.Rect(0,0,size[0],size[1])
         self.rect.center = location 
     def render(self): 
-        pygame.draw.rect(objects.display, (255, 0, 0),  self.rect)
-    def update(self): 
         pass
+        # pygame.draw.rect(objects.display, (255, 0, 0),  self.rect)
+    def update(self): 
+        if self.rect.colliderect(objects.player.rect): 
+            objects.player.hit_this_frame = True
+
 
 class Lava(InvisibleObj): 
     def __init__(self, location): 
