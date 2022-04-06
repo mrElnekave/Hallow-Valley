@@ -290,13 +290,13 @@ class FireGhostBoss(Enemy):
                 objects.resourceAmounts["ghostEnergy"] = objects.player.maxEnergy
                 objects.player.currentHealth = objects.player.maxHealth
                 objects.abilities[1] = Abilities.LaunchFireball()
-                objects.player.chunk = (0,0)
-                objects.player.rect.center = (400,400)
                 print("REPORT: You have defeated the fire ghost.")
                 print("NEW ABILITY: FIREBALL")
                 print("Ability Information: The fireball ability allows you to launch a fireball that does high damage and explodes upon contact, launching 4 smaller fireballs in different directions. This ability uses up 10 ghost energy per use. Press 2 to switch to the fireball ability from another ability.")
                 objects.FindQuest("The Fire Boss").data = True
                 data = map_description.portalLocations["fire"]
+                objects.player.chunk = data[0]
+                objects.player.rect.center = data[1]
                 for i in objects.chunks[data[0][0]][data[0][1]].contents: 
                     if type(i) == MapClasses.CollisionButton: 
                         objects.chunks[data[0][0]][data[0][1]].contents.remove(i)
@@ -367,14 +367,13 @@ class IceGhostBoss(Ghost):
             objects.resourceAmounts["ghostEnergy"] = objects.player.maxEnergy
             objects.player.currentHealth = objects.player.maxHealth
             objects.abilities[2] = Abilities.Freeze()
-            objects.player.chunk = (0,0)
-            objects.player.rect.center = (400,400)
-            
             print("REPORT: You have defeated the ice ghost.")
             print("NEW ABILITY: FREEZE")
             print("Ability Information: The freeze ability allows you to freeze all enemies on the screen for 3 seconds. This ability uses up 25 ghost energy per use. Press 3 to switch to the freeze ability from another ability.")
             objects.FindQuest("The Ice Boss").data = True
             data = map_description.portalLocations["ice"]
+            objects.player.chunk = data[0]
+            objects.player.rect.center = data[1]
             for i in objects.chunks[data[0][0]][data[0][1]].contents: 
                 if type(i) == MapClasses.CollisionButton: 
                     objects.chunks[data[0][0]][data[0][1]].contents.remove(i)
@@ -444,13 +443,13 @@ class LightningGhostBoss(Enemy):
             objects.resourceAmounts["ghostEnergy"] = objects.player.maxEnergy
             objects.player.currentHealth = objects.player.maxHealth
             objects.abilities[3] = Abilities.ElectroDash()
-            objects.player.chunk = (0,0)
-            objects.player.rect.center = (400,400)
             print("REPORT: You have defeated the lightning ghost.")
             print("NEW ABILITY: ELECTRODASH")
             print("Ability Information: The electrodash ability allows you to dash quickly to a spot on the screen, doing damage to everything in your path and not taking damage at all. This ability uses up 25 ghost energy per use. Press 4 to switch to the electrodash ability from another ability.")
             objects.FindQuest("The Lightning Boss").data = True
             data = map_description.portalLocations["lightning"]
+            objects.player.chunk = data[0]
+            objects.player.rect.center = data[1]
             for i in objects.chunks[data[0][0]][data[0][1]].contents: 
                 if type(i) == MapClasses.CollisionButton: 
                     objects.chunks[data[0][0]][data[0][1]].contents.remove(i)
@@ -507,13 +506,13 @@ class PoisonGhostBoss(Enemy):
             objects.resourceAmounts["ghostEnergy"] = objects.player.maxEnergy
             objects.player.currentHealth = objects.player.maxHealth
             objects.abilities[4] = Abilities.PoisonField()
-            objects.player.chunk = (0,0)
-            objects.player.rect.center = (400,400)
             print("REPORT: You have defeated the poison ghost.")
             print("NEW ABILITY: POISON FIELD")
             print("Ability Information: The poison field ability deals damage over time to enemies near you. This ability uses up 25 ghost energy per use. Press 5 to switch to the poison field ability from another ability.")
             objects.FindQuest("The Poison Boss").data = True
             data = map_description.portalLocations["poison"]
+            objects.player.chunk = data[0]
+            objects.player.rect.center = data[1]
             for i in objects.chunks[data[0][0]][data[0][1]].contents: 
                 if type(i) == MapClasses.CollisionButton: 
                     objects.chunks[data[0][0]][data[0][1]].contents.remove(i)
@@ -567,14 +566,13 @@ class SummoningGhostBoss(Enemy):
             objects.resourceAmounts["ghostEnergy"] = objects.player.maxEnergy
             objects.player.currentHealth = objects.player.maxHealth
             objects.abilities[5] = Abilities.SummonAbility()
-            
-            objects.player.chunk = (0,0)
-            objects.player.rect.center = (400,400)
             print("REPORT: You have defeated the summoning ghost.")
             print("NEW ABILITY: GHOST SUMMONING")
             print("Ability Information: The summoning ability summons a ghost that follows your mouse around the screen. This ability uses up 25 ghost energy per use. Press 6 to switch to the summoning ability from another ability.")
             objects.FindQuest("The Summoning Boss").data = True
             data = map_description.portalLocations["summoner"]
+            objects.player.chunk = data[0]
+            objects.player.rect.center = data[1]
             for i in objects.chunks[data[0][0]][data[0][1]].contents: 
                 if type(i) == MapClasses.CollisionButton: 
                     objects.chunks[data[0][0]][data[0][1]].contents.remove(i)
@@ -618,13 +616,13 @@ class ShieldGhostBoss(Enemy):
             objects.resourceAmounts["ghostEnergy"] = objects.player.maxEnergy
             objects.player.currentHealth = objects.player.maxHealth
             objects.abilities[6] = Abilities.MagicalShield()
-            objects.player.chunk = (0,0)
-            objects.player.rect.center = (400,400)
             print("REPORT: You have defeated the shield ghost.")
             print("NEW ABILITY: MAGICAL SHIELD")
             print("Ability Information: The magical shield ability makes you immune to taking damage. This ability uses up 25 ghost energy per use. Press 7 to switch to the poison field ability from another ability.")
             objects.FindQuest("The Shield Boss").data = True
             data = map_description.portalLocations["shield"]
+            objects.player.chunk = data[0]
+            objects.player.rect.center = data[1]
             for i in objects.chunks[data[0][0]][data[0][1]].contents: 
                 if type(i) == MapClasses.CollisionButton: 
                     objects.chunks[data[0][0]][data[0][1]].contents.remove(i)
@@ -738,13 +736,13 @@ class LaserGhostBoss(Enemy):
             objects.resourceAmounts["ghostEnergy"] = objects.player.maxEnergy
             objects.player.currentHealth = objects.player.maxHealth
             objects.abilities[7] = Abilities.FireLaserArrow()
-            objects.player.chunk = (0,0)
-            objects.player.rect.center = (400,400)
             print("REPORT: You have defeated the laser ghost.")
             print("NEW ABILITY: LASER ARROW")
             print("Ability Information: The laser arrow ability allows you to shoot a large arrow that passes through enemies, dealing high damage. This ability uses up 25 ghost energy per use. Press 8 to switch to the laser arrow ability from another ability.")
             objects.FindQuest("The Laser Boss").data = True
             data = map_description.portalLocations["laser"]
+            objects.player.chunk = data[0]
+            objects.player.rect.center = data[1]
             for i in objects.chunks[data[0][0]][data[0][1]].contents: 
                 if type(i) == MapClasses.CollisionButton: 
                     objects.chunks[data[0][0]][data[0][1]].contents.remove(i)
@@ -810,13 +808,13 @@ class WaterGhostBoss:
             objects.resourceAmounts["ghostEnergy"] = objects.player.maxEnergy
             objects.player.currentHealth = objects.player.maxHealth
             objects.abilities[8] = Abilities.LaunchWave()
-            objects.player.chunk = (0,0)
-            objects.player.rect.center = (400,400)
             print("REPORT: You have defeated the water ghost.")
             print("NEW ABILITY: WAVE")
             print("Ability Information: The wave ability launches 4 large waves in different directions. These waves deal damage over time to enemies that they collide with, and pull/push non-boss enemies along with them (dealing more damage). This ability uses up 25 ghost energy per use. Press 9 to switch to the wave ability from another ability.")
             objects.FindQuest("The Water Boss").data = True
             data = map_description.portalLocations["water"]
+            objects.player.chunk = data[0]
+            objects.player.rect.center = data[1]
             for i in objects.chunks[data[0][0]][data[0][1]].contents: 
                 if type(i) == MapClasses.CollisionButton: 
                     objects.chunks[data[0][0]][data[0][1]].contents.remove(i)
@@ -1069,6 +1067,8 @@ class FinalBossGhost(Enemy):
             print("REPORT: You have defeated the dark ghost.")
             print("GAME COMPLETE!")
             data = map_description.portalLocations["final"]
+            objects.player.chunk = data[0]
+            objects.player.rect.center = data[1]
             for i in objects.chunks[data[0][0]][data[0][1]].contents: 
                 if type(i) == MapClasses.CollisionButton: 
                     objects.chunks[data[0][0]][data[0][1]].contents.remove(i)

@@ -57,7 +57,7 @@ def NightEvent():
                 if thing.type == "enemy": 
                     enemies = True
             if enemies is False: 
-                if chunk != objects.chunks[0][0] and chunk != objects.currentChunk: 
+                if (chunk.location[0] >= 2 or chunk.location[1] >= 2) and chunk != objects.currentChunk: 
                     for i in range(random.randint(1,5)):
                         chunk.contents.append(Enemies.Ghost((random.randint(0,500),random.randint(0,500))))
     print("REPORT: Ghosts have appeared in uninhabited areas.")

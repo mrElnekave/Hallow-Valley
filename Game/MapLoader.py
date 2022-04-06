@@ -133,7 +133,7 @@ createDungeon(9, Enemies.FinalBossGhost(), data[1], data[0],pygame.image.load(cr
 for x_index in range(objects.mapWidth): 
     for y_index in range(objects.mapHeight):
         enemyNum = random.randint(1,5)
-        if x_index != 0 or y_index != 0: 
+        if x_index >= 2 or y_index >= 2: 
             for e in range(enemyNum): 
                 objects.chunks[x_index][y_index].contents.append(Enemies.Ghost((random.randint(100,400),random.randint(100,400))))
 
