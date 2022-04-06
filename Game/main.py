@@ -1,8 +1,3 @@
-# TODAYS TODO:
-# 4-3) Press I to get info (current health, chunk, energy, quest)
-# 5-3) Make quest information
-# 6-3) Housekeeping
-
 # at cycle:
 # @PiThon Protectors @Python Vipers @Eco Hero
 
@@ -48,9 +43,7 @@ def mapPosHelper(mx, my):
 def mapMousePos(mousePos):
     mx, my = mousePos
     nx, ny = mapPosHelper(mx, my)
-    # debug
-    # if objects.gamestate == 1 and objects.currentChunk:
-    #     objects.currentChunk.contents.append(objects.Point((nx, ny)))
+    
     return int(nx), int(ny)
 objects.mapMousePos = mapMousePos
 

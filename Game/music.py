@@ -5,7 +5,7 @@ current_path = constants.current_path + "Music\\"
 
 pygame.mixer.init()
 sound1=pygame.mixer.Sound(current_path + "GameMusic.wav")
-sound1.set_volume(0.5)
+sound1.set_volume(0) # TODO: make volume changeable.
 sound1.play(-1)
 
 # pygame.mixer.music.load(current_path + "GameMusic.wav")

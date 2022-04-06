@@ -1,3 +1,4 @@
+from numpy import imag
 import images
 import MapClasses
 import special_obstacles
@@ -47,6 +48,9 @@ location_log = {
     9 : "final"
 }
 
+inv_map = {v: k for k, v in location_log.items()}
+
+
 color_meaning_by_chunk = [
     {(158,158,158): special_obstacles.InvisibleObj}, #village
     {(244,67,54): special_obstacles.Lava, (66,66,66): special_obstacles.InvisibleObj }, #Fire
@@ -59,3 +63,12 @@ color_meaning_by_chunk = [
     {(76,175,80): special_obstacles.Cactus}, #water
     {(38,50,56): special_obstacles.InvisibleObj} #final
 ]
+
+def show_type(type):
+    item = inv_map[type]
+    for row in range(len(map)):
+        for col in range(len(map[0])):
+            if map[row][col] == item:
+                # we need to unblock
+                pygame.draw.rect(images.demo_mask, color, pygame.Rect(posx, posy, 10, 10))
+                images.demo_mask.set_colorkey(color)
