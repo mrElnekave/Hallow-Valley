@@ -14,7 +14,7 @@ debugging = True
 dayLength = 5
 framerate = 30
 difficulty = 0
-start_chunk = (5,9)
+start_chunk = (5, 9)
 
 
 pygame.font.init()

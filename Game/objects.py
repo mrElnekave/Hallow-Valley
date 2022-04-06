@@ -73,7 +73,7 @@ problems = []
 def Reset():
     player.currentHealth = player.maxHealth
     resourceAmounts["ghost energy"] = 0
-    player.chunk = (0, 0)
+    player.chunk = start_chunk
     currentChunk = chunks[player.chunk[1]][player.chunk[0]]
     player.rect.topleft = (0,0)
     for chunkList in chunks:
