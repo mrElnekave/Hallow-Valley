@@ -122,7 +122,7 @@ data = map_description.portalLocations["water"]
 createDungeon(8, Enemies.WaterGhostBoss(), data[1], data[0],pygame.image.load(create_path("Grass.png")), pygame.image.load(create_path("Ice Portal.png")), "Water Dungeon")
 image = pygame.transform.scale(pygame.image.load(create_path("WaterBase.png")), (300,300))
 image.set_alpha(10)
-objects.chunks[7][8].contents.append(MapClasses.MovementBarrier(image,(250,250)))
+objects.chunks[14][8].contents.append(MapClasses.MovementBarrier(image,(250,250)))
 
 # Final Boss 
 data = map_description.portalLocations["final"]

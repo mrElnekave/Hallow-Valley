@@ -9,7 +9,7 @@ default_size = (900, 600)
 
 
 moveSpeed = 5
-mapWidth, mapHeight = 7, 7
+mapWidth, mapHeight = 15, 15
 debugging = True
 dayLength = 5
 framerate = 30
