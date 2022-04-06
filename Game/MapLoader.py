@@ -25,7 +25,7 @@ objects.mapHeight = len(map_description.map[0])
 objects.mapWidth = len(map_description.map)
 
 def from_chunk(surface, chunk):
-    type_of_area = map_description.map[chunk[0]][chunk[1]]
+    type_of_area = map_description.map[chunk[1]][chunk[0]]
     definitions = map_description.color_meaning_by_chunk[type_of_area]
     look_for_colors = definitions.keys()
     for x in range(10):
@@ -40,11 +40,11 @@ def from_chunk(surface, chunk):
                 pass
     pass
 
-for x_index in range(objects.mapHeight): 
+for x_index in range(objects.mapWidth): 
     objects.chunks.append(list())
     x_map = x_index * 10
 
-    for y_index in range(objects.mapWidth):
+    for y_index in range(objects.mapHeight):
         y_map = y_index * 10
         surf = pygame.Surface((10, 10))
         surf.blit(images.simple_map, (0, 0), (x_map, y_map, 10, 10))

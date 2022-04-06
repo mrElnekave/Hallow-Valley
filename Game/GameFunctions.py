@@ -40,7 +40,6 @@ buttons = {
 }
 objects.player = Enemies.Player()
 update_log = MapClasses.UpdateLog((0, 87), objects.archives)
-objects.currentChunk = objects.chunks[objects.player.chunk[0]][objects.player.chunk[1]]
 
 
 def DebugCode():

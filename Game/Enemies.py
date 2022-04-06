@@ -19,6 +19,7 @@ class Player(Obj):
         self.currentHealth = 100
         self.maxEnergy = 100
         self.maxHealth = 100
+        self.rect.topleft = (10, 10)
         self.last_valid_postion = self.rect.center
         self.type = "player"
         self.currentAbility = 0
@@ -51,7 +52,6 @@ class Player(Obj):
         #self.last_valid_position = self.rect.center
         self.rect = self.rect.move(x,y)
     def pos_validate(self):
-        
         if self.rect.center[0] < 0: # Moving off left of screen
             if self.chunk[0] == -1 or self.chunk[0] == 0: # If in subchunk or leftmost chunk and boss fights.
                 self.rect.centerx = 0 # Move flush to wall
