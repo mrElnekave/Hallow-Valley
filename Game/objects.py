@@ -25,7 +25,7 @@ currentChunk = None
 # player resources
 resourceAmounts = {
     "coins": 0, 
-    "ghostEnergy": 0
+    "ghostEnergy": 1000
     }
 potions = {
     "purple": 0, 

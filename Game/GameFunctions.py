@@ -81,7 +81,8 @@ def GameplayUpdate():
     # INPUT (Getting stuff that player is doing ex: pressing keys moving keyboard)
     objects.player.last_valid_position = objects.player.rect.center
     keys = pygame.key.get_pressed()
-    objects.player.getinput(keys)
+    if not inTab:
+        objects.player.getinput(keys)
     if keys[pygame.K_i]: # Game Information
         update_log.addMessage("TESTINGLONGER")
         print("INFORMATION: ")
@@ -132,7 +133,7 @@ def GameplayUpdate():
             for thing in objects.currentChunk.contents: 
                 if thing.type != 'enemy': 
                     thing.update()
-            Abilities.Freeze.freezeCD()
+            objects.abilities[2].freezeCD()  # the freeze abilities cooldown
         else: 
             objects.currentChunk.update()
         objects.player.update()

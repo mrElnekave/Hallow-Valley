@@ -1,9 +1,35 @@
+from cmath import cos
 import pygame
 import objects
 import math
 from BasicClasses import Obj
 from images import create_path
 
+class Ability():
+    def __init__(self, cost, cooldown):
+        self.cost = cost
+        self.cooldown = cooldown 
+        self.orignal_cooldown = cooldown
+
+    def update(self):
+        if self.cooldown > 0:
+            self.cooldown -= 1
+            return False
+        
+        if objects.currentChunk == None:
+            return False
+
+        if objects.resourceAmounts["ghostEnergy"] < self.cost:
+            return False
+        
+        if pygame.mouse.get_pressed(3)[0]:
+            objects.resourceAmounts["ghostEnergy"] -= self.cost
+            self.cooldown = self.orignal_cooldown
+            return True
+
+    
+    def render(self):
+        return
 
 class FireArrow(): # Ability 1: Fires an arrow projectile
     def __init__(self):
@@ -61,21 +87,12 @@ class Arrow(Obj):
                     print(f"something with the arrow {self} is wrong")
                 break
 
-class LaunchFireball:
+class LaunchFireball(Ability):
     def __init__(self):
-        self.fireRate = .1 * objects.framerate
-        self.cooldown = 0
-        self.cost = 0
+        super().__init__(25, .1 * objects.framerate)
 
     def update(self):
-        if self.cooldown > 0:
-            self.cooldown -= 1
-            return
-
-        if objects.currentChunk == None:
-            return
-
-        if pygame.mouse.get_pressed(3)[0] and objects.resourceAmounts["ghostEnergy"] >= self.cost:
+        if super().update():
             mousePos = objects.mapMousePos(pygame.mouse.get_pos())
             mouseX = mousePos[0]
             mouseY = mousePos[1]
@@ -102,11 +119,6 @@ class LaunchFireball:
                     objects.currentChunk.contents.append(Fireball("medium", "large", "small", (moveX, moveY), rotation, objects.player.rect.center))
                 elif level == 5: 
                     objects.currentChunk.contents.append(Fireball("large", "large", "small", (moveX, moveY), rotation, objects.player.rect.center))
-            self.cooldown = self.fireRate
-            objects.resourceAmounts["ghostEnergy"] = objects.resourceAmounts["ghostEnergy"] - self.cost
-
-    def render(self):
-        return
 
 class Fireball(Obj):
     def __init__(self,size, dropsize, dropsize2, direction,rotationAngle, position):
@@ -162,33 +174,25 @@ class Fireball(Obj):
                     objects.currentChunk.contents.append(Fireball(self.dropsize, self.dropsize2, None, (7,-7), 45, self.rect.center))
                 return
 
-class Freeze: 
+class Freeze(Ability): 
     def __init__(self):
-        self.cost = 25 
+        super().__init__(25, 50)
+        self.amount_of_freeze = 100
+        self.time_left_in_freeze = 0
     def update(self):
-        if objects.resourceAmounts["ghostEnergy"] < self.cost:
-            return
-        if pygame.mouse.get_pressed(3)[0] and Freeze.timer == Freeze.cooldown and objects.resourceAmounts["ghostEnergy"] <= self.cost:
-            objects.resourceAmounts["ghostEnergy"] = objects.resourceAmounts["ghostEnergy"] - self.cost
+        if super().update():
             objects.freeze = True
+            self.time_left_in_freeze = self.amount_of_freeze
 
-    cooldown = 100
-    timer = 100
-    def freezeCD():
-        if Freeze.timer == 0:
-            Freeze.timer = Freeze.cooldown
+    def freezeCD(self):
+        if self.time_left_in_freeze == 0:
             objects.freeze = False
             return
-        Freeze.timer -= 1
-    
-    def render(self):
-        return # TODO: Move freeze overlay to here
+        self.time_left_in_freeze -= 1
 
-class ElectroDash:
+class ElectroDash(Ability):
     def __init__(self):
-        self.fireRate = .1 * objects.framerate
-        self.cooldown = 0
-        self.cost = 25
+        super().__init__(25, .1 * objects.framerate)
         self.dashSpeed = 25
         self.damage = 25
         self.dashPositions = []
@@ -250,11 +254,10 @@ class ElectroDash:
                     self.dashPositions.append((self.dashPositions[-1][0]+ xdist, self.dashPositions[-1][1]+ ydist))
                     ratio -= 1
             self.dashPositions.append(mousePos)
-            self.cooldown = self.fireRate
             objects.player.invulnerability = True
 
-    def render(self):
-        return
+class SummonPoinson(Ability):
+    pass
 
 class PoisonField(Obj): 
     def __init__(self): 
@@ -281,6 +284,9 @@ class PoisonField(Obj):
         if self.cooldown != 0:
             # render image # TODO: make a render method for all of our abilities so that this can render after our map
             objects.display.blit(self.image, self.rect)
+
+class SummonGhost(Ability):
+    pass
 
 class SummonAbility(Obj):
     def __init__(self): 
@@ -324,6 +330,9 @@ class SummonAbility(Obj):
                 self.counter = 0
                 self.active = False    
             self.counter += 1
+
+class MakeMagicalShield(Ability):
+    pass
 
 class MagicalShield(Obj): 
     def __init__(self): 
