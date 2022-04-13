@@ -64,7 +64,7 @@ def NightEvent():
     objects.reports_on and print("REPORT: Ghosts have appeared in uninhabited areas.")
     # Spawning a large ghost in uninhabited chunks
     chunk = objects.chunks[random.randint(0,objects.mapWidth-1)][random.randint(0,objects.mapHeight-1)]
-    while chunk == objects.chunks[0][0] or chunk == objects.currentChunk:
+    while (chunk.location[0] < 2 and chunk.location[1] < 2) or chunk == objects.currentChunk:
         chunk = objects.chunks[random.randint(0,objects.mapWidth-1)][random.randint(0,objects.mapHeight-1)]
     objects.reports_on and print(f"REPORT: A powerful ghost has appeared in chunk {chunk.location}.")
     chunk.contents.append(Enemies.LargeGhost((250,250)))
