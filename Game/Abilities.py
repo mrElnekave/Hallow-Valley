@@ -430,21 +430,11 @@ class LaserArrow(Obj):
             if enemy.type == "enemy" and self.rect.colliderect(enemy.rect):
                 enemy.health -= self.attackDamage
 
-class LaunchWave(): # Ability 9: Fires a wave projectile with knockback
+class LaunchWave(Ability): # Ability 9: Fires a wave projectile with knockback
     def __init__(self):
-        self.fireRate = .5 * objects.framerate
-        self.cooldown = 0
-        self.cost = 25
+        super().__init__()
     def update(self):
-        if self.cooldown > 0:
-            self.cooldown -= 1
-            return
-
-        if objects.currentChunk == None:
-            return
-
-        if pygame.mouse.get_pressed(3)[0] and objects.resourceAmounts["ghostEnergy"] >= self.cost:
-            objects.resourceAmounts["ghostEnergy"] -= self.cost
+        if super().update(): 
             mousePos = objects.mapMousePos(pygame.mouse.get_pos())
             mouseX = mousePos[0]
             mouseY = mousePos[1]
@@ -464,10 +454,6 @@ class LaunchWave(): # Ability 9: Fires a wave projectile with knockback
                 objects.currentChunk.contents.append(Wave((moveX*-1, moveY*-1), rotation+180))
                 objects.currentChunk.contents.append(Wave((moveY, moveX*-1), rotation+90))
                 objects.currentChunk.contents.append(Wave((moveY*-1, moveX), rotation+270))
-            self.cooldown = self.fireRate
-    
-    def render(self):
-        return
 
 class Wave(Obj):
     def __init__(self,direction,rotationAngle):
