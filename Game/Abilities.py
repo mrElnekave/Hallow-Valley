@@ -375,20 +375,13 @@ class MagicalShield(Obj):
             self.active = False 
             objects.player.invulnerability = False 
 
-class FireLaserArrow(): # Ability 8: Fires a laser arrow projectile
+class FireLaserArrow(Ability): # Ability 8: Fires a laser arrow projectile
     def __init__(self):
         self.fireRate = .5 * objects.framerate
-        self.cooldown = 0
         self.cost = 25
+        super().__init__(self.cost, self.fireRate)
     def update(self):
-        if self.cooldown > 0:
-            self.cooldown -= 1
-            return
-
-        if objects.currentChunk == None:
-            return
-
-        if pygame.mouse.get_pressed(3)[0] and objects.resourceAmounts["ghostEnergy"] >= self.cost:
+        if super().update():
             objects.resourceAmounts["ghostEnergy"] -= self.cost
             mousePos = objects.mapMousePos(pygame.mouse.get_pos())
             mouseX = mousePos[0]
@@ -407,9 +400,6 @@ class FireLaserArrow(): # Ability 8: Fires a laser arrow projectile
                     rotation += 180
                 objects.currentChunk.contents.append(LaserArrow((moveX*2, moveY*2), rotation))
             self.cooldown = self.fireRate
-    
-    def render(self):
-        return
 
 class LaserArrow(Obj):
     def __init__(self,direction,rotationAngle):
