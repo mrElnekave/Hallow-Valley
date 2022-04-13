@@ -34,7 +34,7 @@ class Player(Obj):
         objects.abilities[4] = Abilities.SummonPoison()
         objects.abilities[7] = Abilities.FireLaserArrow()
         objects.abilities[5] = Abilities.SummonAbility()
-        objects.abilities[6] = Abilities.MagicalShield()
+        objects.abilities[6] = Abilities.MakeMagicalShield()
         objects.abilities[8] = Abilities.LaunchWave()
         objects.abilities[9] = Abilities.PotionAbility()
         #objects.resourceAmounts["ghostEnergy"] = objects.maxEnergys

@@ -338,7 +338,21 @@ class SummonAbility(Obj):
             self.counter += 1
 
 class MakeMagicalShield(Ability):
-    pass
+    def __init__(self):
+        self.shield = MagicalShield()
+        super().__init__(cooldown=self.shield.duration+1*objects.framerate)
+
+    def render(self):
+        if self.shield.active:
+            self.shield.render()   
+        
+    
+    def update(self):
+        if super().update():
+            self.shield.active = True
+            self.shield.cooldown = self.shield.duration
+        if self.shield.active:
+            self.shield.update()
 
 class MagicalShield(Obj): 
     def __init__(self): 
@@ -352,13 +366,9 @@ class MagicalShield(Obj):
             objects.display.blit(self.image, self.rect)
     def update(self): 
         self.rect.center = objects.player.rect.center
-        if pygame.mouse.get_pressed(3)[0] and objects.resourceAmounts["ghostEnergy"] >= self.cost:
-            self.active = True
-            objects.resourceAmounts["ghostEnergy"]-=self.cost
-        if self.active: 
-            objects.player.invulnerability = True 
-            self.cooldown += 1
-        if self.cooldown == self.duration: 
+        objects.player.invulnerability = True 
+        self.cooldown -= 1
+        if self.cooldown == 0: 
             self.active = False 
             objects.player.invulnerability = False 
 
