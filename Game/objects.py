@@ -20,6 +20,7 @@ quests = []
 chunks = []
 player = None
 currentChunk = None
+first_game_frame = True
 
 
 # player resources

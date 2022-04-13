@@ -6,12 +6,13 @@ from BasicClasses import Obj
 from images import create_path
 
 class Ability():
-    def __init__(self, cost, cooldown):
+    def __init__(self, cost=25, cooldown=30):
         self.cost = cost
         self.cooldown = cooldown 
         self.orignal_cooldown = cooldown
 
     def update(self):
+        # print(self.cooldown, self.cost, object)
         if self.cooldown > 0:
             self.cooldown -= 1
             return False
@@ -22,7 +23,7 @@ class Ability():
         if objects.resourceAmounts["ghostEnergy"] < self.cost:
             return False
         
-        if pygame.mouse.get_pressed(3)[0]:
+        if pygame.mouse.get_pressed(3)[0] and not objects.first_game_frame:
             objects.resourceAmounts["ghostEnergy"] -= self.cost
             self.cooldown = self.orignal_cooldown
             return True
@@ -256,34 +257,39 @@ class ElectroDash(Ability):
             self.dashPositions.append(mousePos)
             objects.player.invulnerability = True
 
-class SummonPoinson(Ability):
-    pass
+class SummonPoison(Ability):
+    def __init__(self):
+        super().__init__()
+    
+    def update(self):
+        if super().update():
+            print("summoned")
+            mousePos = objects.mapMousePos(pygame.mouse.get_pos())
+            objects.currentChunk.contents.append(PoisonField(mousePos))
+    
+
 
 class PoisonField(Obj): 
-    def __init__(self): 
+    def __init__(self, pos): 
         image = pygame.image.load(create_path("Poison Effect.png"))
         image.set_alpha(150)
         super().__init__(image)
-        self.cooldown = 0
+        self.rect.center = pos
         self.duration = 5 * objects.framerate
-        self.cost = 25
         self.damage = 1
+
     def update(self): 
-        if self.cooldown == 0 and pygame.mouse.get_pressed(3)[0] and objects.resourceAmounts["ghostEnergy"] >= self.cost:
-            self.cooldown = self.duration
-            objects.resourceAmounts["ghostEnergy"]-=self.cost
-        if self.cooldown != 0:
+        if self.duration >= 0:
             # Check for enemies and damage them
-            self.rect.center = objects.player.rect.center
             for thing in objects.currentChunk.contents: 
                 if thing.type == "enemy" and thing.rect.colliderect(self.rect): 
                     thing.health -= 1
-            self.cooldown -= 1
+            self.duration -= 1
+        else:
+            objects.currentChunk.contents.remove(self)
 
     def render(self):
-        if self.cooldown != 0:
-            # render image # TODO: make a render method for all of our abilities so that this can render after our map
-            objects.display.blit(self.image, self.rect)
+        objects.display.blit(self.image, self.rect)
 
 class SummonGhost(Ability):
     pass

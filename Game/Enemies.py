@@ -31,7 +31,7 @@ class Player(Obj):
         objects.abilities[1] = Abilities.LaunchFireball() 
         objects.abilities[2] = Abilities.Freeze()
         objects.abilities[3] = Abilities.ElectroDash()
-        objects.abilities[4] = Abilities.PoisonField()
+        objects.abilities[4] = Abilities.SummonPoison()
         objects.abilities[7] = Abilities.FireLaserArrow()
         objects.abilities[5] = Abilities.SummonAbility()
         objects.abilities[6] = Abilities.MagicalShield()

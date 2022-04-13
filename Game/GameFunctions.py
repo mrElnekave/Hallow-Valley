@@ -141,8 +141,10 @@ def GameplayUpdate():
             objects.gamestate = 2
         if objects.resourceAmounts["ghostEnergy"] >= objects.player.maxEnergy: 
             objects.resourceAmounts["ghostEnergy"] = objects.player.maxEnergy
+        objects.first_game_frame = False
     else:
-        pass
+        objects.first_game_frame = True
+
         
 freezeOverlay = pygame.Surface(objects.size)
 freezeOverlay.fill((255,255,255))
@@ -272,6 +274,7 @@ parentheses = [startparen,endparen]
 answerString = ""
 values = ["1","2","3","4","5","6","7","8","9","0"]
 def MathUpdate(): 
+    objects.first_game_frame = True
     a[1] = objects.currentProblem[0]
     b[1] = objects.currentProblem[1]
     c[1] = objects.currentProblem[2]
