@@ -291,51 +291,54 @@ class PoisonField(Obj):
     def render(self):
         objects.display.blit(self.image, self.rect)
 
-class SummonGhost(Ability):
-    pass
-
-class SummonAbility(Obj):
+class SummonedGhost(Obj):
     def __init__(self): 
         super().__init__(pygame.image.load(create_path("Ghost Enemy.png")), (250,250))
         self.speed = 10
         self.attackDamage = 20
         self.type = "projectile"
         self.active = False
-        self.counter = 0
-        self.lastChunk = (0,0)
-        self.cost = 25
+        self.counter = 10*objects.framerate
+        self.lastChunk = objects.currentChunk
+        self.rect.center = objects.player.rect.center
     def render(self): 
-        if self.active: 
-            self.image.set_alpha(((objects.framerate * 10) - self.counter)/(objects.framerate * 10)*200+55)
-            objects.display.blit(self.image, self.rect)
+        self.image.set_alpha(self.counter/(objects.framerate * 10)*200+55)
+        objects.display.blit(self.image, self.rect)
     def update(self): 
         # Check if the currentchunk is different
         # if it is move the position back to player
         if objects.currentChunk != self.lastChunk:
             self.rect.center = objects.player.rect.center
+            self.lastChunk = objects.currentChunk
+        
+        mousePos = objects.mapMousePos(pygame.mouse.get_pos())
+        xGap = mousePos[0] - self.rect.center[0] 
+        yGap = mousePos[1] - self.rect.center[1] 
+        distance = (xGap**2+yGap**2)**(1/2)
+        if distance != 0:
+            factor = distance/self.speed
+            moveX = xGap / factor
+            moveY = yGap / factor
+            self.rect = self.rect.move((moveX, moveY))
+        for enemy in objects.currentChunk.contents: 
+            if enemy.type == "enemy" and self.rect.colliderect(enemy.rect): 
+                enemy.health -= self.attackDamage 
+                self.rect.center = objects.player.rect.center
+        if self.counter <= 0: 
+            objects.currentChunk.contents.remove(self)
+        self.counter -= 1
 
-        if pygame.mouse.get_pressed(3)[0] and objects.resourceAmounts["ghostEnergy"] >= self.cost:
-            objects.resourceAmounts["ghostEnergy"] -= self.cost 
-            self.active = True
-            self.rect.center = objects.player.rect.center
-        if self.active:
-            mousePos = objects.mapMousePos(pygame.mouse.get_pos())
-            xGap = mousePos[0] - self.rect.center[0] 
-            yGap = mousePos[1] - self.rect.center[1] 
-            distance = (xGap**2+yGap**2)**(1/2)
-            if distance != 0:
-                factor = distance/self.speed
-                moveX = xGap / factor
-                moveY = yGap / factor
-                self.rect = self.rect.move((moveX, moveY))
-            for enemy in objects.currentChunk.contents: 
-                if enemy.type == "enemy" and self.rect.colliderect(enemy.rect): 
-                    enemy.health -= self.attackDamage 
-                    self.rect.center = objects.player.rect.center
-            if self.counter >= objects.framerate * 10: 
-                self.counter = 0
-                self.active = False    
-            self.counter += 1
+class SummonGhost(Ability):
+    def __init__(self): 
+        super().__init__()
+    
+    def update(self): 
+        if super().update(): 
+            for thing in objects.currentChunk.contents: 
+                if type(thing) == SummonedGhost: 
+                    thing.counter = 10*objects.framerate
+                    return
+            objects.currentChunk.contents.append(SummonedGhost())
 
 class MakeMagicalShield(Ability):
     def __init__(self):
