@@ -61,12 +61,12 @@ def NightEvent():
                 if (chunk.location[0] >= 2 or chunk.location[1] >= 2) and chunk != objects.currentChunk: 
                     for i in range(random.randint(1,5)):
                         chunk.contents.append(Enemies.Ghost((random.randint(0,500),random.randint(0,500))))
-    print("REPORT: Ghosts have appeared in uninhabited areas.")
+    objects.reports_on and print("REPORT: Ghosts have appeared in uninhabited areas.")
     # Spawning a large ghost in uninhabited chunks
     chunk = objects.chunks[random.randint(0,objects.mapWidth-1)][random.randint(0,objects.mapHeight-1)]
     while chunk == objects.chunks[0][0] or chunk == objects.currentChunk:
         chunk = objects.chunks[random.randint(0,objects.mapWidth-1)][random.randint(0,objects.mapHeight-1)]
-    print(f"REPORT: A powerful ghost has appeared in chunk {chunk.location}.")
+    objects.reports_on and print(f"REPORT: A powerful ghost has appeared in chunk {chunk.location}.")
     chunk.contents.append(Enemies.LargeGhost((250,250)))
 
 dayNightCounter = 0
@@ -121,9 +121,9 @@ def GameplayUpdate():
         if dayNightCounter / objects.framerate >= objects.dayLength: 
             objects.daytime = not objects.daytime
             if objects.daytime:
-                print("REPORT: It is now daytime.")
+                objects.reports_on and print("REPORT: It is now daytime.")
             else:
-                print("REPORT: It is now nighttime")
+                objects.reports_on and print("REPORT: It is now nighttime")
                 NightEvent()
             dayNightCounter = 0
             

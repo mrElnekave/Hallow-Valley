@@ -24,3 +24,5 @@ mathFont = pygame.font.SysFont("Arial", 50)
 
 current_path = "Game\Data\\"
 # current_path = "Data\\"
+
+reports_on = False
