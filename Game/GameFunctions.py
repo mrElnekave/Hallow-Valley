@@ -106,6 +106,8 @@ def GameplayUpdate():
                     level = 1
                 objects.levels[i] = level
             print(objects.levels)
+        if event.key == pygame.K_k: 
+            objects.player.changeSkin()
 
     if not inTab:
         for button in buttons["tab"]: 
