@@ -1,3 +1,4 @@
+from re import T
 import pygame
 from images import create_path 
 import objects, constants
@@ -54,6 +55,12 @@ class Player(Obj):
         #self.last_valid_position = self.rect.center
         self.rect = self.rect.move(x,y)
     def pos_validate(self):
+
+        if self.hit_this_frame:
+            self.rect.center = self.last_valid_postion
+            self.hit_this_frame = False
+            # return
+        do_not_clear = False
         saved = self.chunk
         if self.rect.center[0] < 0: # Moving off left of screen
             if self.chunk[0] == -1 or self.chunk[0] == 0: # If in subchunk or leftmost chunk and boss fights.
@@ -79,19 +86,19 @@ class Player(Obj):
         elif self.rect.center[1] > objects.WINDOWWIDTH: # Moving off bottom of screen
             if self.chunk[0] == -1  or self.chunk[1] == objects.mapHeight-1:
                 self.rect.centery = objects.WINDOWHEIGHT
-            else:  
+            else:
                 self.chunk = (self.chunk[0],self.chunk[1]+1)
                 objects.reports_on and print(f'REPORT: Current chunk is {self.chunk}')
                 self.rect.centery = 0
         else:
-            return
-        map_description.clear_chunk(saved)
-
+            do_not_clear = True
         
-        if self.hit_this_frame:
-            self.rect.center = self.last_valid_postion
-            self.hit_this_frame = False
+        if not do_not_clear:
+            map_description.clear_chunk(saved)
+
         self.last_valid_postion = self.rect.center
+        
+        
     def getinput(self, keys): 
         if keys[pygame.K_UP] or keys[pygame.K_w]:
             self.move(0,-objects.moveSpeed)
