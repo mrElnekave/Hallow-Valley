@@ -1,6 +1,5 @@
 from numpy import imag
 import images
-import MapClasses
 import special_obstacles
 import objects, pygame
 
@@ -64,13 +63,23 @@ color_meaning_by_chunk = [
     {(38,50,56): special_obstacles.InvisibleObj} #final
 ]
 
+def show_chunk(row, col):
+    # show_type should use show_chunk
+    pass
+
+
 def show_type(type):
+    dif = 2
     item = inv_map[type]
     for row in range(len(map)):
         for col in range(len(map[0])):
             if map[row][col] == item:
                 # we need to unblock
-                pygame.draw.rect(images.demo_mask, color, pygame.Rect(posx, posy, 10, 10))
+                color = (1, 2, 3)
+                posx = 12 * col + 1
+                posy = 12 * row + 1
+
+                pygame.draw.rect(images.demo_mask, color, pygame.Rect(posx * dif, posy * dif, 10 * dif, 10 * dif))
                 images.demo_mask.set_colorkey(color)
 
 

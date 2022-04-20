@@ -1,3 +1,4 @@
+import imp
 from pydoc import importfile
 from tkinter import image_names
 import pygame
@@ -12,6 +13,7 @@ import rubato as rb
 import images
 from images import create_path
 import webbrowser
+from helpful import map_description
 
 pygame.init()
 
@@ -108,6 +110,8 @@ def GameplayUpdate():
             print(objects.levels)
         if event.key == pygame.K_k: 
             objects.player.changeSkin()
+        if event.key == pygame.K_j:
+            map_description.show_type("fire")
 
     if not inTab:
         for button in buttons["tab"]: 
@@ -198,6 +202,7 @@ def GameplayRender():
             button.render()
         
         objects.display.blit(images.demo_map, (125, 90))
+        objects.display.blit(images.demo_mask, (125, 90))
         # render the map
 
 

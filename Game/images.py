@@ -71,9 +71,9 @@ menu_base_dark.blit(medium_bolt, (300, 60))
 
 # map and notifs
 demo_map = pygame.image.load(create_path("Demo Map.png")).convert()
-demo_map = pygame.transform.scale(demo_map,(240,240))
+demo_map = pygame.transform.scale(demo_map,(360,360))
 demo_mask = demo_map.copy()
-demo_mask = demo_mask.fill((0, 0, 0))
+demo_mask.fill((0, 0, 0))
 simple_map = pygame.image.load(create_path("Simple Map.png")).convert() # 150 by 150
 
 lava = pygame.image.load(create_path("Lava.png"))
