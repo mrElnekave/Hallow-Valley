@@ -25,6 +25,8 @@ class Player(Obj):
         self.currentAbility = 0
         self.invulnerability = False
         self.hit_this_frame = False
+        self.currentSkin = 0
+        self.image = pygame.image.load(create_path("Skin"+str(self.currentSkin)+".png"))
 
         # Debug all powers immediately
         objects.abilities[0] = Abilities.FireArrow()
@@ -137,6 +139,11 @@ class Player(Obj):
     def update(self):
         objects.abilities[self.currentAbility].update()
         self.pos_validate()
+    def changeSkin(self): 
+        self.currentSkin += 1 
+        if self.currentSkin > 25: 
+            self.currentSkin = 0
+        self.image = pygame.image.load(create_path("Skin"+str(self.currentSkin)+".png"))
 
 
 class Enemy: 
