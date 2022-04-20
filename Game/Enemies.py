@@ -16,7 +16,7 @@ class Player(Obj):
     def __init__(self):
         super().__init__(pygame.image.load(create_path("Player2.png")))
         self.chunk = constants.start_chunk
-        self.currentHealth = 100
+        self.currentHealth = 100.00
         self.maxEnergy = 100
         self.maxHealth = 100
         self.rect.topleft = (10, 10)

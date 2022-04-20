@@ -172,7 +172,7 @@ def GameplayRender():
     # Draw healthbar
     pygame.draw.rect(objects.display, (15,15,15), pygame.Rect(300,0,200,20))
     pygame.draw.rect(objects.display, (0,255,0), pygame.Rect(300,0,objects.player.currentHealth/objects.player.maxHealth*200,20))
-    objects.display.blit(objects.myFont.render(f"Health: {objects.player.currentHealth} / {objects.player.maxHealth}", True, (0,0,0)),(0,0))
+    objects.display.blit(objects.myFont.render(f"Health: round({objects.player.currentHealth},2) / {objects.player.maxHealth}", True, (0,0,0)),(0,0))
     # Draw energybar
     pygame.draw.rect(objects.display, (15,15,15), pygame.Rect(300,20,200,20))
     pygame.draw.rect(objects.display, (0,0,255), pygame.Rect(300,20,objects.resourceAmounts["ghostEnergy"]/objects.player.maxEnergy*200,20))
