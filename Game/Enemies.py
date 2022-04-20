@@ -54,6 +54,7 @@ class Player(Obj):
         #self.last_valid_position = self.rect.center
         self.rect = self.rect.move(x,y)
     def pos_validate(self):
+        saved = self.chunk
         if self.rect.center[0] < 0: # Moving off left of screen
             if self.chunk[0] == -1 or self.chunk[0] == 0: # If in subchunk or leftmost chunk and boss fights.
                 self.rect.centerx = 0 # Move flush to wall
@@ -61,30 +62,30 @@ class Player(Obj):
                 self.chunk = (self.chunk[0]-1, self.chunk[1])
                 objects.reports_on and print(f'REPORT: Current chunk is {self.chunk}')
                 self.rect.centerx = objects.WINDOWWIDTH
-        
-        if self.rect.center[0] > objects.WINDOWWIDTH: # Moving off right of screen
+        elif self.rect.center[0] > objects.WINDOWWIDTH: # Moving off right of screen
             if self.chunk[0] == -1  or self.chunk[0] == objects.mapWidth-1:
                 self.rect.centerx = objects.WINDOWWIDTH 
             else:
                 self.chunk = (self.chunk[0]+1, self.chunk[1])
                 objects.reports_on and print(f'REPORT: Current chunk is {self.chunk}')
                 self.rect.centerx = 0
-        
-        if self.rect.center[1] < 0: # Moving off top of screen
+        elif self.rect.center[1] < 0: # Moving off top of screen
             if self.chunk[0] == -1  or self.chunk[1] == 0:
                 self.rect.centery = 0
             else:
                 self.chunk = (self.chunk[0],self.chunk[1]-1)
                 objects.reports_on and print(f'REPORT: Current chunk is {self.chunk}')
                 self.rect.centery = objects.WINDOWHEIGHT
-            
-        if self.rect.center[1] > objects.WINDOWWIDTH: # Moving off bottom of screen
+        elif self.rect.center[1] > objects.WINDOWWIDTH: # Moving off bottom of screen
             if self.chunk[0] == -1  or self.chunk[1] == objects.mapHeight-1:
                 self.rect.centery = objects.WINDOWHEIGHT
             else:  
                 self.chunk = (self.chunk[0],self.chunk[1]+1)
                 objects.reports_on and print(f'REPORT: Current chunk is {self.chunk}')
                 self.rect.centery = 0
+        else:
+            return
+        map_description.clear_chunk(saved)
 
         
         if self.hit_this_frame:

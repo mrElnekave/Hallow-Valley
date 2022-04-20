@@ -72,3 +72,11 @@ def show_type(type):
                 # we need to unblock
                 pygame.draw.rect(images.demo_mask, color, pygame.Rect(posx, posy, 10, 10))
                 images.demo_mask.set_colorkey(color)
+
+
+def clear_chunk(chunk_pos):
+    current_chunk = objects.chunks[chunk_pos[0]][chunk_pos[1]]
+    bad_types: list = ["unassigned", "fireball"]
+    for obj in current_chunk.contents:
+        if obj.type in bad_types:
+            current_chunk.contents.remove(obj)
