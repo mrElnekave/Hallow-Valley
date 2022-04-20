@@ -2,7 +2,8 @@ from numpy import imag
 import images
 import special_obstacles
 import objects, pygame
-from rubato import Math
+from rubato import PMath
+
 shownChunks = []
 map=[
     [0,0,1,1,1,1,6,6,6,6,6,6,6,6,6],
@@ -88,11 +89,19 @@ def show_type(type):
 
                 pygame.draw.rect(images.demo_mask, color, pygame.Rect(posx * dif, posy * dif, 10 * dif, 10 * dif))
                 images.demo_mask.set_colorkey(color)'''
-def playerPosOnMap(playerPos,col,row):
+
+def playerPosOnMap(playerPos, col, row):
     dif = 2
     posx = 12 * col + 1
     posy = 12 * row + 1
-    playerPos = Math.lerp(0,9,)
+    posx += PMath.lerp(0, 9, playerPos[0] / 300)
+    posy += PMath.lerp(0, 9, playerPos[1] / 300)
+
+    # should draw onto the screen instead
+    # check the position and further testing.
+    pygame.draw.rect(images.demo_mask, (255, 255, 255), pygame.Rect(posx * dif, posy * dif, 1 * dif, 1 * dif))
+
+
 
 def clear_chunk(chunk_pos):
     current_chunk = objects.chunks[chunk_pos[0]][chunk_pos[1]]

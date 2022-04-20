@@ -203,6 +203,7 @@ def GameplayRender():
         
         objects.display.blit(images.demo_map, (125, 90))
         objects.display.blit(images.demo_mask, (125, 90))
+        map_description.playerPosOnMap(objects.player.rect.topleft, *objects.player.chunk)
         # render the map
 
 
