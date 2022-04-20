@@ -5,6 +5,12 @@ import math
 from BasicClasses import Obj
 from images import create_path
 
+class AbilityObject(Obj):
+    def __init__(self, image, location=(0,0)):
+        super().__init__(image, location)
+        self.type = "abilityObject"
+
+
 class Ability():
     def __init__(self, cost=25, cooldown=30):
         self.cost = cost
@@ -67,7 +73,7 @@ class FireArrow(): # Ability 1: Fires an arrow projectile
     def render(self):
         return
 
-class Arrow(Obj):
+class Arrow(AbilityObject):
     def __init__(self,direction,rotationAngle):
         image = pygame.image.load(create_path("Arrow.png"))
         image = pygame.transform.rotate(image, rotationAngle)
@@ -121,7 +127,7 @@ class LaunchFireball(Ability):
                 elif level == 5: 
                     objects.currentChunk.contents.append(Fireball("large", "large", "small", (moveX, moveY), rotation, objects.player.rect.center))
 
-class Fireball(Obj):
+class Fireball(AbilityObject):
     def __init__(self,size, dropsize, dropsize2, direction,rotationAngle, position):
         super().__init__(pygame.image.load(create_path("Fireball.png")), position)
         self.size = size
@@ -269,7 +275,7 @@ class SummonPoison(Ability):
     
 
 
-class PoisonField(Obj): 
+class PoisonField(AbilityObject): 
     def __init__(self, pos): 
         image = pygame.image.load(create_path("Poison Effect.png"))
         image.set_alpha(150)
@@ -357,7 +363,7 @@ class MakeMagicalShield(Ability):
         if self.shield.active:
             self.shield.update()
 
-class MagicalShield(Obj): 
+class MagicalShield(AbilityObject): 
     def __init__(self): 
         super().__init__(pygame.image.load(create_path("Magical Shield.png")))
         self.cooldown = 0
@@ -411,7 +417,7 @@ class FireLaserArrow(): # Ability 8: Fires a laser arrow projectile
     def render(self):
         return
 
-class LaserArrow(Obj):
+class LaserArrow(AbilityObject):
     def __init__(self,direction,rotationAngle):
         image = pygame.image.load(create_path("Laser Arrow.png"))
         image = pygame.transform.scale(image, (40,10))
@@ -455,7 +461,7 @@ class LaunchWave(Ability): # Ability 9: Fires a wave projectile with knockback
                 objects.currentChunk.contents.append(Wave((moveY, moveX*-1), rotation+90))
                 objects.currentChunk.contents.append(Wave((moveY*-1, moveX), rotation+270))
 
-class Wave(Obj):
+class Wave(AbilityObject):
     def __init__(self,direction,rotationAngle):
         image = pygame.image.load(create_path("Wave.png"))
         if rotationAngle > 360: 

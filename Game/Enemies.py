@@ -1,4 +1,3 @@
-from re import T
 import pygame
 from images import create_path 
 import objects, constants
