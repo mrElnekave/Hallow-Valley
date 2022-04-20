@@ -65,7 +65,13 @@ color_meaning_by_chunk = [
 
 def show_chunk(row, col):
     # show_type should use show_chunk
-    pass
+    dif = 2
+    color = (1, 2, 3)
+    posx = 12 * col + 1
+    posy = 12 * row + 1
+
+    pygame.draw.rect(images.demo_mask, color, pygame.Rect(posx * dif, posy * dif, 10 * dif, 10 * dif))
+    images.demo_mask.set_colorkey(color)
 
 
 def show_type(type):
@@ -74,13 +80,14 @@ def show_type(type):
     for row in range(len(map)):
         for col in range(len(map[0])):
             if map[row][col] == item:
-                # we need to unblock
+                show_chunk(row,col)
+                '''# we need to unblock
                 color = (1, 2, 3)
                 posx = 12 * col + 1
                 posy = 12 * row + 1
 
                 pygame.draw.rect(images.demo_mask, color, pygame.Rect(posx * dif, posy * dif, 10 * dif, 10 * dif))
-                images.demo_mask.set_colorkey(color)
+                images.demo_mask.set_colorkey(color)'''
 
 
 def clear_chunk(chunk_pos):
