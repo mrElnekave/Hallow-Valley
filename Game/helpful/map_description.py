@@ -2,8 +2,8 @@ from numpy import imag
 import images
 import special_obstacles
 import objects, pygame
-
-
+from rubato import Math
+shownChunks = []
 map=[
     [0,0,1,1,1,1,6,6,6,6,6,6,6,6,6],
     [0,0,1,1,1,1,6,6,6,6,6,6,6,6,6],
@@ -63,7 +63,7 @@ color_meaning_by_chunk = [
     {(38,50,56): special_obstacles.InvisibleObj} #final
 ]
 
-def show_chunk(row, col):
+def show_chunk(col,row):
     # show_type should use show_chunk
     dif = 2
     color = (1, 2, 3)
@@ -80,7 +80,7 @@ def show_type(type):
     for row in range(len(map)):
         for col in range(len(map[0])):
             if map[row][col] == item:
-                show_chunk(row,col)
+                show_chunk(col,row)
                 '''# we need to unblock
                 color = (1, 2, 3)
                 posx = 12 * col + 1
@@ -88,7 +88,11 @@ def show_type(type):
 
                 pygame.draw.rect(images.demo_mask, color, pygame.Rect(posx * dif, posy * dif, 10 * dif, 10 * dif))
                 images.demo_mask.set_colorkey(color)'''
-
+def playerPosOnMap(playerPos,col,row):
+    dif = 2
+    posx = 12 * col + 1
+    posy = 12 * row + 1
+    playerPos = Math.lerp(0,9,)
 
 def clear_chunk(chunk_pos):
     current_chunk = objects.chunks[chunk_pos[0]][chunk_pos[1]]

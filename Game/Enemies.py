@@ -97,7 +97,10 @@ class Player(Obj):
             map_description.clear_chunk(saved)
 
         self.last_valid_postion = self.rect.center
-        
+        if not(self.chunk in map_description.shownChunks):
+            map_description.shownChunks.append(self.chunk)
+            map_description.show_chunk(*self.chunk)
+            print("showChunk")
         
     def getinput(self, keys): 
         if keys[pygame.K_UP] or keys[pygame.K_w]:
