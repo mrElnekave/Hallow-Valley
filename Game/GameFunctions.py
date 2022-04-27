@@ -201,7 +201,7 @@ def GameplayRender():
         location = (125, 90)
         objects.display.blit(images.demo_map, location)
         objects.display.blit(images.demo_mask, location)
-        map_description.playerPosOnMap(objects.player.rect.topleft, *objects.player.chunk, location)
+        map_description.playerPosOnMap(objects.player.rect.center, *objects.player.chunk, location)
         # render the map
 
         # Update Log

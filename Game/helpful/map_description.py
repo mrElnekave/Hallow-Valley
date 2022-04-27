@@ -1,3 +1,4 @@
+from traceback import print_tb
 from numpy import imag
 import images
 import special_obstacles
@@ -94,18 +95,17 @@ def playerPosOnMap(playerPos, col, row, location):
     dif = 2
 
     pos = Vector(12 * col + 1, 12 * row + 1)  # (posx, posy)
+
     # our position can be from 0 to 500
-    percentage = Vector(*playerPos)
-    percentage.y /= 500
-    percentage.x /= 500
+    percentage = Vector(*playerPos) / 500
     pos += Vector(PMath.lerp(0, 9, percentage.x), PMath.lerp(0, 9, percentage.y))
-    pos *= Vector(dif, dif)
+    pos *= dif
     pos += Vector(*location)
 
 
     # should draw onto the screen instead
     # check the position and further testing.
-    pygame.draw.rect(objects.display, (255, 255, 255), pygame.Rect(int(pos.x), int(pos.y), 
+    pygame.draw.rect(objects.display, (255, 255, 255), pygame.Rect(round(pos.x), round(pos.y), 
         *((Vector.ONE * Vector(dif, dif)).to_tuple()))
     )
 

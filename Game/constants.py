@@ -7,6 +7,7 @@ RATIO = WINDOWHEIGHT/WINDOWWIDTH
 size = (WINDOWWIDTH, WINDOWHEIGHT)
 default_size = (900, 600)
 
+player_sprite_size = 25
 
 moveSpeed = 5
 mapWidth, mapHeight = 15, 15

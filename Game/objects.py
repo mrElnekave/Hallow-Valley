@@ -1,4 +1,3 @@
-# from tkinter.messagebox import NO
 import pygame
 pygame.init()
 from constants import *
