@@ -200,10 +200,10 @@ def GameplayRender():
     if inTab: # render extra ontop
         for button in buttons["tab"]: 
             button.render()
-        
-        objects.display.blit(images.demo_map, (125, 90))
-        objects.display.blit(images.demo_mask, (125, 90))
-        map_description.playerPosOnMap(objects.player.rect.topleft, *objects.player.chunk)
+        location = (125, 90)
+        objects.display.blit(images.demo_map, location)
+        objects.display.blit(images.demo_mask, location)
+        map_description.playerPosOnMap(objects.player.rect.topleft, *objects.player.chunk, location)
         # render the map
 
 

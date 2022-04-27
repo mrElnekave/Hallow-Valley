@@ -2,7 +2,7 @@ from numpy import imag
 import images
 import special_obstacles
 import objects, pygame
-from rubato import PMath
+from rubato import PMath, Vector
 
 shownChunks = []
 map=[
@@ -90,16 +90,24 @@ def show_type(type):
                 pygame.draw.rect(images.demo_mask, color, pygame.Rect(posx * dif, posy * dif, 10 * dif, 10 * dif))
                 images.demo_mask.set_colorkey(color)'''
 
-def playerPosOnMap(playerPos, col, row):
+def playerPosOnMap(playerPos, col, row, location):
     dif = 2
-    posx = 12 * col + 1
-    posy = 12 * row + 1
-    posx += PMath.lerp(0, 9, playerPos[0] / 300)
-    posy += PMath.lerp(0, 9, playerPos[1] / 300)
+
+    pos = Vector(12 * col + 1, 12 * row + 1)  # (posx, posy)
+    # our position can be from 0 to 500
+    percentage = Vector(*playerPos)
+    percentage.y /= 500
+    percentage.x /= 500
+    pos += Vector(PMath.lerp(0, 9, percentage.x), PMath.lerp(0, 9, percentage.y))
+    pos *= Vector(dif, dif)
+    pos += Vector(*location)
+
 
     # should draw onto the screen instead
     # check the position and further testing.
-    pygame.draw.rect(images.demo_mask, (255, 255, 255), pygame.Rect(posx * dif, posy * dif, 1 * dif, 1 * dif))
+    pygame.draw.rect(objects.display, (255, 255, 255), pygame.Rect(int(pos.x), int(pos.y), 
+        *((Vector.ONE * Vector(dif, dif)).to_tuple()))
+    )
 
 
 
