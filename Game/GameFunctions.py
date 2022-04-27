@@ -148,6 +148,7 @@ def GameplayUpdate():
         if objects.resourceAmounts["ghostEnergy"] >= objects.player.maxEnergy: 
             objects.resourceAmounts["ghostEnergy"] = objects.player.maxEnergy
         objects.first_game_frame = False
+        objects.NPC_clicked = False
     else:
         objects.first_game_frame = True
 
@@ -171,9 +172,6 @@ def GameplayRender():
     '''questName = objects.quests[objects.currentQuest].name
     objects.display.blit(objects.myFont.render(questName, True, (0,0,0)), (200,100))
     '''
-
-    # Update Log
-    update_log.render()
 
     # Draw healthbar
     pygame.draw.rect(objects.display, (15,15,15), pygame.Rect(300,0,200,20))
@@ -205,6 +203,13 @@ def GameplayRender():
         objects.display.blit(images.demo_mask, location)
         map_description.playerPosOnMap(objects.player.rect.topleft, *objects.player.chunk, location)
         # render the map
+
+        # Update Log
+        update_log.tabRender()
+
+    else:
+        # Update Log
+        update_log.render()
 
 
 
@@ -246,7 +251,6 @@ def lightning():
 
 rb.Time.delayed_call(1000, lightning)
 def MenuUpdate():
-    rb.Time.process_calls()
     for button in buttons["menu"]: 
         button.update()
 

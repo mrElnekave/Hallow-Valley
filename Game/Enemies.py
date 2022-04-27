@@ -5,6 +5,7 @@ import Abilities
 import math 
 import random
 import MapClasses
+from rubato import Vector
 from BasicClasses import Obj
 from helpful import map_description
 
@@ -147,7 +148,8 @@ class Player(Obj):
                 if self.currentAbility < 0: 
                    self.currentAbility = 9
     def update(self):
-        objects.abilities[self.currentAbility].update()
+        if not (Vector(*self.chunk) < Vector.TWO):
+            objects.abilities[self.currentAbility].update()
         self.pos_validate()
     def changeSkin(self): 
         self.currentSkin += 1 

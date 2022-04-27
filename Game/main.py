@@ -86,6 +86,7 @@ def screen_update():
 clock = pygame.time.Clock()
 while 1: 
     input_basics()
+    rubato.Time.process_calls()
     if objects.debugging: # Debugging code
         DebugCode()
     

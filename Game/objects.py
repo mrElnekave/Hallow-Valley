@@ -21,6 +21,7 @@ chunks = []
 player = None
 currentChunk = None
 first_game_frame = True
+NPC_clicked = False
 
 
 # player resources

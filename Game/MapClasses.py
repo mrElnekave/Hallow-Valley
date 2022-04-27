@@ -1,5 +1,3 @@
-from tkinter import N
-from tkinter.messagebox import NO
 import pygame
 import objects
 import random
@@ -131,6 +129,7 @@ class NPC(Obj):
             if pygame.mouse.get_pressed(3)[0]: 
                 mousePos = objects.mapMousePos(pygame.mouse.get_pos())
                 if self.rect.collidepoint(mousePos): 
+                    objects.NPC_clicked = True
                     for action in self.effects:
                         exec(action)
                     self.canClick = False
@@ -156,6 +155,7 @@ class UpdateLog(Obj):
         self.exclamation = self.exclamation_black
         self.image = pygame.Surface((1, 1))  # just for super
         self.text = None
+        self.tab_start = rb.Vector(100, 100)
 
         super().__init__(self.image, location)
         self.message: str = ""
@@ -172,6 +172,15 @@ class UpdateLog(Obj):
                 objects.display.blit(self.text, self.in_relation(25, 0))
             objects.display.blit(self.exclamation, self.in_relation(0, 0))
     
+    def tabRender(self):
+        for i in range(len(self.archived)):
+            message = self.clamp_message(self.archived[i])
+            image = objects.myFont.render(message, True, (200,0,0))
+            objects.display.blit(self.image, self.tab_in_relation(0, i*objects.myFont.get_height()))
+    
+    def tab_in_relation(self, x, y):
+        return (self.tab_start.x + x, self.tab_start.y + y)
+
     def regenerate_image(self):
         message = self.clamp_message(self.message)
         self.text = objects.myFont.render(message, True, (200,0,0))

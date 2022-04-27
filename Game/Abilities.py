@@ -19,6 +19,8 @@ class Ability():
 
     def update(self):
         # print(self.cooldown, self.cost, object)
+        if objects.NPC_clicked:
+            return False
         if self.cooldown > 0:
             self.cooldown -= 1
             return False
