@@ -125,12 +125,18 @@ class NPC(Obj):
         super().__init__(image, location)
         self.effects = effects
         self.type = "NPC" #TODO: wait till up before being pressed down
+        self.canClick = True
     def update(self): 
-        if pygame.mouse.get_pressed(3)[0]:
-            mousePos = objects.mapMousePos(pygame.mouse.get_pos())
-            if self.rect.collidepoint(mousePos): 
-                for action in self.effects:
-                    exec(action)
+        if self.canClick: 
+            if pygame.mouse.get_pressed(3)[0]: 
+                mousePos = objects.mapMousePos(pygame.mouse.get_pos())
+                if self.rect.collidepoint(mousePos): 
+                    for action in self.effects:
+                        exec(action)
+                    self.canClick = False
+                    rb.Time.delayed_call(1000, self.setCanClick)
+    def setCanClick(self): 
+        self.canClick = True
 
 def blit_alpha(target, source, location, opacity):
         x = location[0]
