@@ -11,7 +11,7 @@ from constants import *
 import constants
 pygame.init()
 
-# Game Name: H@LLOW VALLEY
+# Game Name: H@LLOW VALLEYs
 objects.reports_on and print("REPORT: Welcome to the game. Your goal is to find 9 portals on the map and defeat the 9 bosses within them. Controls: arrow keys to move, click to shoot an arrow towards the mouse. Later in the game, when you have other abilities, you can press 1 to switch back to arrows. ")
 
 # screen

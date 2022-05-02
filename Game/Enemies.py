@@ -100,7 +100,6 @@ class Player(Obj):
         if not(self.chunk in map_description.shownChunks):
             map_description.shownChunks.append(self.chunk)
             map_description.show_chunk(*self.chunk)
-            print("showChunk")
         
     def getinput(self, keys): 
         if keys[pygame.K_UP] or keys[pygame.K_w]:
@@ -148,7 +147,7 @@ class Player(Obj):
                 if self.currentAbility < 0: 
                    self.currentAbility = 9
     def update(self):
-        if not (Vector(*self.chunk) < Vector.TWO):
+        if not (Vector(*self.chunk) < Vector.TWO and Vector(*self.chunk) > Vector.ZERO):
             objects.abilities[self.currentAbility].update()
         self.pos_validate()
     def changeSkin(self): 
