@@ -57,7 +57,7 @@ def input_basics():
         current_width = event.size[0]
         current_height = event.size[1]
         screen = pygame.display.set_mode((current_width, current_height), pygame.RESIZABLE)
-
+ 
 screen_update_frame = True
 def screen_update():
     global screen, screen_update_frame
