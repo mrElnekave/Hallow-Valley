@@ -4,6 +4,7 @@ from constants import *
 
 display = pygame.Surface((WINDOWWIDTH, WINDOWHEIGHT))
 
+
 # game logic
 gamestate = 0
 daytime = True
@@ -73,11 +74,14 @@ problems = []
 
 # reset
 def Reset():
-    player.currentHealth = player.maxHealth
+    global currentChunk
+    if player:
+        player.currentHealth = player.maxHealth
+        player.chunk = start_chunk
+        player.rect.topleft = (0,0)
+        currentChunk = chunks[player.chunk[1]][player.chunk[0]]
+
     resourceAmounts["ghost energy"] = 0
-    player.chunk = start_chunk
-    currentChunk = chunks[player.chunk[1]][player.chunk[0]]
-    player.rect.topleft = (0,0)
     for chunkList in chunks:
         for chunk in chunkList:
             for thing in chunk.contents:

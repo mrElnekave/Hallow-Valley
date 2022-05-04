@@ -241,7 +241,6 @@ class ElectroDash(Ability):
 
         if super().update() and len(self.dashPositions) == 0:
             self.canceled = False
-            objects.resourceAmounts["ghostEnergy"] -= self.cost
             mousePos = objects.mapMousePos(pygame.mouse.get_pos())
             # Find the incremental amount to get there
             totalXdist = mousePos[0]-objects.player.rect.centerx

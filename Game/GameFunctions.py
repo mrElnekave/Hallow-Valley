@@ -1,4 +1,3 @@
-import imp
 from pydoc import importfile
 from tkinter import image_names
 import pygame
@@ -23,27 +22,31 @@ def open_guide():
 
 def switch_map_notifs():
     pass
+buttons = {}
 
-buttons = {
-    "game": [
-        MapClasses.Button_func(pygame.image.load(create_path("Help Button.png")), (480, 80), open_guide)],
-    "tab":[
-        MapClasses.Button_func(pygame.image.load(create_path("Blue Potion.png")), (150, 400), switch_map_notifs),
-        MapClasses.Button_func(pygame.image.load(create_path("Red Potion.png")), (350, 400), switch_map_notifs),
-    ],
-    "menu": [
-        MapClasses.Button(pygame.transform.scale(pygame.image.load(create_path("StartButton.png")), (300,80)),(250,450), ['objects.gamestate = 1','objects.Reset()']), MapClasses.Button(pygame.transform.scale(pygame.image.load(create_path("AboutUsButton.png")), (300,80)),(250,350), ['webbrowser.open("https://docs.google.com/presentation/d/1fCRW8VGcp_BtFYz1E_SCKFJo4uPcnhw9mEK5d6gdftc/edit?usp=sharing")'])],
-    "shop": [
-    MapClasses.Button(pygame.transform.scale(pygame.image.load(create_path("Purple Potion.png")),(50,50)),(175,175), ['if objects.resourceAmounts["coins"] >= 25: objects.potions["purple"] += 1;objects.resourceAmounts["coins"] -= 25;print("Bought Purple Potion")', "time.sleep(0.5)"]),
-    MapClasses.Button(pygame.transform.scale(pygame.image.load(create_path("Red Potion.png")), (50,50)),(225,175), ['if objects.resourceAmounts["coins"] >= 50: objects.potions["red"] += 1;objects.resourceAmounts["coins"] -= 50;print("Bought Red Potion")', "time.sleep(0.5)"]),
-    MapClasses.Button(pygame.transform.scale(pygame.image.load(create_path("Blue Potion.png")),(50,50)),(275,175), ['if objects.resourceAmounts["coins"] >= 50: objects.potions["blue"] += 1;objects.resourceAmounts["coins"] -= 50;print("Bought Blue Potion")', "time.sleep(0.5)"]),
-    MapClasses.Button(pygame.transform.scale(pygame.image.load(create_path("Gold Potion.png")),(50,50)),(325,175), ['if objects.resourceAmounts["coins"] >= 100: objects.potions["gold"] += 1;objects.resourceAmounts["coins"] -= 100;print("Bought Gold Potion")', "time.sleep(0.5)","objects.FindQuest('Potion Critic').data += 1"]),
-    MapClasses.Button(pygame.Surface((200,50)),(250,325), ['objects.shopShowing = False'])]
-}
+def restart():
+    global buttons
+    objects.Reset()
+    buttons = {
+        "game": [
+            MapClasses.Button_func(pygame.image.load(create_path("Help Button.png")), (480, 80), open_guide)],
+        "tab":[
+            MapClasses.Button_func(pygame.image.load(create_path("Blue Potion.png")), (150, 400), switch_map_notifs),
+            MapClasses.Button_func(pygame.image.load(create_path("Red Potion.png")), (350, 400), switch_map_notifs),
+        ],
+        "menu": [
+            MapClasses.Button(pygame.transform.scale(pygame.image.load(create_path("StartButton.png")), (300,80)),(250,450), ['objects.gamestate = 1','objects.Reset()']), MapClasses.Button(pygame.transform.scale(pygame.image.load(create_path("AboutUsButton.png")), (300,80)),(250,350), ['webbrowser.open("https://docs.google.com/presentation/d/1fCRW8VGcp_BtFYz1E_SCKFJo4uPcnhw9mEK5d6gdftc/edit?usp=sharing")'])],
+        "shop": [
+        MapClasses.Button(pygame.transform.scale(pygame.image.load(create_path("Purple Potion.png")),(50,50)),(175,175), ['if objects.resourceAmounts["coins"] >= 25: objects.potions["purple"] += 1;objects.resourceAmounts["coins"] -= 25;print("Bought Purple Potion")', "time.sleep(0.5)"]),
+        MapClasses.Button(pygame.transform.scale(pygame.image.load(create_path("Red Potion.png")), (50,50)),(225,175), ['if objects.resourceAmounts["coins"] >= 50: objects.potions["red"] += 1;objects.resourceAmounts["coins"] -= 50;print("Bought Red Potion")', "time.sleep(0.5)"]),
+        MapClasses.Button(pygame.transform.scale(pygame.image.load(create_path("Blue Potion.png")),(50,50)),(275,175), ['if objects.resourceAmounts["coins"] >= 50: objects.potions["blue"] += 1;objects.resourceAmounts["coins"] -= 50;print("Bought Blue Potion")', "time.sleep(0.5)"]),
+        MapClasses.Button(pygame.transform.scale(pygame.image.load(create_path("Gold Potion.png")),(50,50)),(325,175), ['if objects.resourceAmounts["coins"] >= 100: objects.potions["gold"] += 1;objects.resourceAmounts["coins"] -= 100;print("Bought Gold Potion")', "time.sleep(0.5)","objects.FindQuest('Potion Critic').data += 1"]),
+        MapClasses.Button(pygame.Surface((200,50)),(250,325), ['objects.shopShowing = False'])]
+    }
+
 objects.player = Enemies.Player()
 update_log = MapClasses.UpdateLog((0, 87), objects.archives)
-
-
+restart()
 def DebugCode():
     if pygame.key.get_pressed()[pygame.K_SPACE]: 
         objects.player.currentHealth -= 10
@@ -258,7 +261,7 @@ def GameOverUpdate():
     pygame.event.pump()
     keys = pygame.key.get_pressed() 
     if keys[pygame.K_c]: 
-        #print("C recieved")
+        restart()
         objects.gamestate = 0
 
 def GameOverRender(): 
