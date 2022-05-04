@@ -236,6 +236,7 @@ class CollisionButton(Obj):
         self.type = "collisionButton"
     def update(self): 
         if objects.player.rect.colliderect(self.rect): 
+            objects.player.cancel_abilities()
             for effect in self.effects: 
                 exec(effect)
 

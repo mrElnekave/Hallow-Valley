@@ -1,9 +1,8 @@
+import imp
 import pygame
 from images import create_path 
-import objects, constants
-import Abilities 
-import math 
-import random
+import objects, constants, Abilities
+import math, random, rubato
 import MapClasses
 from rubato import Vector
 from BasicClasses import Obj
@@ -100,7 +99,9 @@ class Player(Obj):
         if not(self.chunk in map_description.shownChunks):
             map_description.shownChunks.append(self.chunk)
             map_description.show_chunk(*self.chunk)
-        
+    def cancel_abilities(self):
+        if self.currentAbility == 3:
+            objects.abilities[3].canceled = True
     def getinput(self, keys): 
         if keys[pygame.K_UP] or keys[pygame.K_w]:
             self.move(0,-objects.moveSpeed)
@@ -184,7 +185,8 @@ class Ghost(Enemy):
         self.knocked = False
         self.direction = (0,0)
     def render(self): 
-        self.image.set_alpha((self.health/self.maxHealth)*255)
+        
+        self.image.set_alpha((self.health/self.maxHealth)*205 + 50)
         objects.display.blit(self.image, self.rect)
         
         pygame.draw.rect(objects.display, (0,0,0), pygame.Rect(self.rect.left,self.rect.top-self.rect[3]*.1,self.rect[2],self.rect[3]*.1))

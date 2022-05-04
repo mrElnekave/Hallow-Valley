@@ -205,8 +205,11 @@ class ElectroDash(Ability):
         self.dashSpeed = 25
         self.damage = 25
         self.dashPositions = []
+        self.canceled = False
 
     def update(self):
+        if self.canceled:
+            self.dashPositions = []
         if len(self.dashPositions) != 0:
             
             # Move to first postition in list
@@ -232,16 +235,12 @@ class ElectroDash(Ability):
                 enemy.health = enemy.health - self.damage
             if len(self.dashPositions) == 0:
                 objects.player.invulnerability = False
-                
-
-        if self.cooldown > 0:
-            self.cooldown -= 1
-            return
 
         if objects.currentChunk == None:
             return
 
-        if len(self.dashPositions) == 0 and pygame.mouse.get_pressed(3)[0] and objects.resourceAmounts["ghostEnergy"] >= self.cost:
+        if super().update() and len(self.dashPositions) == 0:
+            self.canceled = False
             objects.resourceAmounts["ghostEnergy"] -= self.cost
             mousePos = objects.mapMousePos(pygame.mouse.get_pos())
             # Find the incremental amount to get there
