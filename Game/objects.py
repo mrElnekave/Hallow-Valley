@@ -21,6 +21,7 @@ player = None
 currentChunk = None
 first_game_frame = True
 NPC_clicked = False
+bosses_killed = 0
 
 
 # player resources

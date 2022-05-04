@@ -35,9 +35,9 @@ class Player(Obj):
         objects.abilities[2] = Abilities.Freeze()
         objects.abilities[3] = Abilities.ElectroDash()
         objects.abilities[4] = Abilities.SummonPoison()
-        objects.abilities[7] = Abilities.FireLaserArrow()
         objects.abilities[5] = Abilities.SummonGhost()
         objects.abilities[6] = Abilities.MakeMagicalShield()
+        objects.abilities[7] = Abilities.FireLaserArrow()
         objects.abilities[8] = Abilities.LaunchWave()
         objects.abilities[9] = Abilities.PotionAbility()
         #objects.resourceAmounts["ghostEnergy"] = objects.maxEnergys
@@ -156,7 +156,6 @@ class Player(Obj):
             self.currentSkin = 0
         self.image = pygame.image.load(create_path("Skin"+str(self.currentSkin)+".png"))
 
-
 class Enemy: 
     def __init__(self, location): 
         self.rect = None
@@ -225,7 +224,7 @@ class Ghost(Enemy):
             objects.currentChunk.contents.remove(self)
             if objects.currentChunk.location[0]+1 != len(objects.chunks): 
                 objects.resourceAmounts["ghostEnergy"] = objects.resourceAmounts["ghostEnergy"] + self.drops
-                objects.currentChunk.contents.append(MapClasses.QuestionCube(self.rect.center))
+                #objects.currentChunk.contents.append(MapClasses.QuestionCube(self.rect.center)) TODO: bring them back 
             return
 
 class LargeGhost(Ghost): 
@@ -529,7 +528,7 @@ class PoisonGhostBoss(Enemy):
             objects.player.maxEnergy = objects.player.maxEnergy + 25
             objects.resourceAmounts["ghostEnergy"] = objects.player.maxEnergy
             objects.player.currentHealth = objects.player.maxHealth
-            objects.abilities[4] = Abilities.PoisonField()
+            objects.abilities[4] = Abilities.SummonPoison()
             objects.reports_on and print("REPORT: You have defeated the poison ghost.")
             objects.reports_on and print("NEW ABILITY: POISON FIELD")
             objects.reports_on and print("Ability Information: The poison field ability deals damage over time to enemies near you. This ability uses up 25 ghost energy per use. Press 5 to switch to the poison field ability from another ability.")
@@ -589,7 +588,7 @@ class SummoningGhostBoss(Enemy):
             objects.player.maxEnergy = objects.player.maxEnergy + 25
             objects.resourceAmounts["ghostEnergy"] = objects.player.maxEnergy
             objects.player.currentHealth = objects.player.maxHealth
-            objects.abilities[5] = Abilities.SummonAbility()
+            objects.abilities[5] = Abilities.SummonGhost()
             objects.reports_on and print("REPORT: You have defeated the summoning ghost.")
             objects.reports_on and print("NEW ABILITY: GHOST SUMMONING")
             objects.reports_on and print("Ability Information: The summoning ability summons a ghost that follows your mouse around the screen. This ability uses up 25 ghost energy per use. Press 6 to switch to the summoning ability from another ability.")
@@ -639,7 +638,7 @@ class ShieldGhostBoss(Enemy):
             objects.player.maxEnergy = objects.player.maxEnergy + 25
             objects.resourceAmounts["ghostEnergy"] = objects.player.maxEnergy
             objects.player.currentHealth = objects.player.maxHealth
-            objects.abilities[6] = Abilities.MagicalShield()
+            objects.abilities[6] = Abilities.MakeMagicalShield()
             print("REPORT: You have defeated the shield ghost.")
             print("NEW ABILITY: MAGICAL SHIELD")
             print("Ability Information: The magical shield ability makes you immune to taking damage. This ability uses up 25 ghost energy per use. Press 7 to switch to the poison field ability from another ability.")
