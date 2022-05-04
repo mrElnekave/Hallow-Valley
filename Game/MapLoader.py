@@ -50,7 +50,8 @@ for x_index in range(objects.mapWidth):
         surf.blit(images.simple_map, (0, 0), (x_map, y_map, 10, 10))
 
         image = surf
-        objects.chunks[-1].append(MapClasses.Chunk((x_index,y_index), image, (500,500), "Overworld"))
+        chunk_type = map_description.location_log[map_description.map[y_index][x_index]]
+        objects.chunks[-1].append(MapClasses.Chunk((x_index,y_index), image, (500,500), chunk_type))
 
         from_chunk(image, [x_index, y_index])
 

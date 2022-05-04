@@ -29,9 +29,6 @@ class Chunk:
         self.contents = []
         self.image = image
         self.image = pygame.transform.scale(self.image, size)
-        if self.location[0] != 7: 
-            for i in range(10): 
-                self.image.blit(pygame.image.load(create_path("TallGrass.png")), (random.randint(0,500),random.randint(0,500)))
                 
         self.rect = self.image.get_rect()
         self.nightOverlay = pygame.Surface(objects.size)
