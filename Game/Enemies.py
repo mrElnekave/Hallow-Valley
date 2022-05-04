@@ -225,7 +225,7 @@ class Ghost(Enemy):
             objects.currentChunk.contents.remove(self)
             if objects.currentChunk.location[0]+1 != len(objects.chunks): 
                 objects.resourceAmounts["ghostEnergy"] = objects.resourceAmounts["ghostEnergy"] + self.drops
-                #objects.currentChunk.contents.append(MapClasses.QuestionCube(self.rect.center)) TODO: bring them back 
+                objects.currentChunk.contents.append(MapClasses.QuestionCube(self.rect.center)) #TODO: bring them back 
             return
 
 class LargeGhost(Ghost): 

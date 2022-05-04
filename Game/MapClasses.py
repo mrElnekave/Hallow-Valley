@@ -238,8 +238,18 @@ class CollisionButton(Obj):
                 exec(effect)
 
 class QuestionCube(Obj): 
-    boosts = [["objects.player.currentHealth += 25", 25], ["objects.resourceAmounts['ghostEnergy'] += 25", 50], ["objects.moveSpeed = 10", 60],["objects.resourceAmountsr['purple']", 65],["objects.resourceAmounts['red']", 67],["objects.resourceAmounts['blue']", 69],["objects.resourceAmounts['gold']", 70],["print('10s infinite health')", 80], ["print('10s infinite energy')", 90], ["print('key')"]]
+    boosts = [
+        ["objects.player.currentHealth += 25", 25], 
+        ["objects.resourceAmounts['ghostEnergy'] += 25", 50], 
+        ["objects.moveSpeed = 10; rb.Time.delayed_call(10*1000, QuestionCube.decrement_speed)", 60],
+        ["objects.resourceAmounts['purple'] += 1", 65],
+        ["objects.resourceAmounts['red'] += 1", 67],
+        ["objects.resourceAmounts['blue'] += 1", 69],
+        ["objects.resourceAmounts['gold'] += 1", 70],
+        ]
 
+    def decrement_speed():
+        objects.moveSpeed = 5
     def __init__(self, location): 
         image = pygame.image.load(create_path("QuestionCube.png"))
         super().__init__(image, location)
@@ -249,8 +259,10 @@ class QuestionCube(Obj):
             objects.currentChunk.contents.remove(self)
             objects.gamestate = 3
             objects.currentProblem = random.choice(objects.problems)
+    
+    @staticmethod
     def randBoost(): 
-        choice = random.randint(1,100)
+        choice = random.randint(1,70)
         for boost in QuestionCube.boosts:
             if choice <= boost[1]:
                 exec(boost[0])
