@@ -257,28 +257,6 @@ class FireGhostBoss(Enemy):
         objects.display.blit(self.image, self.rect)
         pygame.draw.rect(objects.display, (15,15,15), pygame.Rect(300,50 ,200,20))
         pygame.draw.rect(objects.display, (255,0,0), pygame.Rect(300,50,self.health,20))
-    
-    def die(self):
-        objects.currentChunk.contents.remove(self)
-        objects.player.maxHealth = objects.player.maxHealth + 25
-        objects.player.maxEnergy = objects.player.maxEnergy + 25
-        objects.resourceAmounts["ghostEnergy"] = objects.player.maxEnergy
-        objects.player.currentHealth = objects.player.maxHealth
-        objects.abilities[1] = Abilities.LaunchFireball()
-        objects.reports_on and print("REPORT: You have defeated the fire ghost.")
-        objects.reports_on and print("NEW ABILITY: FIREBALL")
-        objects.reports_on and print("Ability Information: The fireball ability allows you to launch a fireball that does high damage and explodes upon contact, launching 4 smaller fireballs in different directions. This ability uses up 10 ghost energy per use. Press 2 to switch to the fireball ability from another ability.")
-        objects.FindQuest("The Fire Boss").data = True
-        data = map_description.portalLocations["fire"]
-        objects.player.chunk = data[0]
-        objects.player.rect.center = data[1]
-
-        map_description.show_chunk(*(map_description.portalLocations["ice"][0]))
-
-        for i in objects.chunks[data[0][0]][data[0][1]].contents: 
-            if type(i) == MapClasses.CollisionButton: 
-                objects.chunks[data[0][0]][data[0][1]].contents.remove(i)
-                return
 
     def update(self):
         # Changing directions after bouncing
@@ -323,7 +301,26 @@ class FireGhostBoss(Enemy):
                 self.health -= projectile.attackDamage
                 objects.currentChunk.contents.remove(projectile)
             if self.health <= 0: 
-                self.die()
+                objects.currentChunk.contents.remove(self)
+                objects.player.maxHealth = objects.player.maxHealth + 25
+                objects.player.maxEnergy = objects.player.maxEnergy + 25
+                objects.resourceAmounts["ghostEnergy"] = objects.player.maxEnergy
+                objects.player.currentHealth = objects.player.maxHealth
+                objects.abilities[1] = Abilities.LaunchFireball()
+                objects.reports_on and print("REPORT: You have defeated the fire ghost.")
+                objects.reports_on and print("NEW ABILITY: FIREBALL")
+                objects.reports_on and print("Ability Information: The fireball ability allows you to launch a fireball that does high damage and explodes upon contact, launching 4 smaller fireballs in different directions. This ability uses up 10 ghost energy per use. Press 2 to switch to the fireball ability from another ability.")
+                objects.FindQuest("The Fire Boss").data = True
+                data = map_description.portalLocations["fire"]
+                objects.player.chunk = data[0]
+                objects.player.rect.center = data[1]
+
+                map_description.show_chunk(*(map_description.portalLocations["ice"][0]))
+
+                for i in objects.chunks[data[0][0]][data[0][1]].contents: 
+                    if type(i) == MapClasses.CollisionButton: 
+                        objects.chunks[data[0][0]][data[0][1]].contents.remove(i)
+                        return
 
 class IceGhostBoss(Ghost): 
     def __init__(self):
@@ -397,6 +394,8 @@ class IceGhostBoss(Ghost):
             data = map_description.portalLocations["ice"]
             objects.player.chunk = data[0]
             objects.player.rect.center = data[1]
+            map_description.show_chunk(*(map_description.portalLocations["lightning"][0]))
+
             for i in objects.chunks[data[0][0]][data[0][1]].contents: 
                 if type(i) == MapClasses.CollisionButton: 
                     objects.chunks[data[0][0]][data[0][1]].contents.remove(i)
@@ -473,6 +472,8 @@ class LightningGhostBoss(Enemy):
             data = map_description.portalLocations["lightning"]
             objects.player.chunk = data[0]
             objects.player.rect.center = data[1]
+            map_description.show_chunk(*(map_description.portalLocations["poison"][0]))
+
             for i in objects.chunks[data[0][0]][data[0][1]].contents: 
                 if type(i) == MapClasses.CollisionButton: 
                     objects.chunks[data[0][0]][data[0][1]].contents.remove(i)
@@ -536,6 +537,8 @@ class PoisonGhostBoss(Enemy):
             data = map_description.portalLocations["poison"]
             objects.player.chunk = data[0]
             objects.player.rect.center = data[1]
+            map_description.show_chunk(*(map_description.portalLocations["summoner"][0]))
+
             for i in objects.chunks[data[0][0]][data[0][1]].contents: 
                 if type(i) == MapClasses.CollisionButton: 
                     objects.chunks[data[0][0]][data[0][1]].contents.remove(i)
@@ -596,6 +599,8 @@ class SummoningGhostBoss(Enemy):
             data = map_description.portalLocations["summoner"]
             objects.player.chunk = data[0]
             objects.player.rect.center = data[1]
+            map_description.show_chunk(*(map_description.portalLocations["shield"][0]))
+
             for i in objects.chunks[data[0][0]][data[0][1]].contents: 
                 if type(i) == MapClasses.CollisionButton: 
                     objects.chunks[data[0][0]][data[0][1]].contents.remove(i)
@@ -646,6 +651,8 @@ class ShieldGhostBoss(Enemy):
             data = map_description.portalLocations["shield"]
             objects.player.chunk = data[0]
             objects.player.rect.center = data[1]
+            map_description.show_chunk(*(map_description.portalLocations["laser"][0]))
+
             for i in objects.chunks[data[0][0]][data[0][1]].contents: 
                 if type(i) == MapClasses.CollisionButton: 
                     objects.chunks[data[0][0]][data[0][1]].contents.remove(i)
@@ -766,6 +773,8 @@ class LaserGhostBoss(Enemy):
             data = map_description.portalLocations["laser"]
             objects.player.chunk = data[0]
             objects.player.rect.center = data[1]
+            map_description.show_chunk(*(map_description.portalLocations["water"][0]))
+
             for i in objects.chunks[data[0][0]][data[0][1]].contents: 
                 if type(i) == MapClasses.CollisionButton: 
                     objects.chunks[data[0][0]][data[0][1]].contents.remove(i)
@@ -838,6 +847,8 @@ class WaterGhostBoss:
             data = map_description.portalLocations["water"]
             objects.player.chunk = data[0]
             objects.player.rect.center = data[1]
+            map_description.show_chunk(*(map_description.portalLocations["final"][0]))
+
             for i in objects.chunks[data[0][0]][data[0][1]].contents: 
                 if type(i) == MapClasses.CollisionButton: 
                     objects.chunks[data[0][0]][data[0][1]].contents.remove(i)
