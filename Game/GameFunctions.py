@@ -216,7 +216,7 @@ def GameplayRender():
         objects.display.blit(images.demo_mask, location)
         map_description.playerPosOnMap(objects.player.rect.center, *objects.player.chunk, location)
         # render the map
-ss
+
         # Update Log
         objects.update_log.tabRender()
 
