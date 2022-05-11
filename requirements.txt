@@ -1,2 +1,2 @@
 pygame==2.0.2
-rubato==0.0.1
+rubato==2.1.0
