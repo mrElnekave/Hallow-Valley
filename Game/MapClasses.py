@@ -239,15 +239,16 @@ class CollisionButton(Obj):
 
 class QuestionCube(Obj): 
     boosts = [
-        ["objects.player.currentHealth += 25", 25], 
-        ["objects.resourceAmounts['ghostEnergy'] += 25", 50], 
-        ["objects.moveSpeed = 10; rb.Time.delayed_call(10*1000, QuestionCube.decrement_speed)", 60],
-        ["objects.resourceAmounts['purple'] += 1", 65],
-        ["objects.resourceAmounts['red'] += 1", 67],
-        ["objects.resourceAmounts['blue'] += 1", 69],
-        ["objects.resourceAmounts['gold'] += 1", 70],
+        ["objects.player.currentHealth += 25", 25, "25 health"],
+        ["objects.resourceAmounts['ghostEnergy'] += 25", 50,"25 ghost energy"],
+        ["objects.moveSpeed = 10; rb.Time.delayed_call(10*1000, QuestionCube.decrement_speed)", 60,"a speed boost"],
+        ["objects.resourceAmounts['purple'] += 1", 65,"a purple potion"],
+        ["objects.resourceAmounts['red'] += 1", 67,"a red potion"],
+        ["objects.resourceAmounts['blue'] += 1", 69,"a blue potion"],
+        ["objects.resourceAmounts['gold'] += 1", 70,"a gold potion"],
         ]
-
+    count = 0
+    @staticmethod
     def decrement_speed():
         objects.moveSpeed = 5
     def __init__(self, location): 
@@ -255,9 +256,12 @@ class QuestionCube(Obj):
         super().__init__(image, location)
         self.type = "qcube"
     def update(self): 
-        if objects.player.rect.colliderect(self.rect): 
+        if objects.player.rect.colliderect(self.rect):
             objects.currentChunk.contents.remove(self)
+            QuestionCube.count += 1
+        if QuestionCube.count >= 5:
             objects.gamestate = 3
+            QuestionCube.count -= 5
             objects.currentProblem = random.choice(objects.problems)
     
     @staticmethod
@@ -266,4 +270,5 @@ class QuestionCube(Obj):
         for boost in QuestionCube.boosts:
             if choice <= boost[1]:
                 exec(boost[0])
+                UpdateLog.addMessage("You used 5 question cubes and got..."+boost[2]+"!")
                 return

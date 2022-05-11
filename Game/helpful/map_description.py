@@ -1,5 +1,3 @@
-from traceback import print_tb
-from numpy import imag
 import images
 import special_obstacles
 import objects, pygame
