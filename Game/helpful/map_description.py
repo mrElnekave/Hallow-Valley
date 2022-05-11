@@ -1,4 +1,3 @@
-
 import images
 import special_obstacles
 import objects, pygame

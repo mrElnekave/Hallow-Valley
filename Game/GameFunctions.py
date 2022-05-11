@@ -115,6 +115,17 @@ def GameplayUpdate():
             objects.player.changeSkin()
         if event.key == pygame.K_j:
             map_description.show_type("fire")
+        if event.key == pygame.K_r:
+            index = objects.player.currentAbility - 1
+            if not (objects.player.currentAbility in [0,9]):
+                if objects.resourceAmounts["ghostEnergy"] >= 25:
+                    objects.resourceAmounts["ghostEnergy"] -= 25
+                    newData = list(map_description.portalLocations.values())[index]
+                    newChunk = newData[0]
+                    newCoordinates = newData[1]
+                    objects.player.chunk = newChunk
+                    objects.player.rect.center = newCoordinates
+
 
     if not inTab:
         for button in buttons["tab"]: 
@@ -316,11 +327,15 @@ def MathUpdate():
                 for i in numbers: 
                     i[2] = True
             if answerString != "" and enter.collidepoint(mousePos):
-                if eval(answerString) == 24 or eval(answerString) == 23.99999999999999:
-                    MapClasses.QuestionCube.randBoost()
-                objects.gamestate = 1 # no boost
-                answerString = ""
-                
+                try:
+                    answer = eval(answerString)
+                    if answer == 24 or answer == 23.99999999999999:
+                        MapClasses.QuestionCube.randBoost()
+                    objects.gamestate = 1  # no boost
+                    answerString = ""
+                except SyntaxError:
+                    answerString = ""
+
             #    if eval(answerString) in results: 
             #        gamestate = 3
             #    else: 

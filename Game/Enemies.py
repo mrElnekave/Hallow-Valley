@@ -29,14 +29,14 @@ class Player(Obj):
 
         # Debug all powers immediately
         objects.abilities[0] = Abilities.FireArrow()
-        objects.abilities[1] = Abilities.LaunchFireball() 
-        objects.abilities[2] = Abilities.Freeze()
-        objects.abilities[3] = Abilities.ElectroDash()
-        objects.abilities[4] = Abilities.SummonPoison()
-        objects.abilities[5] = Abilities.SummonGhost()
-        objects.abilities[6] = Abilities.MakeMagicalShield()
-        objects.abilities[7] = Abilities.FireLaserArrow()
-        objects.abilities[8] = Abilities.LaunchWave()
+        #objects.abilities[1] = Abilities.LaunchFireball()
+        #objects.abilities[2] = Abilities.Freeze()
+        #objects.abilities[3] = Abilities.ElectroDash()
+        #objects.abilities[4] = Abilities.SummonPoison()
+        #objects.abilities[5] = Abilities.SummonGhost()
+        #objects.abilities[6] = Abilities.MakeMagicalShield()
+        #objects.abilities[7] = Abilities.FireLaserArrow()
+        #objects.abilities[8] = Abilities.LaunchWave()
         objects.abilities[9] = Abilities.PotionAbility()
         #objects.resourceAmounts["ghostEnergy"] = objects.maxEnergys
 
