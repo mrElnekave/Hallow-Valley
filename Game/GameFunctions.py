@@ -45,7 +45,7 @@ def restart():
     }
 
 objects.player = Enemies.Player()
-update_log = MapClasses.UpdateLog((0, 87), objects.archives)
+objects.update_log = MapClasses.UpdateLog((0, 87), objects.archives)
 restart()
 def DebugCode():
     if pygame.key.get_pressed()[pygame.K_SPACE]: 
@@ -66,12 +66,12 @@ def NightEvent():
                 if (chunk.location[0] >= 2 or chunk.location[1] >= 2) and chunk != objects.currentChunk: 
                     for i in range(random.randint(1,5)):
                         chunk.contents.append(Enemies.Ghost((random.randint(0,500),random.randint(0,500))))
-    objects.reports_on and print("REPORT: Ghosts have appeared in uninhabited areas.")
+    objects.reports_on and objects.update_log.addMessage("REPORT: Ghosts have appeared in uninhabited areas.")
     # Spawning a large ghost in uninhabited chunks
     chunk = objects.chunks[random.randint(0,objects.mapWidth-1)][random.randint(0,objects.mapHeight-1)]
     while (chunk.location[0] < 2 and chunk.location[1] < 2) or chunk == objects.currentChunk:
         chunk = objects.chunks[random.randint(0,objects.mapWidth-1)][random.randint(0,objects.mapHeight-1)]
-    objects.reports_on and print(f"REPORT: A powerful ghost has appeared in chunk {chunk.location}.")
+    objects.reports_on and objects.update_log.addMessage(f"REPORT: A powerful ghost has appeared in chunk {chunk.location}.")
     chunk.contents.append(Enemies.LargeGhost((250,250)))
 
 dayNightCounter = 0
@@ -89,14 +89,13 @@ def GameplayUpdate():
     if not inTab:
         objects.player.getinput(keys)
     if keys[pygame.K_i]: # Game Information
-        update_log.addMessage("TESTINGLONGER")
-        print("INFORMATION: ")
-        # print("Current Quest: "+objects.quests[objects.currentQuest].name) 
-        print("Ghost Energy: "+str(objects.resourceAmounts["ghost energy"]))
-        print("Coins: "+str(objects.resourceAmounts["coins"]))
-        print("Potions: "+str(objects.potions)) 
-        print("Health: "+str(objects.player.currentHealth))
-        print("")
+        objects.update_log.addMessage("TESTINGLONGER")
+        objects.update_log.addMessage("INFORMATION: ")
+        # objects.update_log.addMessage("Current Quest: "+objects.quests[objects.currentQuest].name)
+        objects.update_log.addMessage("Ghost Energy: "+str(objects.resourceAmounts["ghost energy"]))
+        objects.update_log.addMessage("Coins: "+str(objects.resourceAmounts["coins"]))
+        objects.update_log.addMessage("Potions: "+str(objects.potions))
+        objects.update_log.addMessage("Health: "+str(objects.player.currentHealth))
     # Pressing Keys
     for event in pygame.event.get(pygame.KEYDOWN):
         objects.player.changeAbility(event)
@@ -141,9 +140,9 @@ def GameplayUpdate():
         if dayNightCounter / objects.framerate >= objects.dayLength: 
             objects.daytime = not objects.daytime
             if objects.daytime:
-                objects.reports_on and print("REPORT: It is now daytime.")
+                objects.reports_on and objects.update_log.addMessage("REPORT: It is now daytime.")
             else:
-                objects.reports_on and print("REPORT: It is now nighttime")
+                objects.reports_on and objects.update_log.addMessage("REPORT: It is now nighttime")
                 NightEvent()
             dayNightCounter = 0
             
@@ -217,13 +216,13 @@ def GameplayRender():
         objects.display.blit(images.demo_mask, location)
         map_description.playerPosOnMap(objects.player.rect.center, *objects.player.chunk, location)
         # render the map
-
+ss
         # Update Log
-        update_log.tabRender()
+        objects.update_log.tabRender()
 
     else:
         # Update Log
-        update_log.render()
+        objects.update_log.render()
 
 
 

@@ -22,6 +22,7 @@ player = None
 currentChunk = None
 first_game_frame = True
 NPC_clicked = False
+update_log = None
 bosses_killed = 0
 
 

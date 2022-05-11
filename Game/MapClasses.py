@@ -270,5 +270,5 @@ class QuestionCube(Obj):
         for boost in QuestionCube.boosts:
             if choice <= boost[1]:
                 exec(boost[0])
-                UpdateLog.addMessage("You used 5 question cubes and got..."+boost[2]+"!")
+                objects.update_log.addMessage("You used 5 question cubes and got..."+boost[2]+"!")
                 return

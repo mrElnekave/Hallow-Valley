@@ -65,28 +65,28 @@ class Player(Obj):
                 self.rect.centerx = 0 # Move flush to wall
             else:
                 self.chunk = (self.chunk[0]-1, self.chunk[1])
-                objects.reports_on and print(f'REPORT: Current chunk is {self.chunk}')
+                objects.reports_on and objects.update_log.addMessage(f'REPORT: Current chunk is {self.chunk}')
                 self.rect.centerx = objects.WINDOWWIDTH
         elif self.rect.center[0] > objects.WINDOWWIDTH: # Moving off right of screen
             if self.chunk[0] == -1  or self.chunk[0] == objects.mapWidth-1:
                 self.rect.centerx = objects.WINDOWWIDTH 
             else:
                 self.chunk = (self.chunk[0]+1, self.chunk[1])
-                objects.reports_on and print(f'REPORT: Current chunk is {self.chunk}')
+                objects.reports_on and objects.update_log.addMessage(f'REPORT: Current chunk is {self.chunk}')
                 self.rect.centerx = 0
         elif self.rect.center[1] < 0: # Moving off top of screen
             if self.chunk[0] == -1  or self.chunk[1] == 0:
                 self.rect.centery = 0
             else:
                 self.chunk = (self.chunk[0],self.chunk[1]-1)
-                objects.reports_on and print(f'REPORT: Current chunk is {self.chunk}')
+                objects.reports_on and objects.update_log.addMessage(f'REPORT: Current chunk is {self.chunk}')
                 self.rect.centery = objects.WINDOWHEIGHT
         elif self.rect.center[1] > objects.WINDOWWIDTH: # Moving off bottom of screen
             if self.chunk[0] == -1  or self.chunk[1] == objects.mapHeight-1:
                 self.rect.centery = objects.WINDOWHEIGHT
             else:
                 self.chunk = (self.chunk[0],self.chunk[1]+1)
-                objects.reports_on and print(f'REPORT: Current chunk is {self.chunk}')
+                objects.reports_on and objects.update_log.addMessage(f'REPORT: Current chunk is {self.chunk}')
                 self.rect.centery = 0
         else:
             do_not_clear = True
@@ -308,9 +308,9 @@ class FireGhostBoss(Enemy):
                 objects.resourceAmounts["ghostEnergy"] = objects.player.maxEnergy
                 objects.player.currentHealth = objects.player.maxHealth
                 objects.abilities[1] = Abilities.LaunchFireball()
-                objects.reports_on and print("REPORT: You have defeated the fire ghost.")
-                objects.reports_on and print("NEW ABILITY: FIREBALL")
-                objects.reports_on and print("Ability Information: The fireball ability allows you to launch a fireball that does high damage and explodes upon contact, launching 4 smaller fireballs in different directions. This ability uses up 10 ghost energy per use. Press 2 to switch to the fireball ability from another ability.")
+                objects.reports_on and objects.update_log.addMessage("REPORT: You have defeated the fire ghost.")
+                objects.reports_on and objects.update_log.addMessage("NEW ABILITY: FIREBALL")
+                objects.reports_on and objects.update_log.addMessage("Ability Information: The fireball ability allows you to launch a fireball that does high damage and explodes upon contact, launching 4 smaller fireballs in different directions. This ability uses up 10 ghost energy per use. Press 2 to switch to the fireball ability from another ability.")
                 objects.FindQuest("The Fire Boss").data = True
                 data = map_description.portalLocations["fire"]
                 objects.player.chunk = data[0]
@@ -388,9 +388,9 @@ class IceGhostBoss(Ghost):
             objects.resourceAmounts["ghostEnergy"] = objects.player.maxEnergy
             objects.player.currentHealth = objects.player.maxHealth
             objects.abilities[2] = Abilities.Freeze()
-            objects.reports_on and print("REPORT: You have defeated the ice ghost.")
-            objects.reports_on and print("NEW ABILITY: FREEZE")
-            objects.reports_on and print("Ability Information: The freeze ability allows you to freeze all enemies on the screen for 3 seconds. This ability uses up 25 ghost energy per use. Press 3 to switch to the freeze ability from another ability.")
+            objects.reports_on and objects.update_log.addMessage("REPORT: You have defeated the ice ghost.")
+            objects.reports_on and objects.update_log.addMessage("NEW ABILITY: FREEZE")
+            objects.reports_on and objects.update_log.addMessage("Ability Information: The freeze ability allows you to freeze all enemies on the screen for 3 seconds. This ability uses up 25 ghost energy per use. Press 3 to switch to the freeze ability from another ability.")
             objects.FindQuest("The Ice Boss").data = True
             data = map_description.portalLocations["ice"]
             objects.player.chunk = data[0]
@@ -428,7 +428,7 @@ class LightningGhostBoss(Enemy):
             objects.display.blit(self.shadowImage, self.shadowRect)
     def update(self):
         # Changing directions after reaching targeted location
-        #print(self.counter)
+        #objects.update_log.addMessage(self.counter)
         if self.rect.center == self.nextLocation:
             self.nextLocation = (random.randint(0,500),random.randint(0,500))
             self.shadowRect.center = self.nextLocation
@@ -466,9 +466,9 @@ class LightningGhostBoss(Enemy):
             objects.resourceAmounts["ghostEnergy"] = objects.player.maxEnergy
             objects.player.currentHealth = objects.player.maxHealth
             objects.abilities[3] = Abilities.ElectroDash()
-            objects.reports_on and print("REPORT: You have defeated the lightning ghost.")
-            objects.reports_on and print("NEW ABILITY: ELECTRODASH")
-            objects.reports_on and print("Ability Information: The electrodash ability allows you to dash quickly to a spot on the screen, doing damage to everything in your path and not taking damage at all. This ability uses up 25 ghost energy per use. Press 4 to switch to the electrodash ability from another ability.")
+            objects.reports_on and objects.update_log.addMessage("REPORT: You have defeated the lightning ghost.")
+            objects.reports_on and objects.update_log.addMessage("NEW ABILITY: ELECTRODASH")
+            objects.reports_on and objects.update_log.addMessage("Ability Information: The electrodash ability allows you to dash quickly to a spot on the screen, doing damage to everything in your path and not taking damage at all. This ability uses up 25 ghost energy per use. Press 4 to switch to the electrodash ability from another ability.")
             objects.FindQuest("The Lightning Boss").data = True
             data = map_description.portalLocations["lightning"]
             objects.player.chunk = data[0]
@@ -519,7 +519,7 @@ class PoisonGhostBoss(Enemy):
         if self.counter == objects.framerate*self.waitTime + 5:
             self.counter = 0
             self.rect.center = random.choice(self.pools)
-            #print(self.rect.center)
+            #objects.update_log.addMessage(self.rect.center)
         else:
             self.counter += 1
             
@@ -531,9 +531,9 @@ class PoisonGhostBoss(Enemy):
             objects.resourceAmounts["ghostEnergy"] = objects.player.maxEnergy
             objects.player.currentHealth = objects.player.maxHealth
             objects.abilities[4] = Abilities.SummonPoison()
-            objects.reports_on and print("REPORT: You have defeated the poison ghost.")
-            objects.reports_on and print("NEW ABILITY: POISON FIELD")
-            objects.reports_on and print("Ability Information: The poison field ability deals damage over time to enemies near you. This ability uses up 25 ghost energy per use. Press 5 to switch to the poison field ability from another ability.")
+            objects.reports_on and objects.update_log.addMessage("REPORT: You have defeated the poison ghost.")
+            objects.reports_on and objects.update_log.addMessage("NEW ABILITY: POISON FIELD")
+            objects.reports_on and objects.update_log.addMessage("Ability Information: The poison field ability deals damage over time to enemies near you. This ability uses up 25 ghost energy per use. Press 5 to switch to the poison field ability from another ability.")
             objects.FindQuest("The Poison Boss").data = True
             data = map_description.portalLocations["poison"]
             objects.player.chunk = data[0]
@@ -593,9 +593,9 @@ class SummoningGhostBoss(Enemy):
             objects.resourceAmounts["ghostEnergy"] = objects.player.maxEnergy
             objects.player.currentHealth = objects.player.maxHealth
             objects.abilities[5] = Abilities.SummonGhost()
-            objects.reports_on and print("REPORT: You have defeated the summoning ghost.")
-            objects.reports_on and print("NEW ABILITY: GHOST SUMMONING")
-            objects.reports_on and print("Ability Information: The summoning ability summons a ghost that follows your mouse around the screen. This ability uses up 25 ghost energy per use. Press 6 to switch to the summoning ability from another ability.")
+            objects.reports_on and objects.update_log.addMessage("REPORT: You have defeated the summoning ghost.")
+            objects.reports_on and objects.update_log.addMessage("NEW ABILITY: GHOST SUMMONING")
+            objects.reports_on and objects.update_log.addMessage("Ability Information: The summoning ability summons a ghost that follows your mouse around the screen. This ability uses up 25 ghost energy per use. Press 6 to switch to the summoning ability from another ability.")
             objects.FindQuest("The Summoning Boss").data = True
             data = map_description.portalLocations["summoner"]
             objects.player.chunk = data[0]
@@ -645,9 +645,9 @@ class ShieldGhostBoss(Enemy):
             objects.resourceAmounts["ghostEnergy"] = objects.player.maxEnergy
             objects.player.currentHealth = objects.player.maxHealth
             objects.abilities[6] = Abilities.MakeMagicalShield()
-            print("REPORT: You have defeated the shield ghost.")
-            print("NEW ABILITY: MAGICAL SHIELD")
-            print("Ability Information: The magical shield ability makes you immune to taking damage. This ability uses up 25 ghost energy per use. Press 7 to switch to the poison field ability from another ability.")
+            objects.update_log.addMessage("REPORT: You have defeated the shield ghost.")
+            objects.update_log.addMessage("NEW ABILITY: MAGICAL SHIELD")
+            objects.update_log.addMessage("Ability Information: The magical shield ability makes you immune to taking damage. This ability uses up 25 ghost energy per use. Press 7 to switch to the poison field ability from another ability.")
             objects.FindQuest("The Shield Boss").data = True
             data = map_description.portalLocations["shield"]
             objects.player.chunk = data[0]
@@ -767,9 +767,9 @@ class LaserGhostBoss(Enemy):
             objects.resourceAmounts["ghostEnergy"] = objects.player.maxEnergy
             objects.player.currentHealth = objects.player.maxHealth
             objects.abilities[7] = Abilities.FireLaserArrow()
-            print("REPORT: You have defeated the laser ghost.")
-            print("NEW ABILITY: LASER ARROW")
-            print("Ability Information: The laser arrow ability allows you to shoot a large arrow that passes through enemies, dealing high damage. This ability uses up 25 ghost energy per use. Press 8 to switch to the laser arrow ability from another ability.")
+            objects.update_log.addMessage("REPORT: You have defeated the laser ghost.")
+            objects.update_log.addMessage("NEW ABILITY: LASER ARROW")
+            objects.update_log.addMessage("Ability Information: The laser arrow ability allows you to shoot a large arrow that passes through enemies, dealing high damage. This ability uses up 25 ghost energy per use. Press 8 to switch to the laser arrow ability from another ability.")
             objects.FindQuest("The Laser Boss").data = True
             data = map_description.portalLocations["laser"]
             objects.player.chunk = data[0]
@@ -829,7 +829,7 @@ class WaterGhostBoss:
         if self.counter == objects.framerate * self.waitTime + 5:
             self.counter = 0
             self.rect.center = (random.randint(150,350),random.randint(150,350))
-            #print(self.rect.center)
+            #objects.update_log.addMessage(self.rect.center)
         else:
             self.counter += 1
             
@@ -841,9 +841,9 @@ class WaterGhostBoss:
             objects.resourceAmounts["ghostEnergy"] = objects.player.maxEnergy
             objects.player.currentHealth = objects.player.maxHealth
             objects.abilities[8] = Abilities.LaunchWave()
-            print("REPORT: You have defeated the water ghost.")
-            print("NEW ABILITY: WAVE")
-            print("Ability Information: The wave ability launches 4 large waves in different directions. These waves deal damage over time to enemies that they collide with, and pull/push non-boss enemies along with them (dealing more damage). This ability uses up 25 ghost energy per use. Press 9 to switch to the wave ability from another ability.")
+            objects.update_log.addMessage("REPORT: You have defeated the water ghost.")
+            objects.update_log.addMessage("NEW ABILITY: WAVE")
+            objects.update_log.addMessage("Ability Information: The wave ability launches 4 large waves in different directions. These waves deal damage over time to enemies that they collide with, and pull/push non-boss enemies along with them (dealing more damage). This ability uses up 25 ghost energy per use. Press 9 to switch to the wave ability from another ability.")
             objects.FindQuest("The Water Boss").data = True
             data = map_description.portalLocations["water"]
             objects.player.chunk = data[0]
@@ -1099,8 +1099,8 @@ class FinalBossGhost(Enemy):
             objects.player.currentHealth = objects.player.maxHealth
             objects.player.chunk = (0,0)
             objects.player.rect.center = (400,400)
-            print("REPORT: You have defeated the dark ghost.")
-            print("GAME COMPLETE!")
+            objects.update_log.addMessage("REPORT: You have defeated the dark ghost.")
+            objects.update_log.addMessage("GAME COMPLETE!")
             data = map_description.portalLocations["final"]
             objects.player.chunk = data[0]
             objects.player.rect.center = data[1]
