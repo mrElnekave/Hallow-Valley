@@ -2,7 +2,7 @@
 import images
 import special_obstacles
 import objects, pygame
-from rubato import PMath, Vector
+from rubato import Math, Vector
 
 shownChunks = []
 map=[
@@ -97,7 +97,7 @@ def playerPosOnMap(playerPos, col, row, location):
 
     # our position can be from 0 to 500
     percentage = Vector(*playerPos) / 500
-    pos += Vector(PMath.lerp(0, 9, percentage.x), PMath.lerp(0, 9, percentage.y))
+    pos += Vector(Math.lerp(0, 9, percentage.x), Math.lerp(0, 9, percentage.y))
     pos *= dif
     pos += Vector(*location)
 
@@ -112,7 +112,7 @@ def playerPosOnMap(playerPos, col, row, location):
 
 def clear_chunk(chunk_pos):
     current_chunk = objects.chunks[chunk_pos[0]][chunk_pos[1]]
-    bad_types: list = ["unassigned", "fireball", "abilityObject"]
+    bad_types: list = ["unassigned", "fireball", "abilityObject", "qCube"]
     for obj in current_chunk.contents:
         if obj.type in bad_types:
             current_chunk.contents.remove(obj)
