@@ -15,7 +15,7 @@ debugging = True
 dayLength = 5
 framerate = 30
 difficulty = 0
-start_chunk = (5, 3)
+start_chunk = (0, 0)
 
 
 pygame.font.init()
@@ -24,7 +24,7 @@ announcementFont = pygame.font.SysFont("Arial", 72)
 mathFont = pygame.font.SysFont("Arial", 50)
 
 
-#current_path = "Game\Data\\"
+# current_path = "Game\Data\\"
 current_path = "Data\\"
 
 reports_on = False
