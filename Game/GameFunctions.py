@@ -43,7 +43,7 @@ objects.player = Enemies.Player()
 objects.update_log = MapClasses.UpdateLog((0, 87), objects.archives)
 restart()
 def DebugCode():
-    if pygame.key.get_pressed()[pygame.K_SPACE]: 
+    if objects.debugging and pygame.key.get_pressed()[pygame.K_SPACE]:
         objects.player.currentHealth -= 10
     #if pygame.key.get_pressed()[pygame.K_p]:
        # print(pygame.mouse.get_pos())
@@ -83,7 +83,7 @@ def GameplayUpdate():
     keys = pygame.key.get_pressed()
     if not inTab:
         objects.player.getinput(keys)
-    if keys[pygame.K_i]: # Game Information
+    if objects.debugging: #keys[pygame.K_i]: # Game Information
         objects.update_log.addMessage("TESTINGLONGER")
         objects.update_log.addMessage("INFORMATION: ")
         # objects.update_log.addMessage("Current Quest: "+objects.quests[objects.currentQuest].name)
@@ -97,7 +97,7 @@ def GameplayUpdate():
         # Changing ability level 
         if event.key == pygame.K_TAB:
             inTab = not inTab 
-        if event.key == pygame.K_l: 
+        if objects.debugging and event.key == pygame.K_l:
             for i in range(8): 
                 level = objects.levels[i]
                 level += 1 
@@ -105,9 +105,9 @@ def GameplayUpdate():
                     level = 1
                 objects.levels[i] = level
             print(objects.levels)
-        if event.key == pygame.K_k: 
+        if objects.debugging and event.key == pygame.K_k:
             objects.player.changeSkin()
-        if event.key == pygame.K_j:
+        if objects.debugging and event.key == pygame.K_j:
             map_description.show_type("fire")
         if event.key == pygame.K_r:
             index = objects.player.currentAbility - 1

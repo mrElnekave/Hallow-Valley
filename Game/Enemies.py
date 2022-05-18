@@ -41,6 +41,9 @@ class Player(Obj):
         objects.abilities[9] = Abilities.PotionAbility()
         #objects.resourceAmounts["ghostEnergy"] = objects.maxEnergys
 
+        # show the first boss
+        map_description.show_chunk(*(map_description.portalLocations["fire"][0]))
+
     # Function to draw player to screen
     def render(self):
         # pygame.draw.rect(objects.screen, "#000000", self.rect)
@@ -311,8 +314,8 @@ class FireGhostBoss(Enemy):
                 objects.abilities[1] = Abilities.LaunchFireball()
                 objects.reports_on and objects.update_log.addMessage("REPORT: You have defeated the fire ghost.")
                 objects.reports_on and objects.update_log.addMessage("NEW ABILITY: FIREBALL")
-                objects.reports_on and objects.update_log.addMessage("Ability Information: The fireball ability allows you to launch a fireball that does high damage and explodes upon contact, launching 4 smaller fireballs in different directions. This ability uses up 10 ghost energy per use. Press 2 to switch to the fireball ability from another ability.")
-                objects.FindQuest("The Fire Boss").data = True
+                objects.reports_on and objects.update_log.addMessage("Ability Information: The fireball ability allows you to launch a fireball that deals high damage and explodes upon contact, launching 4 smaller fireballs in different directions. This ability uses up 10 ghost energy per use. Press 2 to switch to the fireball ability from another ability.")
+                #objects.FindQuest("The Fire Boss").data = True
                 data = map_description.portalLocations["fire"]
                 objects.player.chunk = data[0]
                 objects.player.rect.center = data[1]
@@ -416,7 +419,7 @@ class IceGhostBoss(Ghost):
             objects.reports_on and objects.update_log.addMessage("REPORT: You have defeated the ice ghost.")
             objects.reports_on and objects.update_log.addMessage("NEW ABILITY: FREEZE")
             objects.reports_on and objects.update_log.addMessage("Ability Information: The freeze ability allows you to freeze all enemies on the screen for 3 seconds. This ability uses up 25 ghost energy per use. Press 3 to switch to the freeze ability from another ability.")
-            objects.FindQuest("The Ice Boss").data = True
+            #objects.FindQuest("The Ice Boss").data = True
             data = map_description.portalLocations["ice"]
             objects.player.chunk = data[0]
             objects.player.rect.center = data[1]
@@ -494,7 +497,7 @@ class LightningGhostBoss(Enemy):
             objects.reports_on and objects.update_log.addMessage("REPORT: You have defeated the lightning ghost.")
             objects.reports_on and objects.update_log.addMessage("NEW ABILITY: ELECTRODASH")
             objects.reports_on and objects.update_log.addMessage("Ability Information: The electrodash ability allows you to dash quickly to a spot on the screen, doing damage to everything in your path and not taking damage at all. This ability uses up 25 ghost energy per use. Press 4 to switch to the electrodash ability from another ability.")
-            objects.FindQuest("The Lightning Boss").data = True
+            #objects.FindQuest("The Lightning Boss").data = True
             data = map_description.portalLocations["lightning"]
             objects.player.chunk = data[0]
             objects.player.rect.center = data[1]
@@ -559,7 +562,7 @@ class PoisonGhostBoss(Enemy):
             objects.reports_on and objects.update_log.addMessage("REPORT: You have defeated the poison ghost.")
             objects.reports_on and objects.update_log.addMessage("NEW ABILITY: POISON FIELD")
             objects.reports_on and objects.update_log.addMessage("Ability Information: The poison field ability deals damage over time to enemies near you. This ability uses up 25 ghost energy per use. Press 5 to switch to the poison field ability from another ability.")
-            objects.FindQuest("The Poison Boss").data = True
+            #objects.FindQuest("The Poison Boss").data = True
             data = map_description.portalLocations["poison"]
             objects.player.chunk = data[0]
             objects.player.rect.center = data[1]
@@ -621,7 +624,7 @@ class SummoningGhostBoss(Enemy):
             objects.reports_on and objects.update_log.addMessage("REPORT: You have defeated the summoning ghost.")
             objects.reports_on and objects.update_log.addMessage("NEW ABILITY: GHOST SUMMONING")
             objects.reports_on and objects.update_log.addMessage("Ability Information: The summoning ability summons a ghost that follows your mouse around the screen. This ability uses up 25 ghost energy per use. Press 6 to switch to the summoning ability from another ability.")
-            objects.FindQuest("The Summoning Boss").data = True
+            #objects.FindQuest("The Summoning Boss").data = True
             data = map_description.portalLocations["summoner"]
             objects.player.chunk = data[0]
             objects.player.rect.center = data[1]
@@ -673,7 +676,7 @@ class ShieldGhostBoss(Enemy):
             objects.update_log.addMessage("REPORT: You have defeated the shield ghost.")
             objects.update_log.addMessage("NEW ABILITY: MAGICAL SHIELD")
             objects.update_log.addMessage("Ability Information: The magical shield ability makes you immune to taking damage. This ability uses up 25 ghost energy per use. Press 7 to switch to the poison field ability from another ability.")
-            objects.FindQuest("The Shield Boss").data = True
+            #objects.FindQuest("The Shield Boss").data = True
             data = map_description.portalLocations["shield"]
             objects.player.chunk = data[0]
             objects.player.rect.center = data[1]
@@ -795,7 +798,7 @@ class LaserGhostBoss(Enemy):
             objects.update_log.addMessage("REPORT: You have defeated the laser ghost.")
             objects.update_log.addMessage("NEW ABILITY: LASER ARROW")
             objects.update_log.addMessage("Ability Information: The laser arrow ability allows you to shoot a large arrow that passes through enemies, dealing high damage. This ability uses up 25 ghost energy per use. Press 8 to switch to the laser arrow ability from another ability.")
-            objects.FindQuest("The Laser Boss").data = True
+            #objects.FindQuest("The Laser Boss").data = True
             data = map_description.portalLocations["laser"]
             objects.player.chunk = data[0]
             objects.player.rect.center = data[1]
@@ -869,7 +872,7 @@ class WaterGhostBoss:
             objects.update_log.addMessage("REPORT: You have defeated the water ghost.")
             objects.update_log.addMessage("NEW ABILITY: WAVE")
             objects.update_log.addMessage("Ability Information: The wave ability launches 4 large waves in different directions. These waves deal damage over time to enemies that they collide with, and pull/push non-boss enemies along with them (dealing more damage). This ability uses up 25 ghost energy per use. Press 9 to switch to the wave ability from another ability.")
-            objects.FindQuest("The Water Boss").data = True
+            #objects.FindQuest("The Water Boss").data = True
             data = map_description.portalLocations["water"]
             objects.player.chunk = data[0]
             objects.player.rect.center = data[1]
