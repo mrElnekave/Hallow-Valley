@@ -375,9 +375,9 @@ class IceGhostBoss(Ghost):
         pygame.draw.rect(objects.display, (15, 15, 15), pygame.Rect(150, 25, 200, 20))
         pygame.draw.rect(objects.display, (255, 0, 0), pygame.Rect(150, 25, self.health / self.maxHealth * 200, 20))
         if self.health <= 250:
-            x = Math.lerp(0, 255, (self.mul - 1) / 0.3)
-            print(int(x))
-            pygame.draw.circle(objects.display, (int(x), 0, 0), self.rect.topleft, 4)
+            red = Math.lerp(0, 255, (self.mul - 1) / 0.3)
+            # Math.map(0, 255, 1, 1.3) This is what we want
+            pygame.draw.circle(objects.display, (int(red), 0, 0), self.rect.topleft, 4)
 
     def update(self):
         # Changing directions after bouncing
