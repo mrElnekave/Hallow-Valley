@@ -353,3 +353,16 @@ def MathRender():
     dText = objects.mathFont.render(d[1], False, (0,0,0))
     objects.display.blit(dText, (405, 135))
 
+def WinUpdate():
+    pygame.event.pump()
+    keys = pygame.key.get_pressed()
+    if keys[pygame.K_c]:
+        restart()
+        objects.gamestate = 0
+
+def WinRender():
+    objects.display.fill((255,255,255))
+    text = objects.announcementFont.render("You Win!", True, (212,175,55))
+    objects.display.blit(text, (250-text.get_width()/2,50))
+    text = objects.myFont.render("Close and reopen the game to restart and play again.", True, (212, 175, 55))
+    objects.display.blit(text, (250-text.get_width()/2, 300))

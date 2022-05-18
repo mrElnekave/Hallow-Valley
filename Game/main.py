@@ -112,5 +112,9 @@ while 1:
         MathUpdate() 
         MathRender()
 
+    if objects.gamestate == 4:
+        WinUpdate()
+        WinRender()
+
     screen_update()
     clock.tick(objects.framerate)

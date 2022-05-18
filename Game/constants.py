@@ -11,7 +11,7 @@ player_sprite_size = 25
 
 moveSpeed = 5
 mapWidth, mapHeight = 15, 15
-debugging = False
+debugging = True
 dayLength = 5
 framerate = 30
 difficulty = 0

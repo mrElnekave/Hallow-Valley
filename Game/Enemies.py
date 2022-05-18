@@ -1132,6 +1132,7 @@ class FinalBossGhost(Enemy):
             data = map_description.portalLocations["final"]
             objects.player.chunk = data[0]
             objects.player.rect.center = data[1]
+            objects.gamestate = 4
             for i in objects.chunks[data[0][0]][data[0][1]].contents: 
                 if type(i) == MapClasses.CollisionButton: 
                     objects.chunks[data[0][0]][data[0][1]].contents.remove(i)
