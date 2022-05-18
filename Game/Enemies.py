@@ -6,7 +6,7 @@ import MapClasses
 from rubato import Vector
 from BasicClasses import Obj
 from helpful import map_description
-
+from rubato import *
 #IMPORTANT: This includes the player 
 
 # Creating Player Class
@@ -29,14 +29,15 @@ class Player(Obj):
 
         # Debug all powers immediately
         objects.abilities[0] = Abilities.FireArrow()
-        #objects.abilities[1] = Abilities.LaunchFireball()
-        #objects.abilities[2] = Abilities.Freeze()
-        #objects.abilities[3] = Abilities.ElectroDash()
-        #objects.abilities[4] = Abilities.SummonPoison()
-        #objects.abilities[5] = Abilities.SummonGhost()
-        #objects.abilities[6] = Abilities.MakeMagicalShield()
-        #objects.abilities[7] = Abilities.FireLaserArrow()
-        #objects.abilities[8] = Abilities.LaunchWave()
+        if objects.op:
+            objects.abilities[1] = Abilities.LaunchFireball()
+            objects.abilities[2] = Abilities.Freeze()
+            objects.abilities[3] = Abilities.ElectroDash()
+            objects.abilities[4] = Abilities.SummonPoison()
+            objects.abilities[5] = Abilities.SummonGhost()
+            objects.abilities[6] = Abilities.MakeMagicalShield()
+            objects.abilities[7] = Abilities.FireLaserArrow()
+            objects.abilities[8] = Abilities.LaunchWave()
         objects.abilities[9] = Abilities.PotionAbility()
         #objects.resourceAmounts["ghostEnergy"] = objects.maxEnergys
 
@@ -147,7 +148,7 @@ class Player(Obj):
                 if self.currentAbility < 0: 
                    self.currentAbility = 9
     def update(self):
-        if not (Vector(*self.chunk) < Vector.two and Vector(*self.chunk) > Vector.zero):
+        if not (Vector(*self.chunk) < Vector.one*2 and Vector(*self.chunk) > Vector.zero):
             objects.abilities[self.currentAbility].update()
         self.pos_validate()
     def changeSkin(self): 
@@ -335,14 +336,16 @@ class IceGhostBoss(Ghost):
         self.attackDamage = 10
         self.direction = 90
         self.counter = 0
-
+        self.mul = 1
     def render(self):
         self.image.set_alpha((self.health/self.maxHealth)*255)
         objects.display.blit(self.image, self.rect)
-        objects.display.blit(self.image, self.rect)
         pygame.draw.rect(objects.display, (15,15,15), pygame.Rect(150,25,200,20))
         pygame.draw.rect(objects.display, (255,0,0), pygame.Rect(150,25,self.health/self.maxHealth*200,20))
-
+        if self.health <= 250:
+            x = Math.lerp(0,255,(self.mul-1)/0.3)
+            print(int(x))
+            pygame.draw.circle(objects.display, (int(x),0,0), self.rect.topleft, 4)
     def update(self):
         # Changing directions after bouncing
         if self.rect.left < 0 or self.rect.right > objects.WINDOWWIDTH or self.rect.top < 0 or self.rect.bottom > objects.WINDOWHEIGHT:
@@ -380,6 +383,28 @@ class IceGhostBoss(Ghost):
                 rotation += 180
             objects.currentChunk.contents.append(EnemyIcicle((moveX, moveY), rotation, self.rect.center))
             self.counter = 0
+        #rage phase
+        if self.health <= 250:
+            self.mul = Math.lerp(1,1.3,1-self.health/250)
+            self.rect.center = (self.rect.centerx + self.speed * self.mul * math.cos(self.direction),
+                                self.rect.centery + self.speed * self.mul * math.sin(self.direction))
+            self.counter = self.counter + 2
+            if self.counter == 60:
+                playerPos = objects.player.rect.center
+                xGap = playerPos[0] - self.rect.center[0]
+                yGap = playerPos[1] - self.rect.center[1]
+                distance = (xGap ** 2 + yGap ** 2) ** (1 / 2)
+                if yGap == 0:
+                    yGap = .01
+                if distance != 0:
+                    factor = distance / 5
+                    moveX = xGap / factor * 2
+                    moveY = yGap / factor * 2
+                    rotation = math.degrees(math.atan(xGap / yGap)) + 90
+                if yGap > 0:
+                    rotation += 180
+                objects.currentChunk.contents.append(EnemyIcicle((moveX, moveY), rotation, self.rect.center))
+                self.counter = 0
         # Getting hit by arrows
         if self.health <= 0: 
             objects.currentChunk.contents.remove(self)

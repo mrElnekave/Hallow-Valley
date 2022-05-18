@@ -10,7 +10,7 @@ gamestate = 0
 daytime = True
 freeze = False
 shopShowing = False
-
+op = True
 
 # things in game
 abilities = [None, None, None, None, None, None, None, None, None, None]

@@ -104,7 +104,7 @@ def playerPosOnMap(playerPos, col, row, location):
     # should draw onto the screen instead
     # check the position and further testing.
     pygame.draw.rect(objects.display, (255, 255, 255), pygame.Rect(round(pos.x), round(pos.y), 
-        *((Vector.ONE * Vector(dif, dif)).to_tuple()))
+        *((Vector.one * Vector(dif, dif)).to_tuple()))
     )
 
 
