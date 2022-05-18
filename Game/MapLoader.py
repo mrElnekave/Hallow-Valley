@@ -56,8 +56,6 @@ for x_index in range(objects.mapWidth):
         from_chunk(image, [x_index, y_index])
 
         coinNum = 2
-        if x_index == 3 and y_index == 3:
-            coinNum = 4
         
         for coin in range(coinNum): 
             objects.chunks[x_index][y_index].contents.append(MapClasses.Resource("coins", 10, (random.randint(0,500),random.randint(0,500))))
