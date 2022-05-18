@@ -141,7 +141,7 @@ for x_index in range(objects.mapWidth):
 
 # TESTING
 
-objects.chunks[1][1].contents.append(special_obstacles.Lava((250,250)))
-objects.chunks[0][0].contents.append(special_obstacles.Poison((250,250)))
-objects.chunks[0][0].contents.append(special_obstacles.Cactus((150,250)))
+#objects.chunks[1][1].contents.append(special_obstacles.Lava((250,250)))
+#objects.chunks[0][0].contents.append(special_obstacles.Poison((250,250)))
+#objects.chunks[0][0].contents.append(special_obstacles.Cactus((150,250)))
 
