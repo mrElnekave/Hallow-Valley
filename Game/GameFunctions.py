@@ -75,8 +75,8 @@ def GameplayUpdate():
     global inTab, dayNightCounter
     for button in buttons["game"]: 
         button.update()
-    for quest in objects.quests:
-        quest.update()
+    # for quest in objects.quests:
+    #     quest.update()
 
     # INPUT (Getting stuff that player is doing ex: pressing keys moving keyboard)
     objects.player.last_valid_position = objects.player.rect.center
