@@ -66,6 +66,8 @@ menu_base_clear.blit(clearCloud, (275,0))
 menu_base_dark = copy.copy(menu_base)
 
 dark_picture = obscure(menu_base_dark, (0,0,0), 200)
+
+# drawing on all the lightnings
 menu_base_dark.blit(dark_picture, (0, 0))
 menu_base_dark.blit(pygame.transform.scale(stormCloud, (60,20)), (15,20))
 menu_base_dark.blit(pygame.transform.scale(stormCloud, (70,30)), (70,40))
