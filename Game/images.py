@@ -57,7 +57,10 @@ menu_base_clear = copy.copy(menu_base)
 
 
 menu_base_dark = copy.copy(menu_base)
+
 dark_picture = obscure(menu_base_dark, (0,0,0), 200)
+
+# drawing on all the lightnings
 menu_base_dark.blit(dark_picture, (0, 0))
 menu_base_dark.blit(small_bolt, (40, 40))
 menu_base_dark.blit(small_bolt, (200, 50))
