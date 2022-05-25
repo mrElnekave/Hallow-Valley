@@ -40,6 +40,8 @@ def obscure(pic, color, alpha):
 small_bolt = load_img("small_bolt.png", (0, 0, 0))
 medium_bolt = load_img("medium_bolt.png", (0, 0, 0))
 large_bolt = load_img("large_bolt.png", (0, 0, 0))
+clearCloud = pygame.image.load(create_path("Clear Clouds.png"))
+stormCloud = pygame.image.load(create_path("Storm Clouds.png"))
 
 mountain_range_height = 200
 
@@ -54,11 +56,24 @@ menu_base.blit(mountain_2, (200, mountain_range_height))
 menu_base.blit(mountain_3, (120, mountain_range_height))
 
 menu_base_clear = copy.copy(menu_base)
-
+menu_base = menu_base_clear
+menu_base_clear.blit(pygame.transform.scale(clearCloud, (60,20)), (15,20))
+menu_base_clear.blit(pygame.transform.scale(clearCloud, (70,30)), (70,40))
+menu_base_clear.blit(clearCloud, (120,0))
+menu_base_clear.blit(pygame.transform.scale(clearCloud, (79,30)), (250,30))
+menu_base_clear.blit(clearCloud, (275,0))
 
 menu_base_dark = copy.copy(menu_base)
+
 dark_picture = obscure(menu_base_dark, (0,0,0), 200)
+
+# drawing on all the lightnings
 menu_base_dark.blit(dark_picture, (0, 0))
+menu_base_dark.blit(pygame.transform.scale(stormCloud, (60,20)), (15,20))
+menu_base_dark.blit(pygame.transform.scale(stormCloud, (70,30)), (70,40))
+menu_base_dark.blit(stormCloud, (120,0))
+menu_base_dark.blit(pygame.transform.scale(stormCloud, (79,30)), (250,30))
+menu_base_dark.blit(stormCloud, (275,0))
 menu_base_dark.blit(small_bolt, (40, 40))
 menu_base_dark.blit(small_bolt, (200, 50))
 

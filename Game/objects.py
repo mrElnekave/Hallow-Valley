@@ -79,7 +79,7 @@ def Reset():
     if player:
         player.currentHealth = player.maxHealth
         player.chunk = start_chunk
-        player.rect.topleft = (0,0)
+        player.rect.topleft = (20, 150)
         currentChunk = chunks[player.chunk[1]][player.chunk[0]]
 
     resourceAmounts["ghost energy"] = 0
