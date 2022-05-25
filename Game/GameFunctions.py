@@ -26,8 +26,8 @@ def restart():
         "game": [
             MapClasses.Button_func(pygame.image.load(create_path("Help Button.png")), (480, 80), open_guide)],
         "tab":[
-            MapClasses.Button_func(pygame.image.load(create_path("Blue Potion.png")), (150, 400), switch_map_notifs),
-            MapClasses.Button_func(pygame.image.load(create_path("Red Potion.png")), (350, 400), switch_map_notifs),
+            # MapClasses.Button_func(pygame.image.load(create_path("Blue Potion.png")), (40, 400), switch_map_notifs),
+            # MapClasses.Button_func(pygame.image.load(create_path("Red Potion.png")), (360, 400), switch_map_notifs),
         ],
         "menu": [
             MapClasses.Button(pygame.transform.scale(pygame.image.load(create_path("StartButton.png")), (300,80)),(250,450), ['objects.gamestate = 1','objects.Reset()']), MapClasses.Button(pygame.transform.scale(pygame.image.load(create_path("AboutUsButton.png")), (300,80)),(250,350), ['webbrowser.open("https://docs.google.com/presentation/d/1fCRW8VGcp_BtFYz1E_SCKFJo4uPcnhw9mEK5d6gdftc/edit?usp=sharing")'])],
@@ -206,7 +206,8 @@ def GameplayRender():
     if inTab: # render extra ontop
         for button in buttons["tab"]: 
             button.render()
-        location = (125, 90)
+        location = (objects.WINDOWWIDTH - images.demo_map.get_width()) // 2, 90
+        # print(images.demo_map.get_size())
         objects.display.blit(images.demo_map, location)
         objects.display.blit(images.demo_mask, location)
         map_description.playerPosOnMap(objects.player.rect.center, *objects.player.chunk, location)
