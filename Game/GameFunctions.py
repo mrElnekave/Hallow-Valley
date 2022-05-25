@@ -246,6 +246,10 @@ def MenuRender():
     titleScreen = images.menu_base
     
     objects.display.blit(titleScreen, (0, 0))
+
+    text = objects.announcementFont.render("Hallow Valley", True, (212,175,55))
+    objects.display.blit(text, (250-text.get_width()/2,50))
+
     for button in buttons["menu"]: 
         button.render()
 
