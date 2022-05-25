@@ -1,9 +1,6 @@
 # at cycle:
 # @PiThon Protectors @Python Vipers @Eco Hero
 
-# python path
-# ~\AppData\Local\Microsoft\WindowsApps\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\python.exe
-
 import pygame, sys, objects, MapLoader, mathsets, rubato, music
 mathsets.LoadMath()
 from GameFunctions import *
