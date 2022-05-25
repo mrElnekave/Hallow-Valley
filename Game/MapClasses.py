@@ -165,8 +165,8 @@ class UpdateLog(Obj):
     def render(self): 
         if objects.player.chunk[0] != -1: 
             blit_alpha(objects.display, self.capsule, self.in_relation(25, 0), 10)
-            if self.text != None:
-                objects.display.blit(self.text, self.in_relation(25, 0))
+            # if self.text != None:
+            #     objects.display.blit(self.text, self.in_relation(25, 0))
             objects.display.blit(self.exclamation, self.in_relation(0, 0))
     
     def tabRender(self):
