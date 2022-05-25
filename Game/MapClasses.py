@@ -176,7 +176,7 @@ class UpdateLog(Obj):
             objects.display.blit(self.image, self.tab_in_relation(0, i*objects.myFont.get_height()))
     
     def tab_in_relation(self, x, y):
-        return (self.tab_start.x + x, self.tab_start.y + y)
+        return self.tab_start.x + x, self.tab_start.y + y
 
     def regenerate_image(self):
         message = self.clamp_message(self.message)
@@ -189,7 +189,6 @@ class UpdateLog(Obj):
             text_width, text_height = objects.myFont.size(message)
             message = message[:-1]
         return message
-
 
     def addMessage(self, message: str):
         self.archived.append(message)
