@@ -151,7 +151,7 @@ class Player(Obj):
                 if self.currentAbility < 0: 
                    self.currentAbility = 9
     def update(self):
-        if not (Vector.one * 2 > Vector(*self.chunk) > Vector.zero):
+        if self.chunk not in [(0, 0), (0, 1), (1, 0), (1, 1)]:
             objects.abilities[self.currentAbility].update()
         self.pos_validate()
     def changeSkin(self): 

@@ -1,6 +1,5 @@
-import images
-import special_obstacles
-import objects, pygame
+import images, special_obstacles, objects
+import pygame
 from rubato import Math, Vector
 
 shownChunks = []
@@ -51,7 +50,8 @@ inv_map = {v: k for k, v in location_log.items()}
 
 
 color_meaning_by_chunk = [
-    {(158,158,158): special_obstacles.InvisibleObj}, #village
+    {(158,158,158): special_obstacles.InvisibleObj, (244, 67, 54): special_obstacles.InvisibleObj,
+     (255, 235, 59): special_obstacles.InvisibleObj, (121, 85, 72): special_obstacles.InvisibleObj}, #village
     {(244,67,54): special_obstacles.Lava, (66,66,66): special_obstacles.InvisibleObj }, #Fire
     {(96,125,139): special_obstacles.InvisibleObj}, #Ice
     {(121,85,72): special_obstacles.InvisibleObj}, #Electric
