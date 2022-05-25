@@ -30,7 +30,7 @@ def restart():
             MapClasses.Button_func(pygame.image.load(create_path("Red Potion.png")), (350, 400), switch_map_notifs),
         ],
         "menu": [
-            MapClasses.Button(pygame.transform.scale(pygame.image.load(create_path("StartButton.png")), (300,80)),(250,450), ['objects.gamestate = 1','objects.Reset()']), MapClasses.Button(pygame.transform.scale(pygame.image.load(create_path("AboutUsButton.png")), (300,80)),(250,350), ['webbrowser.open("https://docs.google.com/presentation/d/1fCRW8VGcp_BtFYz1E_SCKFJo4uPcnhw9mEK5d6gdftc/edit?usp=sharing")'])],
+            MapClasses.Button(pygame.transform.scale(pygame.image.load(create_path("StartButton.png")), (300,80)),(250,450), ['objects.gamestate = 1','objects.Reset()']), MapClasses.Button(pygame.transform.scale(pygame.image.load(create_path("AboutUsButton.png")), (300,80)),(250,350), ['webbrowser.open("https://docs.google.com/presentation/d/1aYedlgr1Wcgm2S26CWrMcuhUyHt_9ln0pGpd4seUwqo/edit?usp=sharing")'])],
         "shop": [
         MapClasses.Button(pygame.transform.scale(pygame.image.load(create_path("Purple Potion.png")),(50,50)),(175,175), ['if objects.resourceAmounts["coins"] >= 25: objects.potions["purple"] += 1;objects.resourceAmounts["coins"] -= 25;print("Bought Purple Potion")', "time.sleep(0.5)"]),
         MapClasses.Button(pygame.transform.scale(pygame.image.load(create_path("Red Potion.png")), (50,50)),(225,175), ['if objects.resourceAmounts["coins"] >= 50: objects.potions["red"] += 1;objects.resourceAmounts["coins"] -= 50;print("Bought Red Potion")', "time.sleep(0.5)"]),
