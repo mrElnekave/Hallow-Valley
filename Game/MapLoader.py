@@ -72,7 +72,7 @@ for x_index in range(objects.mapWidth):
 
 # --------------------------------------------- HOUSE AND NPC
 objects.chunks[0][0].contents.append(
-    MapClasses.NPC(pygame.image.load(create_path("Player1.png")), (100,100), [
+    MapClasses.NPC(pygame.image.load(create_path("Player2.png")), (100,100), [
         "objects.player.changeSkin()"]))
 
 # objects.chunks[0][0].contents.append(MapClasses.Building(pygame.image.load(create_path("House.png")), (100,0), 0, (24,50)))
