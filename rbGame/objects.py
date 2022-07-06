@@ -6,6 +6,8 @@ rb.init(res=Vector(WIDTH, HEIGHT), window_size=WINDOWSIZE)
 # scenes
 main = rb.Scene(name="main")
 intro = rb.Scene(name="intro")
+game_over = rb.Scene(name="game over")
+win = rb.Scene(name="win")
 
 # game logic
 daytime = True
