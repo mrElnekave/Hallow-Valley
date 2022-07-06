@@ -45,7 +45,7 @@ stormCloud = pygame.image.load(create_path("Storm Clouds.png"))
 
 mountain_range_height = 200
 
-menu_base = pygame.transform.scale(load_img("main_menu.png"), constants.size)
+menu_base = pygame.transform.scale(load_img("../rbGame/Data/Pixel Images/main_menu_bg.png"), constants.size)
 mountain_1 = load_img("Title Screen Mountain.png", (0, 0, 0))
 mountain_2 = load_img("Title Screen Mountain 2.png", (0, 0, 0))
 mountain_3 = load_img("Title Screen Mountain 3.png", (0, 0, 0))
@@ -54,6 +54,8 @@ pygame.draw.rect(menu_base, (139, 195, 74), pygame.Rect((0,mountain_range_height
 menu_base.blit(mountain_1, (-20, mountain_range_height))
 menu_base.blit(mountain_2, (200, mountain_range_height))
 menu_base.blit(mountain_3, (120, mountain_range_height))
+
+pygame.image.save(menu_base, "../rbGame/Data/Pixel Images/main_menu_bg.png")
 
 menu_base_clear = copy.copy(menu_base)
 menu_base = menu_base_clear
