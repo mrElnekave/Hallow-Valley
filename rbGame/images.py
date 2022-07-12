@@ -20,10 +20,10 @@ def create_path(path:str):
 small_bolt = load_img("small_bolt.png", (0, 0, 0))
 medium_bolt = load_img("medium_bolt.png", (0, 0, 0))
 large_bolt = load_img("large_bolt.png", (0, 0, 0))
-clearCloud = pygame.image.load(create_path("Clear Clouds.png"))
-stormCloud = pygame.image.load(create_path("Storm Clouds.png"))
+clearCloud = load_img("Clear Clouds.png")
+stormCloud = load_img("Storm Clouds.png")
 
-
+'''
 menu_base_clear = copy.copy(menu_base)
 menu_base = menu_base_clear
 menu_base_clear.blit(pygame.transform.scale(clearCloud, (60,20)), (15,20))
@@ -63,3 +63,4 @@ simple_map = pygame.image.load(create_path("Simple Map.png")).convert() # 150 by
 lava = pygame.image.load(create_path("Lava.png"))
 poison = pygame.image.load(create_path("Poison Lake.png"))
 cactus = pygame.image.load(create_path("Cactus1.png"))
+'''
