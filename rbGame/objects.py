@@ -1,11 +1,10 @@
 import rubato as rb
 from constants import *
-
 rb.init(
     name="Hallow Valley",
     res=Vector(WIDTH, HEIGHT),
     window_size=WINDOWSIZE,
-    icon="Data/Pixel Images/Blue Potion.png"
+    icon="Data/Pixel Images/Blue Potion.png",
 )
 
 # scenes
