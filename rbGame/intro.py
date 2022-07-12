@@ -2,20 +2,20 @@ import rubato as rb
 import objects
 from constants import *
 from rubato import GameObject, Display
+import images
 
 background = GameObject(pos = Display.center)
-background.add(rb.Image(rel_path="Data/Pixel Images/main_menu_bg.png"))
+background.add(images.background)
 start_button = GameObject(pos = Vector(250,450))
-start_button.add(img:= rb.Image(rel_path="Data/Pixel Images/StartButton.png"))
-start_button.add(rb.Button(width=img.get_size().x, height=img.get_size().y, onclick=lambda:rb.Game.scenes.set(objects.main.id)))
-help_button = GameObject(pos = Vector(480,80))
-help_button.add(rb.Image(rel_path="Data/Pixel Images/Help Button.png"))
+start_button.add(images.start_button)
+start_button.add(rb.Button(width=images.start_button.get_size().x, height=images.about_us.get_size().y, onclick=lambda:rb.Game.scenes.set(objects.main.id)))
 about_us = GameObject(pos = Vector(250,350))
-about_us.add(img:= rb.Image(rel_path = "Data/Pixel Images/AboutUsButton.png", scale=Vector(.4,.5)))
-about_us.add(rb.Button(width = img.get_size().x, height = img.get_size().y))
+about_us.add(images.about_us)
+about_us.add(rb.Button(width = images.about_us.get_size().x, height = images.about_us.get_size().y))
+text = GameObject(pos = Vector(250,150))
+announcementFont.color = rb.Color(212,175,55)
+text.add(rb.Text(text = "Hallow Valley", font=announcementFont))
 
 
-objects.intro.add(background)
-objects.intro.add(start_button)
-objects.intro.add(about_us)
-objects.intro.add(help_button)
+objects.intro.add(background, start_button, about_us, text)
+
