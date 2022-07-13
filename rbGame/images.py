@@ -29,7 +29,8 @@ background = load_img("main_menu_bg.png")
 #buttons
 about_us = load_img("AboutUsButton.png", scale=Vector(.4,.5))
 start_button = load_img("StartButton.png")
-
+#player
+player = load_img("Player1.png")
 '''
 menu_base_clear = copy.copy(menu_base)
 menu_base = menu_base_clear
