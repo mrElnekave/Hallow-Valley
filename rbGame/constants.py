@@ -5,6 +5,7 @@ from rubato import Vector
 WIDTH = 500
 HEIGHT = 500
 WINDOWSIZE = Vector(900, 600)
+BASICLEVELSIZE = Vector(WIDTH, HEIGHT) * 2
 
 player_sprite_size = 25
 

@@ -15,6 +15,14 @@ def create_path(path:str):
     """
     return current_path + path
 
+def switch_base():
+    if menu_base_clear.z_index == -1:
+        menu_base_clear.z_index = -2
+        menu_base_dark.z_index = -1
+    else:
+        menu_base_clear.z_index = -1
+        menu_base_dark.z_index = -2
+
 
 # intro
 small_bolt = load_img("small_bolt.png", (0, 0, 0))
@@ -22,14 +30,16 @@ medium_bolt = load_img("medium_bolt.png", (0, 0, 0))
 large_bolt = load_img("large_bolt.png", (0, 0, 0))
 clearCloud = load_img("Clear Clouds.png")
 stormCloud = load_img("Storm Clouds.png")
-#background
+# background
 menu_base_clear = load_img("menu_base_clear.png")
+menu_base_clear.z_index = -1
 menu_base_dark = load_img("menu_base_dark.png")
-background = load_img("main_menu_bg.png")
-#buttons
-about_us = load_img("AboutUsButton.png", scale=Vector(.4,.5))
-start_button = load_img("StartButton.png")
-#player
+menu_base_dark.z_index = -2
+background = load_img("main_menu_bg.png")  # useless unless custom cloud placement
+# buttons
+about_us = load_img("AboutUsButton.png", scale=Vector(.4,.5) * 1.5)
+start_button = load_img("StartButton.png", scale=Vector.one * 1.5)
+# player
 player = load_img("Player1.png")
 '''
 menu_base_clear = copy.copy(menu_base)
