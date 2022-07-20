@@ -41,6 +41,10 @@ about_us = load_img("AboutUsButton.png", scale=Vector(.4,.5) * 1.5)
 start_button = load_img("StartButton.png", scale=Vector.one * 1.5)
 # player
 player = load_img("Player1.png")
+# maps
+for row in range(len(map)):
+    for col in range(len(map[0])):
+        maps = load_img(f"map/map_{col}_{row}.png", scale=Vector.one * 2)
 '''
 menu_base_clear = copy.copy(menu_base)
 menu_base = menu_base_clear
