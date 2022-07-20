@@ -30,6 +30,6 @@ def lightning():
     rb.Time.delayed_call(random.randrange(5, 12) * 1000, lightning)
 
 
-lightning()
+rb.Time.delayed_call(3000, lightning)
 
 objects.intro.add(background, start_button, about_us, text)

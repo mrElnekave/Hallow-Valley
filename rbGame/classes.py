@@ -31,7 +31,7 @@ class PlayerController(rb.Component):
         self.rect = self.gameobj.get(rb.Rectangle)
 
         # resizing our image to our hitbox's size
-        self.image.resize(Vector(50, 50))
+        # self.image.resize(Vector(50, 50))
         self.gameobj.add(self.image)
 
     def update(self):
