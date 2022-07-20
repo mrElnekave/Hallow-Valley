@@ -4,7 +4,7 @@ import rubato as rb
 import intro, game
 
 
-rb.Game.scenes.set(objects.intro.id)
+rb.Game.set_scene(objects.intro.name)
 
 
 rb.begin()

@@ -10,7 +10,7 @@ background.add(images.menu_base_clear)
 start_button = GameObject(pos=Vector(250, 450))
 start_button.add(images.start_button)
 start_button.add(rb.Button(width=images.start_button.get_size().x, height=images.about_us.get_size().y,
-                           onclick=lambda: rb.Game.scenes.set(objects.main.id)))
+                           onclick=lambda: rb.Game.set_scene(objects.main.name)))
 about_us = GameObject(pos=Vector(250, 350))
 about_us.add(images.about_us)
 about_us.add(rb.Button(width=images.about_us.get_size().x, height=images.about_us.get_size().y,

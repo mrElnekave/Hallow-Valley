@@ -1,6 +1,6 @@
 import objects
-import rubato
-from rubato import Vector
+import rubato as rb
+from rubato import Vector, Display
 import map_description, MapClasses, classes, images
 import random
 
@@ -41,12 +41,7 @@ for x_index in range(objects.mapWidth):
     x_map = x_index * 10
 
     for y_index in range(objects.mapHeight):
-        y_map = y_index * 10
-        surf = pygame.Surface((10, 10))
-        surf.blit(images.simple_map, (0, 0), (x_map, y_map, 10, 10))
-
-        image = surf
-        chunk_type = map_description.location_log[map_description.map[y_index][x_index]]
+        background = rb.wrap(images.maps[y_index][x_index], pos=Display.res, z_index=-10)
         objects.chunks[-1].append(MapClasses.Chunk((x_index,y_index), image, (500,500), chunk_type))
 
         from_chunk(image, [x_index, y_index])
@@ -56,22 +51,12 @@ for x_index in range(objects.mapWidth):
         for coin in range(coinNum): 
             objects.chunks[x_index][y_index].contents.append(MapClasses.Resource("coins", 10, (random.randint(0,500),random.randint(0,500))))
 
-        # enemyNum = random.randint(1,5)
-        # if x != 0 or y != 0: 
-        #     for e in range(enemyNum): 
-        #         objects.chunks[x][y].contents.append(Enemies.Ghost((random.randint(100,400),random.randint(100,400))))
-
-# Manual addition of objects to chunks
-#objects.chunks[0][1].contents.append(
-#            MapClasses.Obstacle(pygame.transform.scale(pygame.image.load("TestImage.png")), (50,50)), (250, 250))
-#            )
 
 # --------------------------------------------- HOUSE AND NPC
 objects.chunks[0][0].contents.append(
     MapClasses.NPC(pygame.image.load(create_path("Player2.png")), (100,100), [
         "objects.player.changeSkin()"]))
 
-# objects.chunks[0][0].contents.append(MapClasses.Building(pygame.image.load(create_path("House.png")), (100,0), 0, (24,50)))
 
 objects.chunks[0][0].contents.append(MapClasses.NPC(pygame.image.load(create_path("Shop.png")), (400,400), ["objects.shopShowing = not objects.shopShowing", "time.sleep(0.1)"])) #TODO: Fix glitching and freeze game
 
