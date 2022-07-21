@@ -1,4 +1,4 @@
-import images, special_obstacles, objects
+# import images, special_obstacles, objects
 import pygame
 from rubato import Math, Vector
 
@@ -49,69 +49,69 @@ location_log = {
 inv_map = {v: k for k, v in location_log.items()}
 
 
-color_meaning_by_chunk = [
-    {(158,158,158): special_obstacles.InvisibleObj, (244, 67, 54): special_obstacles.InvisibleObj,
-     (255, 235, 59): special_obstacles.InvisibleObj, (121, 85, 72): special_obstacles.InvisibleObj}, #village
-    {(244,67,54): special_obstacles.Lava, (66,66,66): special_obstacles.InvisibleObj }, #Fire
-    {(96,125,139): special_obstacles.InvisibleObj}, #Ice
-    {(121,85,72): special_obstacles.InvisibleObj}, #Electric
-    {(103,58,183): special_obstacles.Poison, (158,158,158): special_obstacles.InvisibleObj}, #Poison
-    {(66,66,66): special_obstacles.InvisibleObj}, #summoner
-    {(96,125,139): special_obstacles.InvisibleObj}, #shield
-    {(121,85,72): special_obstacles.InvisibleObj}, #laser
-    {(76,175,80): special_obstacles.Cactus}, #water
-    {(38,50,56): special_obstacles.InvisibleObj} #final
-]
-
-def show_chunk(col,row):
-    # show_type should use show_chunk
-    dif = 2
-    color = (1, 2, 3)
-    posx = 12 * col + 1
-    posy = 12 * row + 1
-
-    pygame.draw.rect(images.demo_mask, color, pygame.Rect(posx * dif, posy * dif, 10 * dif, 10 * dif))
-    images.demo_mask.set_colorkey(color)
-
-
-def show_type(type):
-    dif = 2
-    item = inv_map[type]
-    for row in range(len(map)):
-        for col in range(len(map[0])):
-            if map[row][col] == item:
-                show_chunk(col,row)
-                '''# we need to unblock
-                color = (1, 2, 3)
-                posx = 12 * col + 1
-                posy = 12 * row + 1
-
-                pygame.draw.rect(images.demo_mask, color, pygame.Rect(posx * dif, posy * dif, 10 * dif, 10 * dif))
-                images.demo_mask.set_colorkey(color)'''
-
-def playerPosOnMap(playerPos, col, row, location):
-    dif = 2
-
-    pos = Vector(12 * col + 1, 12 * row + 1)  # (posx, posy)
-
-    # our position can be from 0 to 500
-    percentage = Vector(*playerPos) / 500
-    pos += Vector(Math.lerp(0, 9, percentage.x), Math.lerp(0, 9, percentage.y))
-    pos *= dif
-    pos += Vector(*location)
-
-
-    # should draw onto the screen instead
-    # check the position and further testing.
-    pygame.draw.rect(objects.display, (255, 255, 255), pygame.Rect(round(pos.x), round(pos.y), 
-        *((Vector.one * Vector(dif, dif)).to_tuple()))
-    )
-
-
-
-def clear_chunk(chunk_pos):
-    current_chunk = objects.chunks[chunk_pos[0]][chunk_pos[1]]
-    bad_types: list = ["unassigned", "fireball", "abilityObject", "qCube"]
-    for obj in current_chunk.contents:
-        if obj.type in bad_types:
-            current_chunk.contents.remove(obj)
+# color_meaning_by_chunk = [
+#     {(158,158,158): special_obstacles.InvisibleObj, (244, 67, 54): special_obstacles.InvisibleObj,
+#      (255, 235, 59): special_obstacles.InvisibleObj, (121, 85, 72): special_obstacles.InvisibleObj}, #village
+#     {(244,67,54): special_obstacles.Lava, (66,66,66): special_obstacles.InvisibleObj }, #Fire
+#     {(96,125,139): special_obstacles.InvisibleObj}, #Ice
+#     {(121,85,72): special_obstacles.InvisibleObj}, #Electric
+#     {(103,58,183): special_obstacles.Poison, (158,158,158): special_obstacles.InvisibleObj}, #Poison
+#     {(66,66,66): special_obstacles.InvisibleObj}, #summoner
+#     {(96,125,139): special_obstacles.InvisibleObj}, #shield
+#     {(121,85,72): special_obstacles.InvisibleObj}, #laser
+#     {(76,175,80): special_obstacles.Cactus}, #water
+#     {(38,50,56): special_obstacles.InvisibleObj} #final
+# ]
+#
+# def show_chunk(col,row):
+#     # show_type should use show_chunk
+#     dif = 2
+#     color = (1, 2, 3)
+#     posx = 12 * col + 1
+#     posy = 12 * row + 1
+#
+#     pygame.draw.rect(images.demo_mask, color, pygame.Rect(posx * dif, posy * dif, 10 * dif, 10 * dif))
+#     images.demo_mask.set_colorkey(color)
+#
+#
+# def show_type(type):
+#     dif = 2
+#     item = inv_map[type]
+#     for row in range(len(map)):
+#         for col in range(len(map[0])):
+#             if map[row][col] == item:
+#                 show_chunk(col,row)
+#                 '''# we need to unblock
+#                 color = (1, 2, 3)
+#                 posx = 12 * col + 1
+#                 posy = 12 * row + 1
+#
+#                 pygame.draw.rect(images.demo_mask, color, pygame.Rect(posx * dif, posy * dif, 10 * dif, 10 * dif))
+#                 images.demo_mask.set_colorkey(color)'''
+#
+# def playerPosOnMap(playerPos, col, row, location):
+#     dif = 2
+#
+#     pos = Vector(12 * col + 1, 12 * row + 1)  # (posx, posy)
+#
+#     # our position can be from 0 to 500
+#     percentage = Vector(*playerPos) / 500
+#     pos += Vector(Math.lerp(0, 9, percentage.x), Math.lerp(0, 9, percentage.y))
+#     pos *= dif
+#     pos += Vector(*location)
+#
+#
+#     # should draw onto the screen instead
+#     # check the position and further testing.
+#     pygame.draw.rect(objects.display, (255, 255, 255), pygame.Rect(round(pos.x), round(pos.y),
+#         *((Vector.one * Vector(dif, dif)).to_tuple()))
+#     )
+#
+#
+#
+# def clear_chunk(chunk_pos):
+#     current_chunk = objects.chunks[chunk_pos[0]][chunk_pos[1]]
+#     bad_types: list = ["unassigned", "fireball", "abilityObject", "qCube"]
+#     for obj in current_chunk.contents:
+#         if obj.type in bad_types:
+#             current_chunk.contents.remove(obj)
