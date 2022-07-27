@@ -97,5 +97,6 @@ def switch_chunk(direction: str):
             made_switch = True
     if made_switch:
         main = chunks[currentChunk.y][currentChunk.x]
-        rb.Game.set_scene(main)
+        rb.Time.delayed_frames(0, lambda: rb.Game.set_scene(main))
+
     return made_switch
