@@ -83,8 +83,8 @@ menu_base_dark.blit(medium_bolt, (350, 10))
 
 menu_base_dark.blit(medium_bolt, (150, 20))
 menu_base_dark.blit(medium_bolt, (300, 60))
-pygame.image.save(menu_base_dark, "../rbGame/Data/Pixel Images/menu_base_dark.png")
-pygame.image.save(menu_base_clear, "../rbGame/Data/Pixel Images/menu_base_clear.png")
+pygame.image.save(menu_base_dark, "../rbGame/Data/Pixel Images/menu/menu_base_dark.png")
+pygame.image.save(menu_base_clear, "../rbGame/Data/Pixel Images/menu/menu_base_clear.png")
 # map and notifs
 demo_map = pygame.image.load(create_path("Demo Map.png")).convert()
 demo_map = pygame.transform.scale(demo_map,(360,360))
