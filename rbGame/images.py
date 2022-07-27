@@ -49,44 +49,7 @@ for row in range(len(map_description.map)):
         maps[row].append(load_img(f"map/map_{col}_{row}.png"))
         maps[row][col].z_index = -10
         maps[row][col].resize(constants.BASICLEVELSIZE)
-'''
-menu_base_clear = copy.copy(menu_base)
-menu_base = menu_base_clear
-menu_base_clear.blit(pygame.transform.scale(clearCloud, (60,20)), (15,20))
-menu_base_clear.blit(pygame.transform.scale(clearCloud, (70,30)), (70,40))
-menu_base_clear.blit(clearCloud, (120,0))
-menu_base_clear.blit(pygame.transform.scale(clearCloud, (79,30)), (250,30))
-menu_base_clear.blit(clearCloud, (275,0))
 
-menu_base_dark = copy.copy(menu_base)
-
-dark_picture = obscure(menu_base_dark, (0,0,0), 200)
-
-# drawing on all the lightnings
-menu_base_dark.blit(dark_picture, (0, 0))
-menu_base_dark.blit(pygame.transform.scale(stormCloud, (60,20)), (15,20))
-menu_base_dark.blit(pygame.transform.scale(stormCloud, (70,30)), (70,40))
-menu_base_dark.blit(stormCloud, (120,0))
-menu_base_dark.blit(pygame.transform.scale(stormCloud, (79,30)), (250,30))
-menu_base_dark.blit(stormCloud, (275,0))
-menu_base_dark.blit(small_bolt, (40, 40))
-menu_base_dark.blit(small_bolt, (200, 50))
-
-menu_base_dark.blit(medium_bolt, (100, 70))
-menu_base_dark.blit(medium_bolt, (350, 10))
-
-menu_base_dark.blit(medium_bolt, (150, 20))
-menu_base_dark.blit(medium_bolt, (300, 60))
-
-
-# map and notifs
-demo_map = pygame.image.load(create_path("Demo Map.png")).convert()
-demo_map = pygame.transform.scale(demo_map,(360,360))
-demo_mask = demo_map.copy()
-demo_mask.fill((0, 0, 0))
-simple_map = pygame.image.load(create_path("Simple Map.png")).convert() # 150 by 150
-
-lava = pygame.image.load(create_path("Lava.png"))
-poison = pygame.image.load(create_path("Poison Lake.png"))
-cactus = pygame.image.load(create_path("Cactus1.png"))
-'''
+lava = load_img("obstacles/Lava.png")
+poison = load_img("obstacles/Poison Lake.png")
+cactus = load_img("obstacles/Cactus1.png")
