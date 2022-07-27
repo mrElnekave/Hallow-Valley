@@ -37,10 +37,10 @@ menu_base_dark = load_img("menu_base_dark.png")
 menu_base_dark.z_index = -2
 background = load_img("main_menu_bg.png")  # useless unless custom cloud placement
 # buttons
-about_us = load_img("AboutUsButton.png", scale=Vector(.4,.5) * 1.5)
-start_button = load_img("StartButton.png", scale=Vector.one * 1.5)
+about_us = load_img("buttons/AboutUsButton.png", scale=Vector(.4,.5) * 1.5)
+start_button = load_img("buttons/StartButton.png", scale=Vector.one * 1.5)
 # player
-player = load_img("Player1.png")
+player = load_img("skins/Player1.png")
 # maps
 maps: list[list[rb.Image]] = []  # row column
 for row in range(len(map_description.map)):
