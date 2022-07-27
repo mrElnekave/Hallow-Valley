@@ -27,15 +27,15 @@ def switch_base():
 # intro
 small_bolt = load_img("menu/small_bolt.png", (0, 0, 0))
 medium_bolt = load_img("menu/medium_bolt.png", (0, 0, 0))
-large_bolt = load_img("large_bolt.png", (0, 0, 0))
-clearCloud = load_img("Clear Clouds.png")
-stormCloud = load_img("Storm Clouds.png")
+large_bolt = load_img("menu/large_bolt.png", (0, 0, 0))
+clearCloud = load_img("menu/Clear Clouds.png")
+stormCloud = load_img("menu/Storm Clouds.png")
 # background
-menu_base_clear = load_img("menu_base_clear.png")
+menu_base_clear = load_img("menu/menu_base_clear.png")
 menu_base_clear.z_index = -1
-menu_base_dark = load_img("menu_base_dark.png")
+menu_base_dark = load_img("menu/menu_base_dark.png")
 menu_base_dark.z_index = -2
-background = load_img("main_menu_bg.png")  # useless unless custom cloud placement
+background = load_img("menu/main_menu_bg.png")  # useless unless custom cloud placement
 # buttons
 about_us = load_img("buttons/AboutUsButton.png", scale=Vector(.4,.5) * 1.5)
 start_button = load_img("buttons/StartButton.png", scale=Vector.one * 1.5)
