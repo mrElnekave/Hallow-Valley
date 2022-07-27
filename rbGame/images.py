@@ -46,7 +46,7 @@ maps: list[list[rb.Image]] = []  # row column
 for row in range(len(map_description.map)):
     maps.append(list())
     for col in range(len(map_description.map[0])):
-        maps[row].append(load_img(f"map/map_{col}_{row}.png"))
+        maps[row].append(load_img(f"map/map_{row}_{col}.png"))
         maps[row][col].z_index = -10
         maps[row][col].resize(constants.BASICLEVELSIZE)
 

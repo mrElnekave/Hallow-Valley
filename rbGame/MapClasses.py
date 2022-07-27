@@ -1,69 +1,34 @@
 import objects
 import random
-import math
-import time
-import webbrowser
-import Abilities
-from BasicClasses import Obj
 from images import create_path
 import rubato as rb
+from rubato import Component
 
-# Quest System Steps
 
-# 1) Somewhere to remember all of our quests - List
-# 2) A format to save our quests that has the completions state and the instructions - Class
-#    Things the quests need to know: Instructions, Quest complete state
-# 3) A way to display our quests, either in pause menu or on the UI - A part of gameFunctions
-# 4) Creating all of our quests main and side - A document/file or somthing
+class DayNightCycle(Component):  # TODO: add to GO
+    def __init__(self):
+        super().__init__()
+        self.day = True
 
-# Reset Main Boss Functionality
-# 1) Pause our other functionality - State machine
-# 2) Setup a 
+        self.darkness_overlay = None
 
-# Chunks of the map
+    def switch_day_night(self):
+        self.day = not self.day
+        # TODO: if its day, hide darkness
+        rb.Time.delayed_call(1000 * 10, self.switch_day_night)
 
-class Chunk: 
-    def __init__(self, location, image, size, chunk_type: str):
-        self.location = location
-        self.contents = []
-        self.image = image
-        self.image = pygame.transform.scale(self.image, size)
-                
-        self.rect = self.image.get_rect()
-        self.nightOverlay = pygame.Surface(objects.size)
-        self.nightOverlay.fill((0,0,50))
-        self.chunk_type = chunk_type
-    def render(self):
-        objects.display.blit(self.image, self.rect)
-        for resource in self.contents: 
-            resource.render()
-        if self.location[0] is not objects.mapWidth and objects.daytime is False:
-            self.nightOverlay.set_alpha(100)
-            objects.display.blit(self.nightOverlay, (0,0))
-    def update(self): 
-        for thing in self.contents:
-            thing.update()
-    
-    def __repr__(self):
-        if self.location[0]== objects.mapWidth: 
-            return f"{self.chunk_type}"
-        return f"{self.location} {self.chunk_type}"
-        
-class Quest:
-    def __init__(self, text, condition, name): # all inputs are strings
-        self.text = text 
-        self.condition = condition 
-        self.name = name 
-        self.data = 0
-        self.complete = False
-    def render(self):
-        pass
+    def setup(self):
+        rb.Time.delayed_call(1000 * 10, self.switch_day_night)
 
-    def update(self):
-        if eval(self.condition): 
-            self.complete = True
 
-# Resource Class
+class Coin(Component):
+    # assign gold or silver
+    # value when picked up
+    # add the correct image to its game object
+    # rect which on collision deletes the coin
+    pass
+
+
 class Resource(Obj): 
     def __init__(self, item, quantity, location):
         super().__init__(pygame.image.load(create_path("Gold Coin.png")), location)
