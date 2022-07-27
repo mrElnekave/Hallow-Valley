@@ -1,5 +1,6 @@
 import rubato as rb
 from constants import *
+
 rb.init(
     name="Hallow Valley",
     res=Vector(WIDTH, HEIGHT),
@@ -26,6 +27,7 @@ abilityPanel = []  # game objects of ability icons
 ability_levels = [1, 1, 1, 1, 1, 1, 1, 1]
 chunks = []  # different scenes ? maybe
 player = None
+player_go = None
 currentChunk: Vector = Vector.zero
 NPC_clicked = False
 update_log = None
@@ -76,6 +78,7 @@ def Reset():  # TODO: won't work
                 if thing.type == "enemy":
                     thing.health = thing.maxHealth
 
+
 def switch_chunk(direction: str):
     global main, currentChunk
     made_switch = False
@@ -97,6 +100,11 @@ def switch_chunk(direction: str):
             made_switch = True
     if made_switch:
         main = chunks[currentChunk.y][currentChunk.x]
-        rb.Time.delayed_frames(0, lambda: rb.Game.set_scene(main))
+
+        def switch():
+            main.switch()
+            main.add(player_go)
+
+        rb.Time.delayed_frames(0, switch)
 
     return made_switch

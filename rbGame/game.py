@@ -18,6 +18,7 @@ objects.main.update = camera_follow
 
 objects.player = classes.PlayerController(200)
 player = GameObject(pos=Display.center)
+objects.player_go = player
 player.add(objects.player)
 # go = rb.wrap(comp=images.maps[0][0], pos=Display.res)
 # print(go)

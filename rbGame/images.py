@@ -6,7 +6,7 @@ import constants, copy, map_description
 current_path = constants.current_path + "Pixel Images\\"
 
 def load_img(path, colorkey=(255,255,255), scale = Vector(1,1)):
-    return rb.Image(rel_path=create_path(path),scale = scale)# size=colorkey=colorkey)
+    return Image(rel_path=create_path(path), scale=scale)# colorkey=colorkey)
 
 def create_path(path:str):
     """
