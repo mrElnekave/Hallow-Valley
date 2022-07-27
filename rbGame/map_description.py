@@ -1,5 +1,4 @@
 # import images, special_obstacles, objects
-import pygame
 from rubato import Math, Vector
 
 shownChunks = []

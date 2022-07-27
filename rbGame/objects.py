@@ -4,7 +4,7 @@ rb.init(
     name="Hallow Valley",
     res=Vector(WIDTH, HEIGHT),
     window_size=WINDOWSIZE,
-    icon="Data/Pixel Images/Blue Potion.png",
+    icon="Data/Pixel Images/utility/Blue Potion.png",
 )
 
 # scenes

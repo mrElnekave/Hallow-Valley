@@ -1,4 +1,3 @@
-import pygame
 import objects
 import random
 import math

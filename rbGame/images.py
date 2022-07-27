@@ -25,8 +25,8 @@ def switch_base():
 
 
 # intro
-small_bolt = load_img("small_bolt.png", (0, 0, 0))
-medium_bolt = load_img("medium_bolt.png", (0, 0, 0))
+small_bolt = load_img("menu/small_bolt.png", (0, 0, 0))
+medium_bolt = load_img("menu/medium_bolt.png", (0, 0, 0))
 large_bolt = load_img("large_bolt.png", (0, 0, 0))
 clearCloud = load_img("Clear Clouds.png")
 stormCloud = load_img("Storm Clouds.png")
