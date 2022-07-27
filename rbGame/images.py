@@ -1,7 +1,7 @@
 import rubato as rb
 from rubato import Vector, Image
 
-import constants, copy
+import constants, copy, map_description
 
 current_path = constants.current_path + "Pixel Images\\"
 
@@ -42,9 +42,13 @@ start_button = load_img("StartButton.png", scale=Vector.one * 1.5)
 # player
 player = load_img("Player1.png")
 # maps
-for row in range(len(map)):
-    for col in range(len(map[0])):
-        maps = load_img(f"map/map_{col}_{row}.png", scale=Vector.one * 2)
+maps: list[list[rb.Image]] = []
+for row in range(len(map_description.map)):
+    maps.append(list())
+    for col in range(len(map_description.map[0])):
+        maps[row].append(load_img(f"map/map_{col}_{row}.png"))
+        maps[row][col].z_index = -10
+        maps[row][col].resize(constants.BASICLEVELSIZE)
 '''
 menu_base_clear = copy.copy(menu_base)
 menu_base = menu_base_clear

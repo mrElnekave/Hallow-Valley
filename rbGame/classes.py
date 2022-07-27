@@ -48,8 +48,28 @@ class PlayerController(rb.Component):
         if Input.key_pressed("d"):
             self.gameobj.pos.x += self.speed * Time.delta_time
 
-        self.gameobj.pos = self.gameobj.pos.clamp(Vector.zero + self.image.get_size() / 2,
-                                                  BASICLEVELSIZE/2 - self.image.get_size() / 2)
+        # self.gameobj.pos = self.gameobj.pos.clamp(Vector.zero + self.image.get_size() / 2,
+        #                                           BASICLEVELSIZE - self.image.get_size() / 2)
+        if self.gameobj.pos.x < 0:
+            if objects.switch_chunk("left"):
+                self.gameobj.pos.x = BASICLEVELSIZE.x - self.image.get_size().x / 2
+            else:
+                self.gameobj.pos.x = 0
+        if self.gameobj.pos.y < 0:
+            if objects.switch_chunk("up"):
+                self.gameobj.pos.y = BASICLEVELSIZE.y
+            else:
+                self.gameobj.pos.y = 0
+        if self.gameobj.pos.x > BASICLEVELSIZE.x:
+            if objects.switch_chunk("right"):
+                self.gameobj.pos.x = 0
+            else:
+                self.gameobj.pos.x = BASICLEVELSIZE.x
+        if self.gameobj.pos.y > BASICLEVELSIZE.y:
+            if objects.switch_chunk("down"):
+                self.gameobj.pos.y = 0
+            else:
+                self.gameobj.pos.y = BASICLEVELSIZE.y
 
 
 class Coin(rb.Component):

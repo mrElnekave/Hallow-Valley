@@ -3,12 +3,12 @@ from constants import *
 rb.init(
     name="Hallow Valley",
     res=Vector(WIDTH, HEIGHT),
-    window_size=WINDOWSIZE,
+    size=WINDOWSIZE,
     icon="Data/Pixel Images/Blue Potion.png",
 )
 
 # scenes
-main = rb.Scene(name="main")
+main = None
 intro = rb.Scene(name="intro")
 game_over = rb.Scene(name="game over")
 win = rb.Scene(name="win")
@@ -26,7 +26,7 @@ abilityPanel = []  # game objects of ability icons
 ability_levels = [1, 1, 1, 1, 1, 1, 1, 1]
 chunks = []  # different scenes ? maybe
 player = None
-currentChunk = None
+currentChunk: Vector = Vector.zero
 NPC_clicked = False
 update_log = None
 bosses_killed = 0
@@ -75,3 +75,27 @@ def Reset():  # TODO: won't work
             for thing in chunk.contents:
                 if thing.type == "enemy":
                     thing.health = thing.maxHealth
+
+def switch_chunk(direction: str):
+    global main
+    made_switch = False
+    if direction == "up":
+        if currentChunk.y > 0:
+            currentChunk.y -= 1
+            made_switch = True
+    elif direction == "down":
+        if currentChunk.y < len(chunks) - 1:
+            currentChunk.y += 1
+            made_switch = True
+    elif direction == "left":
+        if currentChunk.x > 0:
+            currentChunk.x -= 1
+            made_switch = True
+    elif direction == "right":
+        if currentChunk.x < len(chunks[0]) - 1:
+            currentChunk.x += 1
+            made_switch = True
+    main = chunks[currentChunk.y][currentChunk.x]
+    rb.Game.set_scene(main)
+
+    return made_switch
