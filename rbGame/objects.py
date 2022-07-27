@@ -3,7 +3,7 @@ from constants import *
 rb.init(
     name="Hallow Valley",
     res=Vector(WIDTH, HEIGHT),
-    size=WINDOWSIZE,
+    window_size=WINDOWSIZE,
     icon="Data/Pixel Images/Blue Potion.png",
 )
 
@@ -77,7 +77,7 @@ def Reset():  # TODO: won't work
                     thing.health = thing.maxHealth
 
 def switch_chunk(direction: str):
-    global main
+    global main, currentChunk
     made_switch = False
     if direction == "up":
         if currentChunk.y > 0:
@@ -95,7 +95,7 @@ def switch_chunk(direction: str):
         if currentChunk.x < len(chunks[0]) - 1:
             currentChunk.x += 1
             made_switch = True
-    main = chunks[currentChunk.y][currentChunk.x]
-    rb.Game.set_scene(main)
-
+    if made_switch:
+        main = chunks[currentChunk.y][currentChunk.x]
+        rb.Game.set_scene(main)
     return made_switch

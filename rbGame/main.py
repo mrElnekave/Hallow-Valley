@@ -1,5 +1,5 @@
 from constants import *
-import objects
+import objects as objects
 import rubato as rb
 import intro, game
 

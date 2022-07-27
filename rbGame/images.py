@@ -42,7 +42,7 @@ start_button = load_img("StartButton.png", scale=Vector.one * 1.5)
 # player
 player = load_img("Player1.png")
 # maps
-maps: list[list[rb.Image]] = []
+maps: list[list[rb.Image]] = []  # row column
 for row in range(len(map_description.map)):
     maps.append(list())
     for col in range(len(map_description.map[0])):
