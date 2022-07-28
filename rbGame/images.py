@@ -41,6 +41,8 @@ about_us = load_img("buttons/AboutUsButton.png", scale=Vector(.4,.5) * 1.5)
 start_button = load_img("buttons/StartButton.png", scale=Vector.one * 1.5)
 # player
 player = load_img("skins/Player1.png")
+# NPC
+NPC = load_img("skins/Player.png")
 # maps
 maps: list[list[rb.Image]] = []  # row column
 for row in range(len(map_description.map)):

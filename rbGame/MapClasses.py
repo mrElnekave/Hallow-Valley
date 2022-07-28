@@ -2,8 +2,8 @@ import objects
 import random
 from images import create_path
 import rubato as rb
-from rubato import Component
-
+from rubato import Component, GameObject
+import images
 
 class DayNightCycle(Component):  # TODO: add to GO
     def __init__(self):
@@ -29,23 +29,26 @@ class Coin(Component):
     pass
 
 
-class NPC(Obj):
+class NPC(Component):
     # create a rect and add to GO
-    def __init__(self, image, location, effects):
-        super().__init__(image, location)
+    def __init__(self, image, effects):
+        super().__init__()
+        self.image = image
+        self.rect = self.image.get_rect()
         self.effects = effects
-        self.type = "NPC" 
         self.canClick = True
+    def setup(self):
+        self.gameobj.add(self.image)
+        self.gameobj.add(self.rect)
     def update(self): 
         if self.canClick: 
-            if pygame.mouse.get_pressed(3)[0]:
+            if rb.Input.mouse_state()[0]:
                 # if the mouse pressed
+
                 rb.world_mouse()
-                mousePos = objects.mapMousePos(pygame.mouse.get_pos())
-                if self.rect.collidepoint(mousePos): 
+                if self.rect.top_left <= rb.world_mouse() <= self.rect.bottom_right: 
                     objects.NPC_clicked = True
-                    for action in self.effects:
-                        exec(action)
+                    self.effects()
                     self.canClick = False
                     rb.Time.delayed_call(1000, self.setCanClick)
     def setCanClick(self): 
