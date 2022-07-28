@@ -2,7 +2,7 @@ import rubato as rb
 import random, webbrowser
 from constants import *
 import objects, images, classes
-import MapLoader
+import MapLoader, MapClasses
 from rubato import GameObject, Display
 
 MapLoader.load_chunks()
@@ -15,8 +15,10 @@ def camera_follow():
     rb.Game.camera.pos = rb.Game.camera.pos.lerp(target, follow_strength)
 
 for row in objects.chunks:
+    day_night = rb.wrap(MapClasses.DayNightCycle(), name="daynight", pos=Display.center)
     for chunk in row:
         chunk.update = camera_follow
+        chunk.add(day_night)
 
 objects.player = classes.PlayerController(200)
 player = GameObject(pos=Display.center)
