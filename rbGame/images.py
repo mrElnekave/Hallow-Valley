@@ -72,3 +72,8 @@ summoning_final = load_img("skins/SummoningFB.png")
 shield_final = load_img("skins/ShieldFB.png")
 laser_final = load_img("skins/LaserFB.png")
 water_final = load_img("skins/WaterFB.png")
+
+# coins
+silver_coin = load_img("coins/Silver Coin.png")
+gold_coin = load_img("coins/Gold Coin.png")
+coin_images = [silver_coin, gold_coin]

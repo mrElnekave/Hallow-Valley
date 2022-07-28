@@ -1,6 +1,7 @@
 import objects
 import random
 from images import create_path
+import images
 import rubato as rb
 from rubato import Component
 
@@ -22,12 +23,28 @@ class DayNightCycle(Component):  # TODO: add to GO
 
 
 class Coin(Component):
+
+    values = [5, 10]
+
     # assign gold or silver
     # value when picked up
-    # add the correct image to its game object
-    # rect which on collision deletes the coin
-    pass
+    def __init__(self):
+        self.coin_type = random.randint(0,1)
+        self.value = Coin.values[self.coin_type]
+        self.image = images.coin_images[self.coin_type]
+        self.rect = self.image.get_rect()
 
+    # add the correct image to its game object
+    def setup(self):
+        self.gameobj.add(self.image)
+        self.gameobj.add(self.rect)
+        self.rect.on_collide = self.on_collide
+
+    # rect which on collision deletes the coin
+    def on_collide(self, manifold):
+        if manifold.shape_b.gameobj.name == "player":
+            objects.main.delete(self.gameobj)
+            objects.resourceAmounts["coins"] += self.value
 
 class Resource(Obj): 
     def __init__(self, item, quantity, location):
