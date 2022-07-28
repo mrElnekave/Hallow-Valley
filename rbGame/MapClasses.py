@@ -46,65 +46,18 @@ class Coin(Component):
             objects.main.delete(self.gameobj)
             objects.resourceAmounts["coins"] += self.value
 
-class Resource(Obj): 
-    def __init__(self, item, quantity, location):
-        super().__init__(pygame.image.load(create_path("Gold Coin.png")), location)
-        self.item = item
-        self.quantity = quantity
-        self.type = "resource"
-    def update(self):
-        if objects.player.rect.colliderect(self.rect):
-            objects.currentChunk.contents.remove(self)
-            objects.resourceAmounts["coins"] += 10
-
-class Obstacle(Obj): 
-    def __init__(self, image, location): 
-        super().__init__(image, location)
-        self.type = "obstacle"
-        self.interact = ["arrow"]
-    def update(self):
-        if self.rect.colliderect(objects.player.rect): 
-            objects.player.hit_this_frame = True
-
-class MovementBarrier(Obj): 
-    def __init__(self, image, location): 
-        super().__init__(image, location)
-        self.type = "obstacle"
-    def update(self):
-        if self.rect.colliderect(objects.player.rect): 
-            objects.player.hit_this_frame = True
-
-class Button(Obj): 
+class NPC(Obj):
+    # create a rect and add to GO
     def __init__(self, image, location, effects):
         super().__init__(image, location)
         self.effects = effects
-    def update(self): 
-        if pygame.mouse.get_pressed(3)[0]:
-            mousePos = objects.mapMousePos(pygame.mouse.get_pos())
-            if self.rect.collidepoint(mousePos): 
-                for action in self.effects:
-                    exec(action)
-
-class Button_func(Obj):
-    def __init__(self, image, location, to_run):
-        super().__init__(image, location)
-        self.to_run = to_run
-    
-    def update(self):
-        if pygame.mouse.get_pressed(3)[0]:
-            mousePos = objects.mapMousePos(pygame.mouse.get_pos())
-            if self.rect.collidepoint(mousePos): 
-                self.to_run()
-
-class NPC(Obj): 
-    def __init__(self, image, location, effects):
-        super().__init__(image, location)
-        self.effects = effects
-        self.type = "NPC" #TODO: wait till up before being pressed down
+        self.type = "NPC" 
         self.canClick = True
     def update(self): 
         if self.canClick: 
-            if pygame.mouse.get_pressed(3)[0]: 
+            if pygame.mouse.get_pressed(3)[0]:
+                # if the mouse pressed
+                rb.world_mouse()
                 mousePos = objects.mapMousePos(pygame.mouse.get_pos())
                 if self.rect.collidepoint(mousePos): 
                     objects.NPC_clicked = True
