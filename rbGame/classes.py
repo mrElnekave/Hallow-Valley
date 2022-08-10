@@ -108,4 +108,20 @@ class EnemyController(rb.Component):
 
 
 class TabScreenController(rb.Component):
-    
+    BEHIND = -100
+    FRONT = 100
+
+    def key_down():
+        if rb.Input.key_pressed("tab"):
+            objects.inTab = True
+
+            # show our tab screen, and the players position on the map
+            print("hi")
+        else:
+            objects.inTab = False
+    # image
+    # update -> draw the player in the correct position
+    # update -> if tab is pressed, bring z to front
+
+    # z_index behind the background
+
