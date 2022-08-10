@@ -10,6 +10,11 @@ objects.main = objects.chunks[0][0]
 
 follow_strength = .5
 
+# tabscreen
+objects.tabscreen = GameObject(pos=Display.center)
+objects.tabscreen.add(CONTROLLER)
+
+
 def camera_follow():
     target = objects.player.pos.clamp(Display.center, BASICLEVELSIZE - Display.center)
     rb.Game.camera.pos = rb.Game.camera.pos.lerp(target, follow_strength)
@@ -24,6 +29,7 @@ for row in objects.chunks:
     for chunk in row:
         chunk.update = update
         chunk.add(day_night)
+        chunk.add_ui(objects.tabscreen)
 
 objects.player = classes.PlayerController(moveSpeed)
 player = GameObject(pos=Display.center)
