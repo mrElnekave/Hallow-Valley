@@ -1,7 +1,7 @@
 import rubato as rb
 import objects, images
 from constants import *
-from rubato import Input, Color, Time, Vector, Manifold
+from rubato import Input, Color, Time, Vector, Manifold, Math
 
 # Component overriding.
 
@@ -93,14 +93,43 @@ class TabScreenController(rb.Component):
     BEHIND = -100
     FRONT = 100
 
-    def key_down():
+    def __init__(self):
+        super().__init__()
+        self.image = images.demo_map
+        self.rect = rb.Rectangle(2, 2, color=Color.white)
+        self.image.scale = Vector.one*2
+
+    def setup(self):
+        self.gameobj.add(self.image)
+        self.gameobj.z_index = TabScreenController.BEHIND
+        self.gameobj.add(self.rect)
+
+    def key_down(self):
         if rb.Input.key_pressed("tab"):
             objects.inTab = True
+            self.gameobj.z_index = TabScreenController.FRONT
 
             # show our tab screen, and the players position on the map
             print("hi")
         else:
             objects.inTab = False
+            self.gameobj.z_index = TabScreenController.BEHIND
+
+    def update(self):
+        self.key_down()
+        player_pos = objects.player.pos
+        player_offset = player_pos-BASICLEVELSIZE/2
+        dif = 2
+
+        pos = Vector(12 * objects.currentChunk.x + 1, 12 * objects.currentChunk.y + 1)  # (posx, posy)
+
+        # our position can be from 0 to 1000
+        percentage = player_pos / 1000
+        pos += Vector(Math.lerp(0, 9, percentage.x), Math.lerp(0, 9, percentage.y))
+        pos *= dif
+        self.rect.offset = pos-self.image.get_size()/2
+
+
     # image
     # update -> draw the player in the correct position
     # update -> if tab is pressed, bring z to front
