@@ -81,3 +81,6 @@ water_final = load_img("skins/WaterFB.png")
 silver_coin = load_img("coins/Silver Coin.png")
 gold_coin = load_img("coins/Gold Coin.png")
 coin_images = [silver_coin, gold_coin]
+
+# ui
+help_button = load_img("buttons/Help Button.png")

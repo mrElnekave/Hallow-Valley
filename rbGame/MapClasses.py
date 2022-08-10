@@ -78,12 +78,16 @@ class GameUI(Component):
     # TEXT
     def __init__(self):
         super().__init__()
+        self.help_button = images.help_button
+
+    def setup(self):
+        self.gameobj.add(self.help_button)
 
     def draw(self, camera):
         # draw the text
-        rb.Draw.text()
-        rb.Draw.rect()
-        pass
+        # Health
+        rb.Draw.queue_text(text="Health: "+int(objects.player.currentHealth)+"/"+int(objects.player.maxHealth),font=objects.myFont,pos=rb.Display.center,z_index=10)
+        #rb.Draw.rect()
 
 # class UpdateLog(Obj):
 #     def __init__(self, location, archives):

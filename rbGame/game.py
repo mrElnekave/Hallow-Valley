@@ -14,6 +14,10 @@ follow_strength = .5
 objects.tabscreen = GameObject(pos=Display.center)
 objects.tabscreen.add(classes.TabScreenController())
 
+# ui
+objects.ui = GameObject(pos=Display.center)
+objects.ui.add(MapClasses.GameUI())
+
 
 def camera_follow():
     target = objects.player.pos.clamp(Display.center, BASICLEVELSIZE - Display.center)
