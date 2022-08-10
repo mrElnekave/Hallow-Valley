@@ -20,7 +20,7 @@ for row in objects.chunks:
         chunk.update = camera_follow
         chunk.add(day_night)
 
-objects.player = classes.PlayerController(200)
+objects.player = classes.PlayerController(moveSpeed)
 player = GameObject(pos=Display.center)
 objects.player_go = player
 player.add(objects.player)

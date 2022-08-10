@@ -36,6 +36,9 @@ def from_chunk(surface, chunk):
                 pass
     pass
 
+def add_coins(chunk):
+    pass
+
 def load_chunks():
     for x_index in range(objects.mapWidth):
         objects.chunks.append(list())
@@ -46,13 +49,7 @@ def load_chunks():
             background = rb.wrap(images.maps[y_index][x_index], pos=Display.res, z_index=-10)
             temp.add(background)
             objects.chunks[-1].append(temp)
-
-            # from_chunk(image, [x_index, y_index])
-
-            coinNum = 2
-
-            # for coin in range(coinNum):
-            #     objects.chunks[x_index][y_index].contents.append(MapClasses.Resource("coins", 10, (random.randint(0,500),random.randint(0,500))))
+            add_coins(temp)
 
 
 # --------------------------------------------- HOUSE AND NPC

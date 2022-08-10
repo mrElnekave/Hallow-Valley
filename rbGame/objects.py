@@ -33,6 +33,8 @@ NPC_clicked = False
 update_log = None
 bosses_killed = 0
 
+visitedChunks = []
+
 # player resources
 resourceAmounts = {
     "coins": 0,
@@ -81,6 +83,7 @@ def Reset():  # TODO: won't work
 
 def switch_chunk(direction: str):
     global main, currentChunk
+    save_chunk = currentChunk
     made_switch = False
     if direction == "up":
         if currentChunk.y > 0:
@@ -100,11 +103,12 @@ def switch_chunk(direction: str):
             made_switch = True
     if made_switch:
         main = chunks[currentChunk.y][currentChunk.x]
+        main.switch()
 
-        def switch():
-            main.switch()
+        if currentChunk not in visitedChunks:
+            visitedChunks.append(save_chunk)
             main.add(player_go)
 
-        rb.Time.delayed_frames(0, switch)
+
 
     return made_switch
