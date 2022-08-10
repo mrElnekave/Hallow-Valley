@@ -23,10 +23,10 @@ text.add(rb.Text(text="Hallow Valley", font=announcementFont))
 
 def lightning():
     timescale = random.random() * 2 + 0.5
-    rb.Time.delayed_call(0 * timescale, images.switch_base)
-    rb.Time.delayed_call(500 * timescale, images.switch_base)
-    rb.Time.delayed_call(550 * timescale, images.switch_base)
-    rb.Time.delayed_call(1000 * timescale, images.switch_base)
+    rb.Time.delayed_call(int(0 * timescale), images.switch_base)
+    rb.Time.delayed_call(int(500 * timescale), images.switch_base)
+    rb.Time.delayed_call(int(550 * timescale), images.switch_base)
+    rb.Time.delayed_call(int(1000 * timescale), images.switch_base)
     rb.Time.delayed_call(random.randrange(5, 12) * 1000, lightning)
 
 
