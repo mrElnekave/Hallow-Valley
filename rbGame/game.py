@@ -14,14 +14,6 @@ def camera_follow():
     target = objects.player.pos.clamp(Display.center, BASICLEVELSIZE - Display.center)
     rb.Game.camera.pos = rb.Game.camera.pos.lerp(target, follow_strength)
 
-def key_down():
-    if rb.Input.key_pressed("tab"):
-        objects.inTab = True
-
-        # show our tab screen, and the players position on the map
-        print("hi")
-    else:
-        objects.inTab = False
 
 def update():
     camera_follow()
