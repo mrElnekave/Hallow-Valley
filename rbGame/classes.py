@@ -11,6 +11,7 @@ class PlayerController(rb.Component):
         super().__init__()  # you must call super().__init__()
 
         self.image = images.player
+        self.rect = self.image.get_rect()
         self.speed = speed
 
     @property
@@ -28,11 +29,11 @@ class PlayerController(rb.Component):
         Automatically run once before the first update call.
         """
         # Only here can we get the rect from our game object and assign the image
-        self.rect = self.gameobj.get(rb.Rectangle)
 
         # resizing our image to our hitbox's size
         # self.image.resize(Vector(50, 50))
         self.gameobj.add(self.image)
+        self.gameobj.add(self.rect)
 
     def update(self):
         """
@@ -70,25 +71,6 @@ class PlayerController(rb.Component):
                 self.gameobj.pos.y = 0
             else:
                 self.gameobj.pos.y = BASICLEVELSIZE.y
-
-
-class Coin(rb.Component):
-    def __init__(self):
-        super().__init__()
-        self.image = rb.Image(rel_path="../art/Silver Coin.png")
-        self.rect = rb.Rectangle(width=self.image.get_size().x, height=self.image.get_size().y)
-
-    def setup(self):
-        self.gameobj.add(self.image)
-        self.gameobj.add(self.rect)
-        self.rect.on_collide = self.on_collide
-
-    def on_collide(self, manifold: Manifold):
-        if manifold.shape_b.gameobj.name == "player":
-            objects.main.delete(self.gameobj)
-            objects.player.get(rb.Rectangle).color = Color.red
-            rb.Time.delayed_call(1000, objects.player.get(PlayerController).reset_color)
-
 
 class EnemyController(rb.Component):
     def __init__(self):

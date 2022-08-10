@@ -28,10 +28,12 @@ class Coin(Component):
     # assign gold or silver
     # value when picked up
     def __init__(self):
+        super().__init__()
         self.coin_type = random.randint(0,1)
         self.value = Coin.values[self.coin_type]
         self.image = images.coin_images[self.coin_type]
         self.rect = self.image.get_rect()
+
 
     # add the correct image to its game object
     def setup(self):
@@ -42,7 +44,8 @@ class Coin(Component):
     # rect which on collision deletes the coin
     def on_collide(self, manifold):
         if manifold.shape_b.gameobj.name == "player":
-            objects.main.delete(self.gameobj)
+            objects.chunks[objects.currentChunk.y][objects.currentChunk.x].delete(self.gameobj) #TODO: figure out why we aren't deleting
+            self.gameobj.z_index = -100
             objects.resourceAmounts["coins"] += self.value
 
 class NPC(Component):
@@ -70,6 +73,17 @@ class NPC(Component):
     def setCanClick(self): 
         self.canClick = True
 
+class GameUI(Component):
+    # all the UI IMAGES
+    # TEXT
+    def __init__(self):
+        super().__init__()
+
+    def draw(self, camera):
+        # draw the text
+        rb.Draw.text()
+        rb.Draw.rect()
+        pass
 
 # class UpdateLog(Obj):
 #     def __init__(self, location, archives):

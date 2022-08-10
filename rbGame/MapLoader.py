@@ -1,7 +1,7 @@
 import objects
 import rubato as rb
 from rubato import Vector, Display
-import map_description, classes, images#, MapClasses
+import map_description, MapClasses, images
 import random
 
 def add_to_chunk(gameObject, chunk: Vector):
@@ -39,7 +39,7 @@ def from_chunk(surface, chunk):
 def add_coins(chunk):
     for _ in range(objects.coins_per_chunk):
         coin_gameobj = rb.GameObject(pos=rb.Vector(random.randint(0,objects.BASICLEVELSIZE.x),random.randint(0,objects.BASICLEVELSIZE.y)))
-        coin_component = classes.Coin()
+        coin_component = MapClasses.Coin()
         coin_gameobj.add(coin_component)
         chunk.add(coin_gameobj)
 
