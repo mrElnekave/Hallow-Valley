@@ -13,6 +13,7 @@ moveSpeed = 200 * 3  # pixels per second
 mapWidth, mapHeight = 15, 15  # in chunks
 dayLength = 5  # seconds
 start_chunk = Vector(0, 0)
+coins_per_chunk = 20
 
 
 myFont = rb.Font(size=20)
