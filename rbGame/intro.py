@@ -27,7 +27,7 @@ def lightning():
     rb.Time.delayed_call(int(500 * timescale), images.switch_base)
     rb.Time.delayed_call(int(550 * timescale), images.switch_base)
     rb.Time.delayed_call(int(1000 * timescale), images.switch_base)
-    rb.Time.delayed_call(random.randrange(5, 12) * 1000, lightning)
+    rb.Time.delayed_call(int(random.randrange(5, 12) * 1000), lightning)
 
 
 rb.Time.delayed_call(3000, lightning)
