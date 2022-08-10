@@ -105,3 +105,7 @@ class EnemyController(rb.Component):
         pos = self.gameobj.pos
         direction = pos.dir_to(objects.player.pos)
         self.gameobj.pos += direction * (self.speed * Time.delta_time)
+
+
+class TabScreenController(rb.Component):
+    
