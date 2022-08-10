@@ -32,6 +32,8 @@ currentChunk: Vector = Vector.zero
 NPC_clicked = False
 update_log = None
 bosses_killed = 0
+inTab = False
+tabScreen = None
 
 visitedChunks = []
 
