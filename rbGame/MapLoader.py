@@ -37,7 +37,11 @@ def from_chunk(surface, chunk):
     pass
 
 def add_coins(chunk):
-    pass
+    for _ in range(4):
+        coin_gameobj = rb.GameObject(pos=rb.Vector(random.randint(0,objects.BASICLEVELSIZE.x),random.randint(0,objects.BASICLEVELSIZE.y)))
+        coin_component = classes.Coin()
+        coin_gameobj.add(coin_component)
+        chunk.add(coin_gameobj)
 
 def load_chunks():
     for x_index in range(objects.mapWidth):
