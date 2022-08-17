@@ -39,6 +39,8 @@ objects.player = classes.PlayerController(moveSpeed)
 player = GameObject(pos=Display.center, name="player")
 objects.player_go = player
 player.add(objects.player)
+
+objects.main.add(rb.wrap(classes.Collider(images.cactus, lambda : print("hi")), pos=Display.center))
 # go = rb.wrap(comp=images.maps[0][0], pos=Display.res)
 # print(go)
 
