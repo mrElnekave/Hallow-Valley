@@ -122,7 +122,6 @@ class TabScreenController(rb.Component):
             self.gameobj.z_index = TabScreenController.FRONT
 
             # show our tab screen, and the players position on the map
-            print("hi")
         else:
             objects.inTab = False
             self.gameobj.z_index = TabScreenController.BEHIND
@@ -154,6 +153,7 @@ class Collider(rb.Component):
         self.image: rb.Image = image
         self.rect = self.image.get_rect()
         self.collision_action = collision_action
+        self.rect.on_collide = self.on_collide
 
     def setup(self):
         self.gameobj.add(self.image)
