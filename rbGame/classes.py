@@ -13,6 +13,9 @@ class PlayerController(rb.Component):
         self.image = images.player
         self.rect = self.image.get_rect()
         self.speed = speed
+
+        self.old_pos = None
+
         self.maxHealth = 100.00
         self.currentHealth = self.maxHealth
         self.energy = 0
@@ -43,7 +46,9 @@ class PlayerController(rb.Component):
         """
         Called once per frame. Before the draw function.
         """
-        print(self.gameobj.pos)
+        if (objects.collided):
+            self.gameobj.pos = self.old_pos
+            objects.collided = False
         # We moved the input into here. And changed it all to use delta_time
         if Input.key_pressed("a"):
             self.gameobj.pos.x -= self.speed * Time.delta_time
@@ -76,6 +81,8 @@ class PlayerController(rb.Component):
                 self.gameobj.pos.y = 0
             else:
                 self.gameobj.pos.y = BASICLEVELSIZE.y
+        self.old_pos = self.pos
+
 
 class EnemyController(rb.Component):
     def __init__(self):
@@ -141,3 +148,18 @@ class TabScreenController(rb.Component):
 
     # z_index behind the background
 
+class Collider(rb.Component):
+    def __init__(self, image, collision_action):
+        super().__init__()
+        self.image: rb.Image = image
+        self.rect = self.image.get_rect()
+        self.collision_action = collision_action
+
+    def setup(self):
+        self.gameobj.add(self.image)
+        self.gameobj.add(self.rect)
+
+    def on_collide(self, manifold):
+        if manifold.shape_b.gameobj.name == "player":
+            objects.collided = True
+            self.collision_action()

@@ -45,6 +45,7 @@ for row in objects.chunks:
         chunk.add(objects.player_go)
 
 
+objects.main.add(rb.wrap(classes.Collider(images.cactus, lambda : print("hi")), pos=Display.center))
 # go = rb.wrap(comp=images.maps[0][0], pos=Display.res)
 # print(go)
 

@@ -35,6 +35,7 @@ bosses_killed = 0
 inTab = False
 tabScreen = None
 ui = None
+collided = False
 
 visitedChunks = []
 
@@ -111,7 +112,5 @@ def switch_chunk(direction: str):
         # if currentChunk not in visitedChunks:
         #     visitedChunks.append(save_chunk)
         #     main.add(player_go)
-
-
 
     return made_switch
