@@ -21,6 +21,8 @@ class PlayerController(rb.Component):
         self.energy = 0
         self.maxEnergy = 100
 
+        
+
     @property
     def pos(self):  # TODO: explain next class properly
         return self.gameobj.pos
@@ -161,5 +163,31 @@ class Collider(rb.Component):
 
     def on_collide(self, manifold):
         if manifold.shape_b.gameobj.name == "player":
-            objects.collided = True
             self.collision_action()
+
+def cactus_rules():
+    objects.player.currentHealth -= 0.1
+    objects.collided = True
+
+def poison_rules():
+    objects.player.currentHealth -= 1
+
+def lava_rules():
+    objects.player.currentHealth -= 0.2
+
+decoration_z_index = -2
+
+def spawn_cactus(chunk,pos):
+    chunk.add(rb.wrap(Collider(images.cactus, cactus_rules), pos=pos, z_index=decoration_z_index))
+
+def spawn_poison(chunk,pos):
+    chunk.add(rb.wrap(Collider(images.poison, poison_rules), pos=pos, z_index=decoration_z_index))
+
+def spawn_lava(chunk,pos):
+    chunk.add(rb.wrap(Collider(images.lava, lava_rules), pos=pos, z_index=decoration_z_index))
+
+def make_rect_collide_with_player(rect,on_collision):
+    def on_collide(manifold):
+        if manifold.shape_b.gameobj.name == "player":
+            on_collision()
+    rect.on_collide = on_collide
