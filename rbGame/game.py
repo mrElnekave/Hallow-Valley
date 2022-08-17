@@ -27,6 +27,9 @@ def camera_follow():
 def update():
     camera_follow()
 
+    if rb.Input.key_pressed("space"):
+        objects.player.currentHealth -= 0.1
+
 
 for row in objects.chunks:
     day_night = rb.wrap(MapClasses.DayNightCycle(), name="daynight", pos=Display.center)
@@ -34,6 +37,7 @@ for row in objects.chunks:
         chunk.update = update
         chunk.add(day_night)
         chunk.add_ui(objects.tabscreen)
+        chunk.add_ui(objects.ui)
 
 objects.player = classes.PlayerController(moveSpeed)
 player = GameObject(pos=Display.center, name="player")

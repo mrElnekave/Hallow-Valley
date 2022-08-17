@@ -13,7 +13,13 @@ class PlayerController(rb.Component):
         self.image = images.player
         self.rect = self.image.get_rect()
         self.speed = speed
+
         self.old_pos = None
+
+        self.maxHealth = 100.00
+        self.currentHealth = self.maxHealth
+        self.energy = 0
+        self.maxEnergy = 100
 
     @property
     def pos(self):  # TODO: explain next class properly
