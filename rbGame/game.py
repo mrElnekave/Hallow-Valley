@@ -44,12 +44,10 @@ for row in objects.chunks:
         chunk.add_ui(objects.ui)
         chunk.add(objects.player_go)
 
+
 classes.spawn_lava(objects.chunks[0][0],rb.Vector(200,200))
 classes.spawn_cactus(objects.chunks[0][0],rb.Vector(300,300))
 classes.spawn_poison(objects.chunks[0][0],rb.Vector(400,400))
-# go = rb.wrap(comp=images.maps[0][0], pos=Display.res)
-# print(go)
-
 
 
 

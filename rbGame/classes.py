@@ -48,42 +48,43 @@ class PlayerController(rb.Component):
         """
         Called once per frame. Before the draw function.
         """
-        if (objects.collided):
+        if objects.collided:
             self.gameobj.pos = self.old_pos
             objects.collided = False
-        # We moved the input into here. And changed it all to use delta_time
-        if Input.key_pressed("a"):
-            self.gameobj.pos.x -= self.speed * Time.delta_time
-        if Input.key_pressed("w"):
-            self.gameobj.pos.y -= self.speed * Time.delta_time
-        if Input.key_pressed("s"):
-            self.gameobj.pos.y += self.speed * Time.delta_time
-        if Input.key_pressed("d"):
-            self.gameobj.pos.x += self.speed * Time.delta_time
+        else:
+            self.old_pos = self.pos
+            # We moved the input into here. And changed it all to use delta_time
+            if Input.key_pressed("a"):
+                self.gameobj.pos.x -= self.speed * Time.delta_time
+            if Input.key_pressed("w"):
+                self.gameobj.pos.y -= self.speed * Time.delta_time
+            if Input.key_pressed("s"):
+                self.gameobj.pos.y += self.speed * Time.delta_time
+            if Input.key_pressed("d"):
+                self.gameobj.pos.x += self.speed * Time.delta_time
 
-        # self.gameobj.pos = self.gameobj.pos.clamp(Vector.zero + self.image.get_size() / 2,
-        #                                           BASICLEVELSIZE - self.image.get_size() / 2)
-        if self.gameobj.pos.x < 0:
-            if objects.switch_chunk("left"):
-                self.gameobj.pos.x = BASICLEVELSIZE.x - self.image.get_size().x / 2
-            else:
-                self.gameobj.pos.x = 0
-        if self.gameobj.pos.y < 0:
-            if objects.switch_chunk("up"):
-                self.gameobj.pos.y = BASICLEVELSIZE.y
-            else:
-                self.gameobj.pos.y = 0
-        if self.gameobj.pos.x > BASICLEVELSIZE.x:
-            if objects.switch_chunk("right"):
-                self.gameobj.pos.x = 0
-            else:
-                self.gameobj.pos.x = BASICLEVELSIZE.x
-        if self.gameobj.pos.y > BASICLEVELSIZE.y:
-            if objects.switch_chunk("down"):
-                self.gameobj.pos.y = 0
-            else:
-                self.gameobj.pos.y = BASICLEVELSIZE.y
-        self.old_pos = self.pos
+            # self.gameobj.pos = self.gameobj.pos.clamp(Vector.zero + self.image.get_size() / 2,
+            #                                           BASICLEVELSIZE - self.image.get_size() / 2)
+            if self.gameobj.pos.x < 0:
+                if objects.switch_chunk("left"):
+                    self.gameobj.pos.x = BASICLEVELSIZE.x - self.image.get_size().x / 2
+                else:
+                    self.gameobj.pos.x = 0
+            if self.gameobj.pos.y < 0:
+                if objects.switch_chunk("up"):
+                    self.gameobj.pos.y = BASICLEVELSIZE.y
+                else:
+                    self.gameobj.pos.y = 0
+            if self.gameobj.pos.x > BASICLEVELSIZE.x:
+                if objects.switch_chunk("right"):
+                    self.gameobj.pos.x = 0
+                else:
+                    self.gameobj.pos.x = BASICLEVELSIZE.x
+            if self.gameobj.pos.y > BASICLEVELSIZE.y:
+                if objects.switch_chunk("down"):
+                    self.gameobj.pos.y = 0
+                else:
+                    self.gameobj.pos.y = BASICLEVELSIZE.y
 
 
 class EnemyController(rb.Component):
@@ -191,3 +192,4 @@ def make_rect_collide_with_player(rect,on_collision):
         if manifold.shape_b.gameobj.name == "player":
             on_collision()
     rect.on_collide = on_collide
+
