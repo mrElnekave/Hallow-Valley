@@ -88,11 +88,11 @@ class GameUI(Component):
         # Health
         rb.Draw.queue_text(text="Health: "+str(objects.player.currentHealth)+"/"+str(objects.player.maxHealth), font=objects.myFont, pos=rb.Vector(rb.Display.center.x*0.4,rb.Display.center.y/10), z_index=10)
         rb.Draw.queue_rect(width=200,height=20,center=rb.Vector(375,rb.Display.center.y/10),fill=rb.Color.black,z_index=11)
-        rb.Draw.queue_rect(width=200*objects.player.currentHealth/objects.player.maxHealth, height=20, center=rb.Vector(275+100*objects.player.currentHealth/objects.player.maxHealth, rb.Display.center.y / 10), fill=rb.Color(0,255,0),z_index=12)
+        rb.Draw.queue_rect(width=int(200*objects.player.currentHealth/objects.player.maxHealth), height=20, center=rb.Vector(275+100*objects.player.currentHealth/objects.player.maxHealth, rb.Display.center.y / 10), fill=rb.Color(0,255,0),z_index=12)
         # Ghost Energy
         rb.Draw.queue_text(text="Ghost Energy: "+str(objects.player.energy)+"/"+str(objects.player.maxEnergy), font=objects.myFont, pos=rb.Vector(rb.Display.center.x*0.4,rb.Display.center.y/5), z_index=10)
         rb.Draw.queue_rect(width=200,height=20,center=rb.Vector(375,rb.Display.center.y/5),fill=rb.Color.black,z_index=11)
-        rb.Draw.queue_rect(width=200*objects.player.energy/objects.player.maxEnergy, height=20, center=rb.Vector(275+100*objects.player.energy/objects.player.maxEnergy, rb.Display.center.y / 5), fill=rb.Color(0,0,255),z_index=12)
+        rb.Draw.queue_rect(width=int(200*objects.player.energy/objects.player.maxEnergy), height=20, center=rb.Vector(275+100*objects.player.energy/objects.player.maxEnergy, rb.Display.center.y / 5), fill=rb.Color(0,0,255),z_index=12)
 
 
 # class UpdateLog(Obj):
