@@ -43,6 +43,7 @@ class PlayerController(rb.Component):
         """
         Called once per frame. Before the draw function.
         """
+        print(self.gameobj.pos)
         # We moved the input into here. And changed it all to use delta_time
         if Input.key_pressed("a"):
             self.gameobj.pos.x -= self.speed * Time.delta_time
@@ -100,7 +101,7 @@ class TabScreenController(rb.Component):
     def __init__(self):
         super().__init__()
         self.image = images.demo_map
-        self.rect = rb.Rectangle(2, 2, color=Color.white)
+        self.rect = rb.Rectangle(2, 2, color=Color.white, z_index=1)
         self.image.scale = Vector.one*2
 
     def setup(self):

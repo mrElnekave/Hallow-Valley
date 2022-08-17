@@ -44,7 +44,7 @@ class Coin(Component):
     # rect which on collision deletes the coin
     def on_collide(self, manifold):
         if manifold.shape_b.gameobj.name == "player":
-            objects.chunks[objects.currentChunk.y][objects.currentChunk.x].delete(self.gameobj) #TODO: figure out why we aren't deleting
+            objects.chunks[objects.currentChunk.y][objects.currentChunk.x].delete(self.gameobj) #TODO: figure out why we aren't deleting (Note: This can break the game, our guess is that it is when you collect a coin and get rid of it as you swap chunks)
             self.gameobj.z_index = -100
             objects.resourceAmounts["coins"] += self.value
 

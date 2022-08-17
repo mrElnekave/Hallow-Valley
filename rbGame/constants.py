@@ -9,7 +9,7 @@ BASICLEVELSIZE = Vector(WIDTH, HEIGHT) * 2
 
 player_sprite_size = 25
 
-moveSpeed = 200 * 3  # pixels per second
+moveSpeed = 200 # * 3  # pixels per second
 mapWidth, mapHeight = 15, 15  # in chunks
 dayLength = 5  # seconds
 start_chunk = Vector(0, 0)

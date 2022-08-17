@@ -108,9 +108,9 @@ def switch_chunk(direction: str):
         main = chunks[currentChunk.y][currentChunk.x]
         main.switch()
 
-        if currentChunk not in visitedChunks:
-            visitedChunks.append(save_chunk)
-            main.add(player_go)
+        # if currentChunk not in visitedChunks:
+        #     visitedChunks.append(save_chunk)
+        #     main.add(player_go)
 
 
 
