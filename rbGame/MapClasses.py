@@ -73,6 +73,7 @@ class NPC(Component):
     def setCanClick(self): 
         self.canClick = True
 
+# TODO: Make the UI manager a script, holding different Game Objects.
 class GameUI(Component):
     # all the UI IMAGES
     # TEXT
