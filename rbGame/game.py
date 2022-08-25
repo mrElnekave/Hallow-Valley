@@ -10,13 +10,18 @@ objects.main = objects.chunks[0][0]
 
 follow_strength = .5
 
+# player creation
+objects.player = classes.PlayerController(moveSpeed)
+player = GameObject(pos=Display.center, name="player")
+objects.player_go = player
+player.add(objects.player)
+
 # tabscreen
 objects.tabscreen = GameObject(pos=Display.center)
 objects.tabscreen.add(classes.TabScreenController())
 
 # ui
-objects.ui = GameObject(pos=Display.center)
-objects.ui.add(MapClasses.GameUI())
+objects.ui = MapClasses.GameUI()
 
 
 def camera_follow():
@@ -26,14 +31,11 @@ def camera_follow():
 
 def update():
     camera_follow()
-
+    objects.ui.update()
     if rb.Input.key_pressed("space"):
         objects.player.currentHealth -= 0.1
 
-objects.player = classes.PlayerController(moveSpeed)
-player = GameObject(pos=Display.center, name="player")
-objects.player_go = player
-player.add(objects.player)
+
 
 for row in objects.chunks:
     day_night = rb.wrap(MapClasses.DayNightCycle(), name="daynight", pos=Display.center)
@@ -41,7 +43,7 @@ for row in objects.chunks:
         chunk.update = update
         chunk.add(day_night)
         chunk.add_ui(objects.tabscreen)
-        chunk.add_ui(objects.ui)
+        objects.ui.prime(chunk)
         chunk.add(objects.player_go)
 
 

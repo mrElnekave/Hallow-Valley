@@ -1,7 +1,7 @@
 import objects
 import rubato as rb
 from rubato import Vector, Display
-import map_description, MapClasses, images
+import map_description, MapClasses, images, objects
 import random
 
 def add_to_chunk(gameObject, chunk: Vector):
