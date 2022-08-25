@@ -1,5 +1,3 @@
-import rubato as rb
-import random, webbrowser
 from constants import *
 import objects, images, classes
 import MapLoader, MapClasses
@@ -29,7 +27,7 @@ def camera_follow():
     rb.Game.camera.pos = rb.Game.camera.pos.lerp(target, follow_strength)
 
 
-def update():
+def game_update():
     camera_follow()
     objects.ui.update()
     if rb.Input.key_pressed("space"):
@@ -40,7 +38,7 @@ def update():
 for row in objects.chunks:
     day_night = rb.wrap(MapClasses.DayNightCycle(), name="daynight", pos=Display.center)
     for chunk in row:
-        chunk.update = update
+        chunk.update = game_update
         chunk.add(day_night)
         chunk.add_ui(objects.tabscreen)
         objects.ui.prime(chunk)
