@@ -19,6 +19,7 @@ daytime = True
 freeze = False
 shopShowing = False
 
+
 # start with all abilities
 op = False
 
@@ -26,7 +27,7 @@ op = False
 abilityPanel = []  # game objects of ability icons
 ability_levels = [1, 1, 1, 1, 1, 1, 1, 1]
 chunks: list[rb.Scene] = []  # list of scenes
-dungeons: list[rb.Scene] = [rb.Scene()] # list of scenes
+dungeons: list[rb.Scene] = [] # list of scenes
 
 player = None
 player_go = None

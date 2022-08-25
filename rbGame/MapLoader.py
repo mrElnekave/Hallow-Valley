@@ -1,18 +1,30 @@
 import objects
 import rubato as rb
 from rubato import Vector, Display
-import map_description, MapClasses, images, objects
+import map_description, MapClasses, images, objects, classes
 import random
 
 def add_to_chunk(gameObject, chunk: Vector):
     objects.chunks[chunk.x][chunk.y].add(gameObject)
 
 
-def createDungeon(index, boss, location, chunk, background, portal_image, name):
+def createDungeon(index, boss, location, chunk, background, portal_image: rb.Image, name):
+    objects.dungeons.append(rb.Scene(name= name))
+    def move_to_dungeon():
+        objects.main = objects.dungeons[0]
+        objects.main.switch()
+    portal = rb.GameObject(name=name, pos=location * objects.stretch_factor)
+    portal.add(portal_image)
+    portal.add(rect := portal_image.get_rect())
+    classes.make_rect_collide_with_player(rect, move_to_dungeon)
+
+    # TODO: add the portal to the correct chunk
     # create a button that moves the player to the dungeon
     # add the image of the dungeon to the button
 
     # add dungeon chunk to the chunk list
+
+    
     # add the boss to the dungeon
     pass
 

@@ -1,11 +1,12 @@
 import rubato as rb
 from rubato import Vector
 
+stretch_factor = 2
 
 WIDTH = 500
 HEIGHT = 500
 WINDOWSIZE = Vector(900, 600)
-BASICLEVELSIZE = Vector(WIDTH, HEIGHT) * 2
+BASICLEVELSIZE = Vector(WIDTH, HEIGHT) * stretch_factor
 
 player_sprite_size = 25
 
