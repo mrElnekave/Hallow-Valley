@@ -3,7 +3,7 @@ import random
 from images import create_path
 import images
 import rubato as rb
-from rubato import Component, GameObject
+from rubato import Component, GameObject, Vector
 import images
 
 class DayNightCycle(Component):  # TODO: add to GO
@@ -73,18 +73,25 @@ class NPC(Component):
     def setCanClick(self): 
         self.canClick = True
 
+# A script runs all the time, and will the game objects moving them around.
 # TODO: Make the UI manager a script, holding different Game Objects.
-class GameUI(Component):
+class GameUI:
+    INFRONT = 10
     # all the UI IMAGES
     # TEXT
     def __init__(self):
-        super().__init__()
         self.help_button = images.help_button
+        self.health = rb.Text(text="Health: "+str(objects.player.currentHealth)+"/"+str(objects.player.maxHealth), font=objects.myFont)
+        self.gos = []
+        self.gos.append(rb.wrap(self.health, pos=rb.Vector(rb.Display.center.x*0.4,rb.Display.center.y/10), z_index=GameUI.INFRONT))
+        self.gos.append(rb.wrap(self.help_button, "help", pos=Vector(), z_index=GameUI.INFRONT))
+    def prime(self, scene):
+        scene.add_ui(*self.gos)
 
-    def setup(self):
-        self.gameobj.add(self.help_button)
+    def update(self):
+        self.health.text = "Health: "+str(objects.player.currentHealth)+"/"+str(objects.player.maxHealth)
 
-    def draw(self, camera):
+    def draw(self, camera): # THIS IS BAD
         # draw the text
         # Health
         rb.Draw.queue_text(text="Health: "+str(objects.player.currentHealth)+"/"+str(objects.player.maxHealth), font=objects.myFont, pos=rb.Vector(rb.Display.center.x*0.4,rb.Display.center.y/10), z_index=10)
