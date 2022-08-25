@@ -26,6 +26,7 @@ op = False
 abilityPanel = []  # game objects of ability icons
 ability_levels = [1, 1, 1, 1, 1, 1, 1, 1]
 chunks = []  # different scenes ? maybe
+dungeons = [rb.Scene()]
 player = None
 player_go = None
 currentChunk: Vector = Vector.zero

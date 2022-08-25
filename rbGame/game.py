@@ -49,7 +49,13 @@ classes.spawn_lava(objects.chunks[0][0],rb.Vector(200,200))
 classes.spawn_cactus(objects.chunks[0][0],rb.Vector(300,300))
 classes.spawn_poison(objects.chunks[0][0],rb.Vector(400,400))
 
+def move_to_dungeon():
+    objects.main = objects.dungeons[0]
+    objects.main.switch()
 
-
+portal = rb.GameObject(name="portal",pos=rb.Vector(500,500))
+portal.add(rect:=rb.Rectangle(width=100,height=100,color=rb.Color.cyan))
+classes.make_rect_collide_with_player(rect,move_to_dungeon)
+objects.main.add(portal)
 
 # objects.main.add(player)
