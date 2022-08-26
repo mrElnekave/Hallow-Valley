@@ -1,6 +1,5 @@
 import rubato as rb
 from rubato import Vector, Image
-
 import constants, copy, map_description
 
 current_path = constants.current_path + "Pixel Images\\"
@@ -76,6 +75,9 @@ summoning_final = load_img("skins/SummoningFB.png")
 shield_final = load_img("skins/ShieldFB.png")
 laser_final = load_img("skins/LaserFB.png")
 water_final = load_img("skins/WaterFB.png")
+
+# backgrounds
+fire_boss_bg = load_img("map/FireBossBackground.png")
 
 # coins
 silver_coin = load_img("coins/Silver Coin.png")

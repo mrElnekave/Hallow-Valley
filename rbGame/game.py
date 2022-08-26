@@ -1,6 +1,6 @@
 from constants import *
 import objects, images, classes
-import MapLoader, MapClasses
+import MapLoader, MapClasses, bosses
 from rubato import GameObject, Display
 
 MapLoader.load_chunks()
@@ -55,8 +55,8 @@ classes.spawn_poison(objects.chunks[0][0],rb.Vector(400,400))
 #
 # portal = rb.GameObject(name="portal",pos=rb.Vector(500,500))
 # portal.add(rect:=rb.Rectangle(width=100,height=100,color=rb.Color.cyan))
-# classes.make_reddddddddddct_collide_with_player(rect,move_to_dungeon)
+# classes.make_rect_collide_with_player(rect,move_to_dungeon)
 # objects.main.add(portal)
-MapLoader.createDungeon(1,None,rb.Vector(250,250),rb.Vector(0,0),None,images.portal,"Dungeon Test")
+MapLoader.createDungeon(1,bosses.FireGhostBoss(),rb.Vector(250,250),rb.Vector(0,0),images.fire_boss_bg,images.portal,"Dungeon Test")
 
 # objects.main.add(player)

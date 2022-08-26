@@ -1,5 +1,3 @@
-import pygame
-
 
 WINDOWWIDTH = 500
 WINDOWHEIGHT = 500

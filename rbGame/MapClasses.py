@@ -31,7 +31,7 @@ class Coin(Component):
         super().__init__()
         self.coin_type = random.randint(0,1)
         self.value = Coin.values[self.coin_type]
-        self.image = images.coin_images[self.coin_type]
+        self.image = images.coin_images[self.coin_type] #TODO once fixed .clone()
         self.rect = self.image.get_rect()
 
 

@@ -9,7 +9,9 @@ def add_to_chunk(gameObject, chunk: Vector):
 
 
 def createDungeon(index, boss, location, chunk, background, portal_image: rb.Image, name):
-    objects.dungeons.append(rb.Scene(name= name))
+    objects.dungeons.append(scene:=rb.Scene(name= name))
+    scene.add(rb.wrap(background, pos=Display.center))
+    scene.add(rb.wrap(boss))
     def move_to_dungeon():
         objects.main = objects.dungeons[index-1]
         objects.main.add(objects.player_go)
@@ -48,10 +50,12 @@ def from_chunk(surface, chunk):
 
 def add_coins(chunk):
     for _ in range(objects.coins_per_chunk):
-        coin_gameobj = rb.GameObject(pos=rb.Vector(random.randint(10,objects.BASICLEVELSIZE.x-10),random.randint(10,objects.BASICLEVELSIZE.y-10)))
+        coin_gameobj = rb.GameObject(pos=rb.Vector(random.randint(10,objects.BASICLEVELSIZE.x-10),random.randint(10,objects.BASICLEVELSIZE.y-10)),
+                                     z_index=10)
         coin_component = MapClasses.Coin()
         coin_gameobj.add(coin_component)
         chunk.add(coin_gameobj)
+
 
 def load_chunks():
     for x_index in range(objects.mapWidth):
