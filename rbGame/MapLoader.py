@@ -11,21 +11,19 @@ def add_to_chunk(gameObject, chunk: Vector):
 def createDungeon(index, boss, location, chunk, background, portal_image: rb.Image, name):
     objects.dungeons.append(rb.Scene(name= name))
     def move_to_dungeon():
-        objects.main = objects.dungeons[0]
+        objects.main = objects.dungeons[index-1]
+        objects.main.add(objects.player)
         objects.main.switch()
     portal = rb.GameObject(name=name, pos=location * objects.stretch_factor)
     portal.add(portal_image)
     portal.add(rect := portal_image.get_rect())
+    objects.chunks[chunk.x][chunk.y].add(portal)
     classes.make_rect_collide_with_player(rect, move_to_dungeon)
 
-    # TODO: add the portal to the correct chunk
-    # create a button that moves the player to the dungeon
-    # add the image of the dungeon to the button
+    portal.add(portal_image)
 
-    # add dungeon chunk to the chunk list
-
-    
     # add the boss to the dungeon
+
     pass
 
 # Creating Chunks
@@ -66,7 +64,6 @@ def load_chunks():
             temp.add(background)
             objects.chunks[-1].append(temp)
             add_coins(temp)
-
 
 # --------------------------------------------- HOUSE AND NPC
 # objects.chunks[0][0].contents.append(

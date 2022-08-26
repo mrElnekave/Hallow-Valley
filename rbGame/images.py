@@ -84,3 +84,6 @@ coin_images = [silver_coin, gold_coin]
 
 # ui
 help_button = load_img("buttons/Help Button.png")
+
+# portal
+portal = load_img("map/Summoning Portal.png")
