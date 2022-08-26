@@ -86,6 +86,12 @@ class PlayerController(rb.Component):
                 else:
                     self.gameobj.pos.y = BASICLEVELSIZE.y
 
+            if objects.main in objects.dungeons:
+                if self.gameobj.pos.x > BASICLEVELSIZE.x/stretch_factor:
+                    self.gameobj.pos.x = BASICLEVELSIZE.x/stretch_factor
+                if self.gameobj.pos.y > BASICLEVELSIZE.y/stretch_factor:
+                    self.gameobj.pos.y = BASICLEVELSIZE.y/stretch_factor
+
 
 class EnemyController(rb.Component):
     def __init__(self):
