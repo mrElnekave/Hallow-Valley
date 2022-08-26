@@ -12,7 +12,7 @@ def createDungeon(index, boss, location, chunk, background, portal_image: rb.Ima
     objects.dungeons.append(rb.Scene(name= name))
     def move_to_dungeon():
         objects.main = objects.dungeons[index-1]
-        objects.main.add(objects.player)
+        objects.main.add(objects.player_go)
         objects.main.switch()
     portal = rb.GameObject(name=name, pos=location * objects.stretch_factor)
     portal.add(portal_image)
