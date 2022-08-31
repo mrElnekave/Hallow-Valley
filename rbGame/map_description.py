@@ -51,17 +51,17 @@ inv_map = {v: k for k, v in location_log.items()}
 
 
 color_meaning_by_chunk = [
-    {(158,158,158): special_obstacles.InvisibleObj, (244, 67, 54): special_obstacles.InvisibleObj,
-     (255, 235, 59): special_obstacles.InvisibleObj, (121, 85, 72): special_obstacles.InvisibleObj}, #village
-    {(244,67,54): special_obstacles.Lava, (66,66,66): special_obstacles.InvisibleObj }, #Fire
-    {(96,125,139): special_obstacles.InvisibleObj}, #Ice
-    {(121,85,72): special_obstacles.InvisibleObj}, #Electric
-    {(103,58,183): classes.spawn_poison, (158,158,158): special_obstacles.InvisibleObj}, #Poison
-    {(66,66,66): special_obstacles.InvisibleObj}, #summoner
-    {(96,125,139): special_obstacles.InvisibleObj}, #shield
-    {(121,85,72): special_obstacles.InvisibleObj}, #laser
-    {(76,175,80): special_obstacles.Cactus}, #water
-    {(38,50,56): special_obstacles.InvisibleObj} #final
+    {(158,158,158): classes.spawn_invisible_wall, (244, 67, 54): classes.spawn_invisible_wall,
+     (255, 235, 59): classes.spawn_invisible_wall, (121, 85, 72): classes.spawn_invisible_wall}, #village
+    {(244,67,54): classes.spawn_lava, (66,66,66): classes.spawn_invisible_wall }, #Fire
+    {(96,125,139): classes.spawn_invisible_wall}, #Ice
+    {(121,85,72): classes.spawn_invisible_wall}, #Electric
+    {(103,58,183): classes.spawn_poison, (158,158,158): classes.spawn_invisible_wall}, #Poison
+    {(66,66,66): classes.spawn_invisible_wall}, #summoner
+    {(96,125,139): classes.spawn_invisible_wall}, #shield
+    {(121,85,72): classes.spawn_invisible_wall}, #laser
+    {(76,175,80): classes.spawn_cactus}, #water
+    {(38,50,56): classes.spawn_invisible_wall} #final
 ]  # MUST BE THE CORRECT FUNCTIONS
 #
 # def show_chunk(col,row):
