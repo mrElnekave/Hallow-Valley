@@ -27,15 +27,14 @@ class Enemy(Component):
 
 
 class Ghost(Enemy):
-    def __init__(self, location):
+    def __init__(self):
         super().__init__()
         self.maxHealth = 20
         self.health = self.maxHealth
         self.image = images.ghost # WHEN updated .clone()
-        self.speed = 2
+        self.speed = 50
         self.attackDamage = 10
         self.rect = self.image.get_rect()
-        self.rect.center = location
         self.type = "enemy"
         self.drops = 5
         self.knocked = False
@@ -48,7 +47,7 @@ class Ghost(Enemy):
                 random.randint(100, constants.BASICLEVELSIZE.x - 100), random.randint(100, constants.BASICLEVELSIZE.y - 100))
 
     def update(self):
-        self.image.set_alpha(self.health / self.maxHealth * 255)
+        # self.image.set_alpha(self.health / self.maxHealth * 255) # TODO: when updated
         if not self.knocked:  # moving towards player
             pos = self.gameobj.pos
             direction = pos.dir_to(objects.player.pos)

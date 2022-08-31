@@ -60,12 +60,13 @@ def add_coins(chunk):
         coin_gameobj.add(coin_component)
         chunk.add(coin_gameobj)
 def add_ghosts(chunk):
-    for _ in range(objects.coins_per_chunk):
+    for _ in range(1):
         ghost_gameobj = rb.GameObject(pos=rb.Vector(random.randint(10,objects.BASICLEVELSIZE.x-10),random.randint(10,objects.BASICLEVELSIZE.y-10)),
                                      z_index=10)
         ghost_component = bosses.Ghost()
         ghost_gameobj.add(ghost_component)
         chunk.add(ghost_gameobj)
+
 
 
 def load_chunks():

@@ -83,23 +83,30 @@ class GameUI:
         self.help_button = images.help_button
         self.health = rb.Text(text="Health: "+str(objects.player.currentHealth)+"/"+str(objects.player.maxHealth), font=objects.myFont)
         self.ghost_energy = rb.Text(text="Ghost Energy: "+str(objects.player.energy)+"/"+str(objects.player.maxEnergy), font=objects.myFont)
-        self.health_bar = rb.Rectangle(width=200,height=20, color = rb.Color.black)
-        self.ghost_energy_bar = rb.Rectangle(width=200,height=20, color=rb.Color.yellow)
+        self.health_bar_bg = rb.Rectangle(width=200,height=20, color = rb.Color.black)
+        self.health_bar = rb.Rectangle(width=200,height=20, color = rb.Color(0,255,0))
+        self.ghost_energy_bar = rb.Rectangle(width=200,height=20, color=rb.Color.blue)
+        self.ghost_energy_bar_bg = rb.Rectangle(width=200,height=20, color=rb.Color.black)
 
         self.gos = []
         self.gos.append(rb.wrap(self.health, pos=rb.Vector(rb.Display.center.x*0.4,rb.Display.center.y/10), z_index=GameUI.INFRONT))
-        self.gos.append(rb.wrap(self.help_button, "help", pos=Vector(), z_index=GameUI.INFRONT))
+        self.gos.append(rb.wrap(self.help_button, "help", pos=Vector(), z_index=GameUI.INFRONT)) # TODO: max pos for help button
         self.gos.append(rb.wrap(self.ghost_energy, pos=rb.Vector(rb.Display.center.x*0.4,rb.Display.center.y/5), z_index=GameUI.INFRONT))
-        self.gos.append(rb.wrap(self.health_bar, pos=rb.Vector(375,rb.Display.center.y/10), z_index = GameUI.INFRONT+1))
-        self.gos.append(rb.wrap(self.ghost_energy_bar, pos=rb.Vector(375,rb.Display.center.y/5),z_index=GameUI.INFRONT+1))
+        self.gos.append(rb.wrap(self.health_bar_bg, z_index = GameUI.INFRONT+1))
+        self.gos.append(rb.wrap(self.health_bar, z_index = GameUI.INFRONT+1))
+        self.gos.append(rb.wrap(self.ghost_energy_bar_bg, z_index=GameUI.INFRONT+1))
+        self.gos.append(rb.wrap(self.ghost_energy_bar, z_index=GameUI.INFRONT+1))
         self.health_bar.top_left = rb.Vector(300,0)
+        self.health_bar_bg.top_left = rb.Vector(300,0)
         self.ghost_energy_bar.top_left = rb.Vector(300,20)
+        self.ghost_energy_bar_bg.top_left = rb.Vector(300,20)
     def prime(self, scene):
         scene.add_ui(*self.gos)
 
     def update(self): #Fix UI bar so that it moves according to player health, each time width changes, need to set top left
         self.health.text = f"Health: {objects.player.currentHealth: .2f}/{objects.player.maxHealth: .2f}"
-
+        self.health_bar.width = rb.Math.clamp(objects.player.currentHealth/objects.player.maxHealth*200, 0, 200)
+        self.health_bar.top_left = rb.Vector(300,0)
     def draw(self, camera): # THIS IS BAD
         # draw the text
         # Health
