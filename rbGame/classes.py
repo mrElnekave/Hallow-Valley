@@ -98,7 +98,6 @@ class PlayerController(rb.Component):
                     self.gameobj.pos.x = BASICLEVELSIZE.x/stretch_factor
                 if self.gameobj.pos.y > BASICLEVELSIZE.y/stretch_factor:
                     self.gameobj.pos.y = BASICLEVELSIZE.y/stretch_factor
-rb.Game.debug = True
 
 # UNUSED
 class EnemyController(rb.Component):
@@ -212,6 +211,9 @@ def spawn_poison(chunk,pos):
 
 def spawn_lava(chunk,pos):
     chunk.add(rb.wrap(Collider(images.lava, lava_rules), pos=pos, z_index=decoration_z_index))
+
+def spawn_invisible_wall(chunk,pos):
+    chunk.add(rb.wrap(Collider(None, lambda: None, True), pos=pos, z_index=decoration_z_index))
 
 def make_rect_collide_with_player(rect,on_collision):
     def on_collide(manifold):

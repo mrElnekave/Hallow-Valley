@@ -1,5 +1,6 @@
 # import images, special_obstacles, objects
 from rubato import Math, Vector
+import classes
 import rubato as rb
 
 shownChunks = []
@@ -49,19 +50,19 @@ location_log = {
 inv_map = {v: k for k, v in location_log.items()}
 
 
-# color_meaning_by_chunk = [
-#     {(158,158,158): special_obstacles.InvisibleObj, (244, 67, 54): special_obstacles.InvisibleObj,
-#      (255, 235, 59): special_obstacles.InvisibleObj, (121, 85, 72): special_obstacles.InvisibleObj}, #village
-#     {(244,67,54): special_obstacles.Lava, (66,66,66): special_obstacles.InvisibleObj }, #Fire
-#     {(96,125,139): special_obstacles.InvisibleObj}, #Ice
-#     {(121,85,72): special_obstacles.InvisibleObj}, #Electric
-#     {(103,58,183): special_obstacles.Poison, (158,158,158): special_obstacles.InvisibleObj}, #Poison
-#     {(66,66,66): special_obstacles.InvisibleObj}, #summoner
-#     {(96,125,139): special_obstacles.InvisibleObj}, #shield
-#     {(121,85,72): special_obstacles.InvisibleObj}, #laser
-#     {(76,175,80): special_obstacles.Cactus}, #water
-#     {(38,50,56): special_obstacles.InvisibleObj} #final
-# ]
+color_meaning_by_chunk = [
+    {(158,158,158): special_obstacles.InvisibleObj, (244, 67, 54): special_obstacles.InvisibleObj,
+     (255, 235, 59): special_obstacles.InvisibleObj, (121, 85, 72): special_obstacles.InvisibleObj}, #village
+    {(244,67,54): special_obstacles.Lava, (66,66,66): special_obstacles.InvisibleObj }, #Fire
+    {(96,125,139): special_obstacles.InvisibleObj}, #Ice
+    {(121,85,72): special_obstacles.InvisibleObj}, #Electric
+    {(103,58,183): classes.spawn_poison, (158,158,158): special_obstacles.InvisibleObj}, #Poison
+    {(66,66,66): special_obstacles.InvisibleObj}, #summoner
+    {(96,125,139): special_obstacles.InvisibleObj}, #shield
+    {(121,85,72): special_obstacles.InvisibleObj}, #laser
+    {(76,175,80): special_obstacles.Cactus}, #water
+    {(38,50,56): special_obstacles.InvisibleObj} #final
+]  # MUST BE THE CORRECT FUNCTIONS
 #
 # def show_chunk(col,row):
 #     # show_type should use show_chunk
