@@ -21,6 +21,8 @@ class PlayerController(rb.Component):
         self.energy = 0
         self.maxEnergy = 100
 
+        self.velocity = Vector()
+
         # for electrodash and shield
         self.invulnerability = False
 
@@ -56,16 +58,18 @@ class PlayerController(rb.Component):
             objects.collided = False
         else:
             self.old_pos = self.pos
+            self.velocity = Vector()
             # We moved the input into here. And changed it all to use delta_time
             if Input.key_pressed("a"):
-                self.gameobj.pos.x -= self.speed * Time.delta_time
+                self.velocity.x -= self.speed * Time.delta_time
             if Input.key_pressed("w"):
-                self.gameobj.pos.y -= self.speed * Time.delta_time
+                self.velocity.y -= self.speed * Time.delta_time
             if Input.key_pressed("s"):
-                self.gameobj.pos.y += self.speed * Time.delta_time
+                self.velocity.y += self.speed * Time.delta_time
             if Input.key_pressed("d"):
-                self.gameobj.pos.x += self.speed * Time.delta_time
+                self.velocity.x += self.speed * Time.delta_time
 
+            self.pos += self.velocity
             # self.gameobj.pos = self.gameobj.pos.clamp(Vector.zero + self.image.get_size() / 2,
             #                                           BASICLEVELSIZE - self.image.get_size() / 2)
             if self.gameobj.pos.x < 0:
@@ -94,7 +98,7 @@ class PlayerController(rb.Component):
                     self.gameobj.pos.x = BASICLEVELSIZE.x/stretch_factor
                 if self.gameobj.pos.y > BASICLEVELSIZE.y/stretch_factor:
                     self.gameobj.pos.y = BASICLEVELSIZE.y/stretch_factor
-
+rb.Game.debug = True
 
 # UNUSED
 class EnemyController(rb.Component):
@@ -161,12 +165,13 @@ class TabScreenController(rb.Component):
     # z_index behind the background
 
 class Collider(rb.Component):
-    def __init__(self, image, collision_action):
+    def __init__(self, image, collision_action, solid=False):
         super().__init__()
         self.image: rb.Image = image
         self.rect = self.image.get_rect()
         self.collision_action = collision_action
         self.rect.on_collide = self.on_collide
+        self.solid = solid
 
     def setup(self):
         self.gameobj.add(self.image)
@@ -175,10 +180,14 @@ class Collider(rb.Component):
     def on_collide(self, manifold):
         if manifold.shape_b.gameobj.name == "player":
             self.collision_action()
+            if self.solid:
+                if objects.player.velocity.y < 0:
+                    objects.player.rect.top = self.rect.bottom
+                
 
 def cactus_rules():
     objects.player.currentHealth -= 0.1
-    objects.collided = True
+    # objects.collided = True
 
 def poison_rules():
     objects.player.currentHealth -= 1
@@ -189,7 +198,7 @@ def lava_rules():
 decoration_z_index = -2
 
 def spawn_cactus(chunk,pos):
-    chunk.add(rb.wrap(Collider(images.cactus, cactus_rules), pos=pos, z_index=decoration_z_index))
+    chunk.add(rb.wrap(Collider(images.cactus, cactus_rules, True), pos=pos, z_index=decoration_z_index))
 
 def spawn_poison(chunk,pos):
     chunk.add(rb.wrap(Collider(images.poison, poison_rules), pos=pos, z_index=decoration_z_index))
