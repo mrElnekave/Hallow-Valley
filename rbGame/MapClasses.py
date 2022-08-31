@@ -98,8 +98,7 @@ class GameUI:
         scene.add_ui(*self.gos)
 
     def update(self): #Fix UI bar so that it moves according to player health, each time width changes, need to set top left
-        self.health.text = "Health: "+str(objects.player.currentHealth)+"/"+str(objects.player.maxHealth)
-
+        self.health.text = f"Health: {objects.player.currentHealth: .2f}/{objects.player.maxHealth: .2f}"
 
     def draw(self, camera): # THIS IS BAD
         # draw the text

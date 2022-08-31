@@ -7,15 +7,70 @@ import random, math
 class Enemy(Component):
     def __init__(self):
         super().__init__()
-        self.rect = None
+        self.rect: rb.Rectangle = None
         self.health = None
         self.image = None
         self.attackDamage = None
         self.speed = None
         self.type = None
 
+    def setup(self):
+        self.gameobj.add(self.rect)
+        self.rect.on_collide = self.on_collide
     def update(self):
         pass
+
+    def on_collide(self, manifold: rb.Manifold):
+        if manifold.shape_b.gameobj.name == "player":
+            if not objects.player.invulnerability:
+                objects.player.currentHealth = objects.player.currentHealth - self.attackDamage
+
+
+class Ghost(Enemy):
+    def __init__(self, location):
+        super().__init__()
+        self.maxHealth = 20
+        self.health = self.maxHealth
+        self.image = images.ghost # WHEN updated .clone()
+        self.speed = 2
+        self.attackDamage = 10
+        self.rect = self.image.get_rect()
+        self.rect.center = location
+        self.type = "enemy"
+        self.drops = 5
+        self.knocked = False
+        self.direction = (0, 0)
+
+    def on_collide(self, manifold: rb.Manifold):
+        super().on_collide(manifold)
+        if manifold.shape_b.gameobj.name == "player":
+            self.rect.center = Vector(
+                random.randint(100, constants.BASICLEVELSIZE.x - 100), random.randint(100, constants.BASICLEVELSIZE.y - 100))
+
+    def update(self):
+        self.image.set_alpha(self.health / self.maxHealth * 255)
+        if not self.knocked:  # moving towards player
+            pos = self.gameobj.pos
+            direction = pos.dir_to(objects.player.pos)
+            self.gameobj.pos += direction * (self.speed * rb.Time.delta_time)
+
+        # Check which side of the screen we are off and then move us back on
+        if self.rect.left < 0:
+            self.rect.left = 0
+        if self.rect.right > constants.BASICLEVELSIZE.x:
+            self.rect.right = constants.BASICLEVELSIZE.x
+        if self.rect.top > constants.BASICLEVELSIZE.y:
+            self.rect.top = constants.BASICLEVELSIZE.y
+        if self.rect.bottom < 0:
+            self.rect.bottom = 0
+
+
+        if self.health <= 0:
+            objects.main.delete(self)
+            if True:  # In ghost boss
+                objects.resourceAmounts["ghostEnergy"] = objects.resourceAmounts["ghostEnergy"] + self.drops
+
+
 
 class Boss(Enemy):
     def __init__(self):

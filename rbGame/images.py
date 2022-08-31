@@ -78,6 +78,7 @@ water_final = load_img("skins/WaterFB.png")
 
 # backgrounds
 fire_boss_bg = load_img("map/FireBossBackground.png")
+# print(fire_boss_bg.get_pixel((0, 0)), "hi")
 
 # coins
 silver_coin = load_img("coins/Silver Coin.png")

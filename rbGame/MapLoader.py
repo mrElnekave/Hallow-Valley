@@ -1,7 +1,7 @@
 import objects
 import rubato as rb
 from rubato import Vector, Display
-import map_description, MapClasses, images, objects, classes
+import map_description, MapClasses, images, objects, classes, bosses
 import random
 
 def add_to_chunk(gameObject, chunk: Vector):
@@ -35,14 +35,14 @@ def createDungeon(index, boss, location: Vector, chunk: Vector, background, port
 objects.mapHeight = len(map_description.map[0])
 objects.mapWidth = len(map_description.map)
 
-def from_chunk(surface, chunk_pos):
-    return # TODO come back
+def from_chunk(image: rb.Image, chunk_pos):
+    return
     type_of_area = map_description.map[chunk_pos[1]][chunk_pos[0]]
     definitions = map_description.color_meaning_by_chunk[type_of_area]
     look_for_colors = definitions.keys()
     for x in range(10):
         for y in range(10):
-            color_of_pixel = surface.get_at((x, y))[:-1]
+            color_of_pixel = image.get_pixel((x, y)).to_tuple()[:-1]  # TODO: get this fixed "get_pixel"
             if color_of_pixel in look_for_colors:
                 toInstantiate = definitions[color_of_pixel]
                 objects.chunks[chunk_pos[0]][chunk_pos[1]].add(
@@ -59,6 +59,13 @@ def add_coins(chunk):
         coin_component = MapClasses.Coin()
         coin_gameobj.add(coin_component)
         chunk.add(coin_gameobj)
+def add_ghosts(chunk):
+    for _ in range(objects.coins_per_chunk):
+        ghost_gameobj = rb.GameObject(pos=rb.Vector(random.randint(10,objects.BASICLEVELSIZE.x-10),random.randint(10,objects.BASICLEVELSIZE.y-10)),
+                                     z_index=10)
+        ghost_component = bosses.Ghost()
+        ghost_gameobj.add(ghost_component)
+        chunk.add(ghost_gameobj)
 
 
 def load_chunks():
@@ -73,6 +80,7 @@ def load_chunks():
             temp.add(background)
             objects.chunks[-1].append(temp)
             add_coins(temp)
+            add_ghosts(temp)
 
 # --------------------------------------------- HOUSE AND NPC
 # objects.chunks[0][0].contents.append(

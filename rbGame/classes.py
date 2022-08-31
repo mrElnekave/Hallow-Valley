@@ -173,7 +173,8 @@ class Collider(rb.Component):
         self.solid = solid
 
     def setup(self):
-        self.gameobj.add(self.image)
+        if self.image is not None:
+            self.gameobj.add(self.image)
         self.gameobj.add(self.rect)
 
     def on_collide(self, manifold):
