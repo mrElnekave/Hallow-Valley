@@ -13,7 +13,7 @@ player_sprite_size = 25
 moveSpeed = 200 # * 3  # pixels per second
 mapWidth, mapHeight = 15, 15  # in chunks
 dayLength = 5  # seconds
-start_chunk = Vector(0, 0)
+start_chunk = Vector(3, 1)
 coins_per_chunk = 20
 
 

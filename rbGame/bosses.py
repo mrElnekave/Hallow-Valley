@@ -16,14 +16,17 @@ class Enemy(Component):
 
     def setup(self):
         self.gameobj.add(self.rect)
+        self.gameobj.add(self.image)
         self.rect.on_collide = self.on_collide
     def update(self):
         pass
 
-    def on_collide(self, manifold: rb.Manifold):
+    def on_collide(self, manifold: rb.Manifold, func=None):
         if manifold.shape_b.gameobj.name == "player":
             if not objects.player.invulnerability:
                 objects.player.currentHealth = objects.player.currentHealth - self.attackDamage
+                if func is not None:
+                    func()
 
 
 class Ghost(Enemy):
@@ -41,10 +44,11 @@ class Ghost(Enemy):
         self.direction = (0, 0)
 
     def on_collide(self, manifold: rb.Manifold):
-        super().on_collide(manifold)
-        if manifold.shape_b.gameobj.name == "player":
+        def move():
             self.rect.center = Vector(
                 random.randint(100, constants.BASICLEVELSIZE.x - 100), random.randint(100, constants.BASICLEVELSIZE.y - 100))
+
+        super().on_collide(manifold, move)
 
     def update(self):
         # self.image.set_alpha(self.health / self.maxHealth * 255) # TODO: when updated
@@ -77,12 +81,14 @@ class Boss(Enemy):
         self.maxHealth = None
         self.bg_health_bar = rb.Rectangle(200,20, color=rb.Color(15, 15, 15))
         self.health_bar = rb.Rectangle(200,20, color=rb.Color(255, 0, 0))
+        self.start_pos = Vector(0, 0)
 
     def setup(self):
-        self.gameobj.add(self.bg_health_bar, self.health_bar)
+        super().setup()
+        self.gameobj.add(self.bg_health_bar, self.health_bar)  # TODO: add to the scene
         self.bg_health_bar.top_left = Vector(300, 20)
         self.health_bar.top_left = Vector(300, 20)
-
+        self.rect.center = self.start_pos
     def update(self):
         # self.image.set_alpha((self.health / self.maxHealth) * 255)
         self.health_bar.width = self.health/self.maxHealth*200
@@ -95,25 +101,26 @@ class FireGhostBoss(Boss):
         self.rect = self.image.get_rect()
 
         self.attackDamage = 25
-        self.speed = 5
+        self.speed = 50
         self.type = "enemy"
         self.angle = 0
         self.counter = 0
         self.maxHealth = 200
         self.health = self.maxHealth
+
+        self.start_pos = Vector(250, 250)
+
     def on_collide(self, manifold: rb.Manifold):
-        if manifold.shape_b.gameobj.name == "player":
-            if not objects.player.invulnerability:
-                objects.player.currentHealth = objects.player.currentHealth - self.attackDamage
-            # while self.rect.con: #TODO: bring back next class
-            #     self.rect.center = (random.randint(0, objects.WINDOWWIDTH), random.randint(0, objects.WINDOWHEIGHT))
-    def setup(self):
-        super().setup()
-        self.gameobj.add(self.image, self.rect)
-        self.rect.center = Vector(250, 250)
-        self.rect.on_collide = self.on_collide
+        def move():
+            self.rect.center = Vector(
+                random.randint(100, constants.BASICLEVELSIZE.x - 100),
+                random.randint(100, constants.BASICLEVELSIZE.y - 100))
+
+        super().on_collide(manifold, move)
+
 
     def update(self):
+
         # Changing directions after bouncing
         if self.rect.left < 0:
             self.angle = random.random() * math.pi - math.pi / 2
@@ -124,9 +131,10 @@ class FireGhostBoss(Boss):
         if self.rect.bottom > constants.HEIGHT:
             self.angle = random.random() * math.pi
         # Moving
-
-        self.rect.center = Vector(
-        self.rect.center.x + self.speed * math.cos(self.angle), self.rect.center.y - self.speed * math.sin(self.angle))
+        vel = Vector(self.speed * math.cos(self.angle), - self.speed * math.sin(self.angle)) * rb.Time.delta_time
+        self.gameobj.pos += vel
+        # print(Vector(
+        # self.gameobj.pos.x + self.speed * math.cos(self.angle), self.gameobj.pos.y - self.speed * math.sin(self.angle)))
         # Checking for collision with player
 
         # Shooting fireballs on a timer
