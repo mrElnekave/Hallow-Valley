@@ -12,6 +12,8 @@ def createDungeon(index, boss, location, chunk, background, portal_image: rb.Ima
     objects.dungeons.append(scene:=rb.Scene(name= name))
     scene.add(rb.wrap(background, pos=Display.center))
     scene.add(rb.wrap(boss))
+    objects.ui.prime(scene)
+    # scene.add_ui(objects.tabScreen)  # TODO: come back to it
     def move_to_dungeon():
         objects.main = objects.dungeons[index-1]
         objects.main.add(objects.player_go)

@@ -57,6 +57,7 @@ classes.spawn_poison(objects.chunks[0][0],rb.Vector(400,400))
 # portal.add(rect:=rb.Rectangle(width=100,height=100,color=rb.Color.cyan))
 # classes.make_rect_collide_with_player(rect,move_to_dungeon)
 # objects.main.add(portal)
+
+# ADD THE DUNGEONS
 MapLoader.createDungeon(1,bosses.FireGhostBoss(),rb.Vector(250,250),rb.Vector(0,0),images.fire_boss_bg,images.portal,"Dungeon Test")
 
-# objects.main.add(player)

@@ -21,6 +21,9 @@ class PlayerController(rb.Component):
         self.energy = 0
         self.maxEnergy = 100
 
+        # for electrodash and shield
+        self.invulnerability = False
+
         
 
     @property
@@ -93,6 +96,7 @@ class PlayerController(rb.Component):
                     self.gameobj.pos.y = BASICLEVELSIZE.y/stretch_factor
 
 
+# UNUSED
 class EnemyController(rb.Component):
     def __init__(self):
         super().__init__()
@@ -108,7 +112,7 @@ class EnemyController(rb.Component):
         pos = self.gameobj.pos
         direction = pos.dir_to(objects.player.pos)
         self.gameobj.pos += direction * (self.speed * Time.delta_time)
-
+# END
 
 class TabScreenController(rb.Component):
     BEHIND = -100
