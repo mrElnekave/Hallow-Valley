@@ -1,5 +1,5 @@
 from constants import *
-import objects, images, classes
+import objects, images, classes, map_description
 import MapLoader, MapClasses, bosses
 from rubato import GameObject, Display
 
@@ -59,5 +59,22 @@ classes.spawn_poison(objects.chunks[0][0],rb.Vector(400,400))
 # objects.main.add(portal)
 
 # ADD THE DUNGEONS
-MapLoader.createDungeon(1,bosses.FireGhostBoss(),rb.Vector(250,250),rb.Vector(0,0),images.fire_boss_bg,images.portal,"Dungeon Test")
+data = map_description.portalLocations["fire"]
+MapLoader.createDungeon(1,bosses.FireGhostBoss(),data[0],data[1],images.fire_boss_bg,images.portal,"Dungeon 1")
+data = map_description.portalLocations["ice"]
+MapLoader.createDungeon(2,bosses.FireGhostBoss(),data[0],data[1],images.fire_boss_bg,images.portal,"Dungeon 2")
+data = map_description.portalLocations["lightning"]
+MapLoader.createDungeon(3,bosses.FireGhostBoss(),data[0],data[1],images.fire_boss_bg,images.portal,"Dungeon 3")
+data = map_description.portalLocations["poison"]
+MapLoader.createDungeon(4,bosses.FireGhostBoss(),data[0],data[1],images.fire_boss_bg,images.portal,"Dungeon 4")
+data = map_description.portalLocations["summoner"]
+MapLoader.createDungeon(5,bosses.FireGhostBoss(),data[0],data[1],images.fire_boss_bg,images.portal,"Dungeon 5")
+data = map_description.portalLocations["shield"]
+MapLoader.createDungeon(6,bosses.FireGhostBoss(),data[0],data[1],images.fire_boss_bg,images.portal,"Dungeon 6")
+data = map_description.portalLocations["laser"]
+MapLoader.createDungeon(7,bosses.FireGhostBoss(),data[0],data[1],images.fire_boss_bg,images.portal,"Dungeon 7")
+data = map_description.portalLocations["water"]
+MapLoader.createDungeon(8,bosses.FireGhostBoss(),data[0],data[1],images.fire_boss_bg,images.portal,"Dungeon 8")
+data = map_description.portalLocations["final"]
+MapLoader.createDungeon(9,bosses.FireGhostBoss(),data[0],data[1],images.fire_boss_bg,images.portal,"Dungeon 9")
 

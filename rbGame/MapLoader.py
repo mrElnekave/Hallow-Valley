@@ -8,7 +8,7 @@ def add_to_chunk(gameObject, chunk: Vector):
     objects.chunks[chunk.x][chunk.y].add(gameObject)
 
 
-def createDungeon(index, boss, location, chunk, background, portal_image: rb.Image, name):
+def createDungeon(index, boss, location: rb.Vector, chunk: rb.Vector, background, portal_image: rb.Image, name):
     objects.dungeons.append(scene:=rb.Scene(name= name))
     scene.add(rb.wrap(background, pos=Display.center))
     scene.add(rb.wrap(boss))

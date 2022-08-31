@@ -1,5 +1,6 @@
 # import images, special_obstacles, objects
 from rubato import Math, Vector
+import rubato as rb
 
 shownChunks = []
 map=[
@@ -21,15 +22,15 @@ map=[
 ]
 
 portalLocations = {
-    "fire":[(4,1),(250,250)],
-    "ice":[(13,4),(250,250)],
-    "lightning":[(14,4),(350,150)],
-    "poison":[(0,6),(250,250)],
-    "summoner":[(7,9),(250,300)],
-    "shield":[(14,0),(250,250)],
-    "laser":[(4,13),(250,250)],
-    "water":[(13,14),(350,350)],
-    "final":[(7,7),(250,250)]
+    "fire":[rb.Vector(4,1),rb.Vector(250,250)],
+    "ice":[rb.Vector(13,4),rb.Vector(250,250)],
+    "lightning":[rb.Vector(14,4),rb.Vector(350,150)],
+    "poison":[rb.Vector(0,6),rb.Vector(250,250)],
+    "summoner":[rb.Vector(7,9),rb.Vector(250,300)],
+    "shield":[rb.Vector(14,0),rb.Vector(250,250)],
+    "laser":[rb.Vector(4,13),rb.Vector(250,250)],
+    "water":[rb.Vector(13,14),rb.Vector(350,350)],
+    "final":[rb.Vector(7,7),rb.Vector(250,250)]
 }
 
 location_log = {
