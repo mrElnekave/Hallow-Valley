@@ -19,10 +19,10 @@ def createDungeon(index, boss, location: Vector, chunk: Vector, background, port
         objects.main.add(objects.player_go)
         objects.main.switch()
     portal = rb.GameObject(name=name, pos=location * objects.stretch_factor)
+    portal_image.scale = Vector(objects.stretch_factor, objects.stretch_factor)
     portal.add(portal_image)
     portal.add(rect := portal_image.get_rect())
-    print(chunk)
-    objects.chunks[chunk.x][chunk.y].add(portal)
+    objects.chunks[chunk.y][chunk.x].add(portal)
     classes.make_rect_collide_with_player(rect, move_to_dungeon)
 
     portal.add(portal_image)
