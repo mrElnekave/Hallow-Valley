@@ -8,7 +8,7 @@ def add_to_chunk(gameObject, chunk: Vector):
     objects.chunks[chunk.x][chunk.y].add(gameObject)
 
 
-def createDungeon(index, boss, location: rb.Vector, chunk: rb.Vector, background, portal_image: rb.Image, name):
+def createDungeon(index, boss, location: Vector, chunk: Vector, background, portal_image: rb.Image, name):
     objects.dungeons.append(scene:=rb.Scene(name= name))
     scene.add(rb.wrap(background, pos=Display.center))
     scene.add(rb.wrap(boss))
@@ -21,6 +21,7 @@ def createDungeon(index, boss, location: rb.Vector, chunk: rb.Vector, background
     portal = rb.GameObject(name=name, pos=location * objects.stretch_factor)
     portal.add(portal_image)
     portal.add(rect := portal_image.get_rect())
+    print(chunk)
     objects.chunks[chunk.x][chunk.y].add(portal)
     classes.make_rect_collide_with_player(rect, move_to_dungeon)
 
@@ -34,8 +35,9 @@ def createDungeon(index, boss, location: rb.Vector, chunk: rb.Vector, background
 objects.mapHeight = len(map_description.map[0])
 objects.mapWidth = len(map_description.map)
 
-def from_chunk(surface, chunk):
-    type_of_area = map_description.map[chunk[1]][chunk[0]]
+def from_chunk(surface, chunk_pos):
+    return # TODO come back
+    type_of_area = map_description.map[chunk_pos[1]][chunk_pos[0]]
     definitions = map_description.color_meaning_by_chunk[type_of_area]
     look_for_colors = definitions.keys()
     for x in range(10):
@@ -43,8 +45,8 @@ def from_chunk(surface, chunk):
             color_of_pixel = surface.get_at((x, y))[:-1]
             if color_of_pixel in look_for_colors:
                 toInstantiate = definitions[color_of_pixel]
-                objects.chunks[chunk[0]][chunk[1]].contents.append(
-                    toInstantiate((x*50 + 25,y*50 + 25))
+                objects.chunks[chunk_pos[0]][chunk_pos[1]].add(
+                    toInstantiate(objects.chunks[chunk_pos[0]][chunk_pos[1]], (x*50 + 25,y*50 + 25))
                 )
                 # instantiate right obstacle
                 pass
@@ -66,7 +68,8 @@ def load_chunks():
 
         for y_index in range(objects.mapHeight):
             temp = rb.Scene(name=f"{x_index}_{y_index}")
-            background = rb.wrap(images.maps[y_index][x_index], pos=Display.res, z_index=-10)
+            background = rb.wrap(img := images.maps[y_index][x_index], pos=Display.res, z_index=-10)
+            from_chunk(img, (x_index, y_index))
             temp.add(background)
             objects.chunks[-1].append(temp)
             add_coins(temp)
