@@ -66,7 +66,7 @@ class Ghost(Enemy):
 
         if self.health <= 0:
             objects.main.delete(self)
-            if True:  # In ghost boss
+            if not (objects.main in objects.dungeons):
                 objects.resourceAmounts["ghostEnergy"] = objects.resourceAmounts["ghostEnergy"] + self.drops
 
 
