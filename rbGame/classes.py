@@ -183,6 +183,13 @@ class Collider(rb.Component):
             if self.solid:
                 if objects.player.velocity.y < 0:
                     objects.player.rect.top = self.rect.bottom
+                if objects.player.velocity.y > 0:
+                    objects.player.rect.bottom = self.rect.top
+                if objects.player.velocity.x < 0:
+                    objects.player.rect.left = self.rect.right
+                if objects.player.velocity.x > 0:
+                    objects.player.rect.right = self.rect.left
+
                 
 
 def cactus_rules():
